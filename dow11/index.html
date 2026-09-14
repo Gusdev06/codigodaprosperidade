@@ -78,14 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // ===== MODO TESTE — REVERTER ANTES DE SUBIR PRA PROD =====
-    // Botoes liberados na hora. Tempo ORIGINAL: SECONDS_TO_DISPLAY = 75 (1:15),
-    // que continua declarado la em cima, intocado.
-    // Para voltar ao normal: apagar as 2 linhas abaixo marcadas com TESTE.
-    // Nao grava no localStorage, entao nao contamina o teste depois.
-    // =========================================================
-    elsHidden.forEach((e) => e.style.display = "block"); // TESTE
-    return;                                             // TESTE
 
     var alreadyElsDisplayed = StorageHandler.get(alreadyDisplayedKey);
     var showHiddenElements = function () {

@@ -208,13 +208,6 @@
       sp.async=true;
       document.head.appendChild(sp);
     }
-    // ===== MODO TESTE — REVERTER ANTES DE SUBIR PRA PROD =====
-    // Botao liberado na hora. Para voltar ao normal, apagar as 2 linhas
-    // marcadas com TESTE. O tempo de producao (espera=1020000 ms = 17:00)
-    // continua logo abaixo, intocado. Nao grava no localStorage.
-    // =========================================================
-    document.getElementById('btn-comprar').hidden=false; // TESTE
-    return;                                              // TESTE
 
     var espera=1020000; /* 17:00 em ms */
     var chave='cp_botao_liberado';

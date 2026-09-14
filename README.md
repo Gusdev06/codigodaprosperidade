@@ -38,22 +38,20 @@ No `/up1`, como não existe mais o `<video>` nativo, a liberação dos botões e
 `timeupdate` da API do smartplayer e, se a API não responder em ~20 s, cai pro relógio
 de parede contado do carregamento da página.
 
-## ⚠️ MODO TESTE ATIVO EM TODAS AS VSLs
+## Tempos de liberação dos botões
 
-Os botões estão liberados na hora. **Antes de promover pra produção**, apague em cada
-arquivo as duas linhas marcadas com `// TESTE` e confira se o tempo abaixo ainda bate
-com o pitch da VSL que está no ar.
+Em produção. Nenhuma página está em modo teste.
 
-| Arquivo | Tempo de produção |
-|---|---|
-| `index.html` | `var espera=1020000` → **17:00** |
-| `up1/index.html` | `SECONDS_TO_DISPLAY = 385` → **6:25** |
-| `dow11/index.html` | `SECONDS_TO_DISPLAY = 75` → **1:15** |
-| `upabs2/index.html` | `SECONDS_TO_DISPLAY = 545` → **9:05** |
-| `dowup02/index.html` | `SECONDS_TO_DISPLAY = 90` → **1:30** |
+| Arquivo | Variável | Botão aparece aos |
+|---|---|---|
+| `index.html` | `var espera=1020000` | **17:00** |
+| `up1/index.html` | `SECONDS_TO_DISPLAY = 385` | **6:25** |
+| `dow11/index.html` | `SECONDS_TO_DISPLAY = 75` | **1:15** |
+| `upabs2/index.html` | `SECONDS_TO_DISPLAY = 545` | **9:05** |
+| `dowup02/index.html` | `SECONDS_TO_DISPLAY = 90` | **1:30** |
 
-Esses tempos foram calibrados pelo pitch das VSLs antigas. Ao trocar uma VSL, o minuto
-do pitch muda — reconfira antes de restaurar.
+⚠️ Esses tempos foram calibrados pelo pitch das VSLs antigas. O `/` e o `/up1` já rodam
+VSLs novas da Vturb — reconferir em que minuto o pitch entra nelas e ajustar o número.
 
 ## Checkouts (Cakto)
 
