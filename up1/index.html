@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>UPSELL 1 – .</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#000}
+  .faixa{background:#e00000;color:#fff;text-align:center;font-weight:600;font-size:15px;padding:18px 16px;margin-top:28px}
+  .wrap{max-width:400px;margin:0 auto;padding:0 16px 60px}
+  .titulo{font-size:20px;font-weight:700;text-align:center;line-height:1.45;margin:18px 0 22px;letter-spacing:.3px}
+  .esconder{display:none;margin-top:28px}
+  cakto-upsell-accept::part(button){display:block;width:100%;background:#22c55e;color:#fff;font-family:system-ui,-apple-system,sans-serif;font-size:21px;font-weight:700;padding:15px 22.5px;border-radius:32px;border:0;text-align:center;cursor:pointer}
+  cakto-upsell-reject::part(button){display:inline-block;margin-top:22px;background:#54595f;color:#fff;font-size:13px;font-weight:500;padding:12px 24px;border-radius:3px;border:0;cursor:pointer}
+  .center{text-align:center}
+</style>
+</head>
+<body>
+<div class="faixa">Atenção! Para não ocorrer erros na sua compra, não volte, não atualize e não feche esta página!</div>
+<div class="wrap">
+  <h1 class="titulo">O que aconteceu depois que você fez a sua compra não estava previsto na sua leitura! 👇</h1>
+  <vturb-smartplayer id="vid-6aa567c1b554c32c63a5e826" style="display:block;margin:0 auto;width:100%;max-width:400px"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:133.33333333333331% 0 0;z-index:0;background-color:black"></div></vturb-smartplayer>
+  <script type="text/javascript">
+    var s=document.createElement("script");
+    s.src="https://scripts.converteai.net/8961d838-aff2-4dce-9b39-e84022d332ce/players/6aa567c1b554c32c63a5e826/v4/player.js",
+    s.async=!0,document.head.appendChild(s);
+  </script>
+
+  <div class="esconder">
+    <cakto-upsell-buttons>
+      <cakto-upsell-accept
+        bg-color="#22c55e"
+        text-color="#ffffff"
+        upsell-accept-url="https://codigodaprosperidade-ivory.vercel.app/upabs2" offer-id="39craow" offer-type="upsell"
+        app-base-url="https://app.cakto.com.br"
+        upsell-reject-url="https://codigodaprosperidade-ivory.vercel.app/dow11"
+      >SIM, QUERO O MAPA DA PROSPERIDADE!</cakto-upsell-accept>
+      <div class="center">
+      <cakto-upsell-reject upsell-reject-url="https://codigodaprosperidade-ivory.vercel.app/dow11">Não, Obrigado.</cakto-upsell-reject>
+      </div>
+    </cakto-upsell-buttons>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+/* ALTERE O VALOR 10 PARA OS SEGUNDOS EM QUE AS SEÇÕES VÃO APARECER */
+    var SECONDS_TO_DISPLAY = 385;
+    var CLASS_TO_DISPLAY = ".esconder";
+/* DAQUI PARA BAIXO NAO PRECISA ALTERAR */
+    var EXPIRATION_DAYS = 14;
+    var alreadyDisplayedKey = "alreadyElsDisplayed" + SECONDS_TO_DISPLAY;
+    var elsHidden = document.querySelectorAll(CLASS_TO_DISPLAY);
+    var elsDisplayed = false;
+    class StorageHandler {
+        static expiryTime = EXPIRATION_DAYS * 86400000;
+        static set(key, value) { localStorage.setItem(key, JSON.stringify({ value, expiry: Date.now() + this.expiryTime })); }
+        static get(key) {
+            var item = localStorage.getItem(key);
+            if (!item) return null;
+            var { value, expiry } = JSON.parse(item);
+            if (Date.now() > expiry) { localStorage.removeItem(key); return null; }
+            return value;
+        }
+    }
+
+    // ===== MODO TESTE — REVERTER ANTES DE SUBIR PRA PROD =====
+    // Botoes liberados na hora. Tempo ORIGINAL: SECONDS_TO_DISPLAY = 385 (6:25),
+    // que continua declarado la em cima, intocado.
+    // Para voltar ao normal: apagar as 2 linhas abaixo marcadas com TESTE.
+    // Nao grava no localStorage, entao nao contamina o teste depois.
+    // =========================================================
+    elsHidden.forEach((e) => e.style.display = "block"); // TESTE
+    return;                                             // TESTE
+
+    var alreadyElsDisplayed = StorageHandler.get(alreadyDisplayedKey);
+    var showHiddenElements = function () {
+        if (elsDisplayed) return;
+        elsDisplayed = true;
+        elsHidden.forEach((e) => e.style.display = "block");
+        StorageHandler.set(alreadyDisplayedKey, true);
+    };
+
+    /* Player vturb (vid-6aa567c1b554c32c63a5e826). Tenta ler o tempo real do vídeo
+       pela API do smartplayer; se a API não aparecer em ~20 s, cai pro relógio de
+       parede contado a partir do carregamento da página. */
+    var enganchou = false, tentativas = 0;
+    var polling = setInterval(function () {
+        tentativas++;
+        try {
+            var sp = window.smartplayer;
+            var inst = sp && (sp.instances ? (sp.instances[0] || sp.instances["vid-6aa567c1b554c32c63a5e826"]) : sp);
+            if (inst && typeof inst.on === "function") {
+                enganchou = true;
+                clearInterval(polling);
+                inst.on("timeupdate", function () {
+                    if (elsDisplayed) return;
+                    var t = (inst.video && inst.video.currentTime) || inst.currentTime || 0;
+                    if (t >= SECONDS_TO_DISPLAY) showHiddenElements();
+                });
+                return;
+            }
+        } catch (e) {}
+        if (tentativas > 40) {
+            clearInterval(polling);
+            if (!enganchou) setTimeout(showHiddenElements, SECONDS_TO_DISPLAY * 1000);
+        }
+    }, 500);
+
+    if (alreadyElsDisplayed) { setTimeout(showHiddenElements, 100); }
+});
+</script>
+</body>
+</html>

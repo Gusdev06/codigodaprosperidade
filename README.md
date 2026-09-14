@@ -1,41 +1,77 @@
 # codigodaprosperidade
 
-Página principal do funil do Código da Prosperidade — quiz de 9 telas que termina na VSL e no checkout.
+Funil completo do Código da Prosperidade. Site estático, sem build.
 
-## Como rodar
+## Rotas
 
-Site estático, sem build. Qualquer servidor de arquivos serve:
+| Rota | O que é |
+|---|---|
+| `/` | Quiz de 9 telas → VSL do front → checkout |
+| `/up1` | Upsell 1 — Mapa Astral (one-click Cakto) |
+| `/dow11` | Downsell do upsell 1 |
+| `/upabs2` | Upsell 2 — Constelação Familiar |
+| `/dowup02` | Downsell do upsell 2 |
+| `/app`, `/app/onboarding.html`, `/app/jornada.html`, `/app/bonus.html` | App do comprador |
+| `/oraculo` | Oráculo |
+| `/mapa`, `/mapa/meu-mapa.html`, `/mapa/transito.html`, `/mapa/diario.html` | Mapa astral |
+
+## Rodar local
 
 ```bash
 python3 -m http.server 4322
 ```
 
-## Estrutura
+## VSLs
 
-- `index.html` — a página inteira (telas, CSS e JS inline)
-- `cartas/` — versos e frentes das 3 cartas reveladas (Roda da Fortuna, Louco, Torre)
-- `selo-consulta.png`, `sensitiva.jpg`, `iris.jpg` — imagens da página
+| Página | Player | Estado |
+|---|---|---|
+| `/` | Vturb `vid-6aa567d5bc76189ae5a9ccc8` | trocado |
+| `/up1` | Vturb `vid-6aa567c1b554c32c63a5e826` | trocado |
+| `/dow11` | `<video>` + `vsl-dow11.mp4` (Vercel Blob) | **falta ID da Vturb** |
+| `/upabs2` | `<video>` + `vsl-upabs2.mp4` (Vercel Blob) | **falta ID da Vturb** |
+| `/dowup02` | `<video>` + `vsl-dowup02.mp4` (Vercel Blob) | **falta ID da Vturb** |
 
-## VSL
+Conta Vturb: `8961d838-aff2-4dce-9b39-e84022d332ce`.
 
-Player Vturb `vid-6aa567d5bc76189ae5a9ccc8` (conta `8961d838-aff2-4dce-9b39-e84022d332ce`).
-O script do player carrega só quando a tela 9 aparece, para não dar play durante o quiz.
+No `/` o script do player carrega só quando a tela 9 aparece, pra não dar play durante o quiz.
+No `/up1`, como não existe mais o `<video>` nativo, a liberação dos botões engancha no
+`timeupdate` da API do smartplayer e, se a API não responder em ~20 s, cai pro relógio
+de parede contado do carregamento da página.
 
-## Checkout
+## ⚠️ MODO TESTE ATIVO EM TODAS AS VSLs
 
-`https://pay.cakto.com.br/utxai3d_1105878`
+Os botões estão liberados na hora. **Antes de promover pra produção**, apague em cada
+arquivo as duas linhas marcadas com `// TESTE` e confira se o tempo abaixo ainda bate
+com o pitch da VSL que está no ar.
 
-## ⚠️ MODO TESTE ATIVO
+| Arquivo | Tempo de produção |
+|---|---|
+| `index.html` | `var espera=1020000` → **17:00** |
+| `up1/index.html` | `SECONDS_TO_DISPLAY = 385` → **6:25** |
+| `dow11/index.html` | `SECONDS_TO_DISPLAY = 75` → **1:15** |
+| `upabs2/index.html` | `SECONDS_TO_DISPLAY = 545` → **9:05** |
+| `dowup02/index.html` | `SECONDS_TO_DISPLAY = 90` → **1:30** |
 
-O botão de compra está liberado na hora. O comportamento de produção é aparecer aos
-**17:00** (`var espera=1020000`), que segue declarado no arquivo, intocado.
+Esses tempos foram calibrados pelo pitch das VSLs antigas. Ao trocar uma VSL, o minuto
+do pitch muda — reconfira antes de restaurar.
 
-Para voltar ao normal, apague em `index.html` as duas linhas marcadas com `// TESTE`:
+## Checkouts (Cakto)
 
-```js
-document.getElementById('btn-comprar').hidden=false; // TESTE
-return;                                              // TESTE
+- Front: `pay.cakto.com.br/utxai3d_1105878` (R$ 77)
+- Upsell 1 one-click: oferta `39craow` · downsell `h46677q` · Pix `faptqy9`
+- Upsell 2 one-click: oferta `3gc6tmu` · downsell `4kxvpc5` · Pix `33y2caz`
+
+O "SIM" dos upsells é one-click da Cakto: depende de `upsellToken` na query string,
+injetado pela Cakto após a compra do front. Abrindo a URL direto, sem token, o botão
+falha e cai no `upsell-reject-url` (o downsell) — isso é esperado, não é bug.
+
+## Deploy
+
+Feito pelo CLI, a partir desta pasta:
+
+```bash
+vercel --prod
 ```
 
-Obs.: os 17:00 foram calibrados pelo pitch da VSL anterior. Confirme em que minuto o
-pitch entra na VSL atual antes de restaurar.
+O projeto da Vercel **não** está ligado ao repositório do GitHub: `git push` sozinho
+não publica.

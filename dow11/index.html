@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DOWNSELL UP 1 – .</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#000}
+  .faixa{background:#e00000;color:#fff;text-align:center;font-weight:600;font-size:15px;padding:18px 16px;margin-top:28px}
+  .wrap{max-width:400px;margin:0 auto;padding:0 16px 60px}
+  .titulo{font-size:20px;font-weight:700;text-align:center;line-height:1.45;margin:18px 0 22px;letter-spacing:.3px}
+  .player{position:relative;width:100%;aspect-ratio:3/4;background:#000;overflow:hidden;cursor:pointer}
+  .player video{width:100%;height:100%;object-fit:cover;display:block}
+  .overlay{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);margin:0 4px;background:rgba(66,20,220,.72);color:#fff;text-align:center;padding:22px 10px;font-weight:700}
+  .overlay .t1{font-size:22px;margin-bottom:14px}
+  .overlay .t2{font-size:22px;margin-top:14px}
+  .overlay svg{width:110px;height:80px}
+  .esconder{display:none;margin-top:28px}
+  cakto-upsell-accept::part(button){display:block;width:100%;background:#22c55e;color:#fff;font-family:system-ui,-apple-system,sans-serif;font-size:21px;font-weight:700;padding:15px 22.5px;border-radius:32px;border:0;text-align:center;cursor:pointer}
+  cakto-upsell-reject::part(button){display:inline-block;margin-top:22px;background:#54595f;color:#fff;font-size:13px;font-weight:500;padding:12px 24px;border-radius:3px;border:0;cursor:pointer}
+  .center{text-align:center}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  
+  <div class="player" id="player">
+    <video id="vsl" src="https://ijvj8w54iaylsej5.public.blob.vercel-storage.com/vsl-dow11.mp4" playsinline muted autoplay loop preload="auto"></video>
+    <div class="overlay" id="overlay">
+      <div class="t1">Tenho algo pra te dizer!</div>
+      <svg viewBox="0 0 110 80" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 30h16l18-16v52L28 50H12z" fill="#fff"/><path d="M66 22c8 8 8 28 0 36M78 12c14 14 14 42 0 56"/><path d="M8 72 L100 8"/></svg>
+      <div class="t2">Clique para ouvir</div>
+    </div>
+  </div>
+
+  <div class="esconder">
+    <cakto-upsell-buttons>
+      <cakto-upsell-accept
+        bg-color="#22c55e"
+        text-color="#ffffff"
+        upsell-accept-url="https://codigodaprosperidade-ivory.vercel.app/upabs2" offer-id="h46677q" offer-type="downsell"
+        app-base-url="https://app.cakto.com.br"
+        upsell-reject-url="https://pay.cakto.com.br/faptqy9"
+      >SIM, QUERO O MAPA COM DESCONTO!</cakto-upsell-accept>
+      <div class="center">
+      <cakto-upsell-reject upsell-reject-url="https://pay.cakto.com.br/faptqy9">Não, obrigado.</cakto-upsell-reject>
+      </div>
+    </cakto-upsell-buttons>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+/* ALTERE O VALOR 10 PARA OS SEGUNDOS EM QUE AS SEÇÕES VÃO APARECER */
+    var SECONDS_TO_DISPLAY = 75;
+    var CLASS_TO_DISPLAY = ".esconder";
+/* DAQUI PARA BAIXO NAO PRECISA ALTERAR */
+    var EXPIRATION_DAYS = 14;
+    var alreadyDisplayedKey = "alreadyElsDisplayed" + SECONDS_TO_DISPLAY;
+    var elsHidden = document.querySelectorAll(CLASS_TO_DISPLAY);
+    var elsDisplayed = false;
+    var video = document.getElementById("vsl");
+    var overlay = document.getElementById("overlay");
+    var player = document.getElementById("player");
+
+    class StorageHandler {
+        static expiryTime = EXPIRATION_DAYS * 86400000;
+        static set(key, value) { localStorage.setItem(key, JSON.stringify({ value, expiry: Date.now() + this.expiryTime })); }
+        static get(key) {
+            var item = localStorage.getItem(key);
+            if (!item) return null;
+            var { value, expiry } = JSON.parse(item);
+            if (Date.now() > expiry) { localStorage.removeItem(key); return null; }
+            return value;
+        }
+    }
+
+    // ===== MODO TESTE — REVERTER ANTES DE SUBIR PRA PROD =====
+    // Botoes liberados na hora. Tempo ORIGINAL: SECONDS_TO_DISPLAY = 75 (1:15),
+    // que continua declarado la em cima, intocado.
+    // Para voltar ao normal: apagar as 2 linhas abaixo marcadas com TESTE.
+    // Nao grava no localStorage, entao nao contamina o teste depois.
+    // =========================================================
+    elsHidden.forEach((e) => e.style.display = "block"); // TESTE
+    return;                                             // TESTE
+
+    var alreadyElsDisplayed = StorageHandler.get(alreadyDisplayedKey);
+    var showHiddenElements = function () {
+        elsDisplayed = true;
+        elsHidden.forEach((e) => e.style.display = "block");
+        StorageHandler.set(alreadyDisplayedKey, true);
+    };
+
+    // smart autoplay: começa mudo em loop; clique = som + recomeça do zero (comportamento vturb)
+    player.addEventListener("click", function () {
+        if (!overlay.hidden) {
+            overlay.hidden = true;
+            video.muted = false; video.loop = false; video.currentTime = 0; video.play();
+        } else if (video.paused) { video.play(); } else { video.pause(); }
+    });
+    video.addEventListener("timeupdate", function () {
+        if (elsDisplayed || !overlay.hidden) return;
+        if (video.currentTime < SECONDS_TO_DISPLAY) return;
+        showHiddenElements();
+    });
+
+    if (alreadyElsDisplayed) { setTimeout(showHiddenElements, 100); }
+});
+</script>
+</body>
+</html>
