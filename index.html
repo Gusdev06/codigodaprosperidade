@@ -167,6 +167,26 @@
 <footer></footer>
 
 <script>
+/* Repassa os parâmetros do anúncio (utm_*, fbclid, gclid, sck, src…) da URL de
+   entrada para o checkout da Cakto, para a venda não chegar sem origem.
+   Guarda em sessionStorage para sobreviver a um reload no meio do quiz. */
+(function(){
+  var qs='';
+  try{
+    qs=location.search.replace(/^\?/,'');
+    if(qs) sessionStorage.setItem('cp_qs',qs);
+    else qs=sessionStorage.getItem('cp_qs')||'';
+  }catch(e){ qs=location.search.replace(/^\?/,''); }
+  if(!qs) return;
+  document.querySelectorAll('a[href*="pay.cakto.com.br"]').forEach(function(a){
+    try{
+      var u=new URL(a.href), entrada=new URLSearchParams(qs);
+      entrada.forEach(function(v,k){ if(!u.searchParams.has(k)) u.searchParams.set(k,v); });
+      a.href=u.toString();
+    }catch(e){}
+  });
+})();
+
 (function(){
   var frentes=["A Roda da Fortuna","O Louco","A Torre"];
   var escolhidas=0;

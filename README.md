@@ -53,6 +53,15 @@ Em produção. Nenhuma página está em modo teste.
 ⚠️ Esses tempos foram calibrados pelo pitch das VSLs antigas. O `/` e o `/up1` já rodam
 VSLs novas da Vturb — reconferir em que minuto o pitch entra nelas e ajustar o número.
 
+## Rastreamento
+
+O `index.html` repassa a query string de entrada (utm_*, fbclid, gclid, sck, src, o que
+vier) para o link do checkout da Cakto, para a venda não chegar sem origem na Cakto/UTMify.
+Guarda em `sessionStorage` (`cp_qs`) para sobreviver a um reload no meio do quiz. Não
+sobrescreve parâmetro que já exista no link do checkout.
+
+Pixel Meta: **pendente**. Nenhuma página tem fbq/GTM/GA.
+
 ## Checkouts (Cakto)
 
 - Front: `pay.cakto.com.br/utxai3d_1105878` (R$ 77)
