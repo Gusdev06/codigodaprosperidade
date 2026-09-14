@@ -60,6 +60,12 @@ vier) para o link do checkout da Cakto, para a venda não chegar sem origem na C
 Guarda em `sessionStorage` (`cp_qs`) para sobreviver a um reload no meio do quiz. Não
 sobrescreve parâmetro que já exista no link do checkout.
 
+UTMify: instalado no `<head>` das 5 páginas do funil (`/`, `/up1`, `/dow11`, `/upabs2`,
+`/dowup02`). O snippet é ofuscado; decodificado, ele injeta
+`https://cdn.utmify.com.br/scripts/utms/latest.js` com os atributos
+`data-utmify-prevent-xcod-sck` e `data-utmify-prevent-subids`. Não está nas páginas
+pós-compra (`/app`, `/oraculo`, `/mapa`), onde não há venda.
+
 Pixel Meta: **pendente**. Nenhuma página tem fbq/GTM/GA.
 
 ## Checkouts (Cakto)
