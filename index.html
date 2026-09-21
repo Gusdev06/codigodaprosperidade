@@ -257,7 +257,9 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href*="p
           clearInterval(poll);
           inst.on('ended',libera);
           inst.on('timeupdate',function(){
-            var v=inst.video||inst, t=v.currentTime||0, d=v.duration||0;
+            var t=(inst.video&&inst.video.currentTime)||inst.currentTime||0;
+            var d=0;
+            try{ d=(inst.instance&&inst.instance.duration)||(inst.video&&inst.video.duration)||inst.duration||0; }catch(e){}
             if(d&&t>=d-1) libera();
           });
           return;
