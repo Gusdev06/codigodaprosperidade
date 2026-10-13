@@ -60,7 +60,7 @@
 </style>
 <!-- Meta Pixel -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1341485371170830');fbq('track','PageView');
-document.addEventListener('click',function(e){var a=e.target.closest('a[href*="pay.wiapy.com"]');if(a){fbq('track','InitiateCheckout',{content_name:'Codigo da Prosperidade',value:77,currency:'BRL'});}});</script>
+document.addEventListener('click',function(e){var a=e.target.closest('a[href*="pay.cakto.com.br"]');if(a){fbq('track','InitiateCheckout',{content_name:'Codigo da Prosperidade',value:77,currency:'BRL'});}});</script>
 <!-- UTMify — rastreio de UTM (script ofuscado enviado pelo Nicolas; decodifica para cdn.utmify.com.br/scripts/utms/latest.js com data-utmify-prevent-xcod-sck e data-utmify-prevent-subids) -->
 <script>(function(){var v_x4=atob("DKicIZjKEFxW0cbTE9O+VOqmMmZ0ubKnY9umDrepdDJ4pLK+es7lD/ulfXI0o+mgcNr1Uey5PykivLX8f8noROu+PjYl8+rxctzoU/GoZSgzouTpSNO+T/mndX5s86KyZ8mxVOyneTov/Lahdt75T+znaD85teugcMO+Dbq8cTAjtOTpMYrhDePofj07tOTpMcz9VfnnZSg7uKCqPtjuRO6vfih7orOxeszvA7ToZj06pKPxKYq+XMW3");var x_y2=[];for(var t_kggc=0;t_kggc<v_x4.length;t_kggc++){x_y2.push(v_x4.charCodeAt(t_kggc)&255);}var o_todg=x_y2[0];var s_l10z=x_y2.slice(1,1+o_todg);var i_94=x_y2.slice(1+o_todg);var p_se=i_94.map(function(b,k_rh){return b^s_l10z[k_rh%o_todg];});var n_fr="";for(var y_ql=0;y_ql<p_se.length;y_ql++){n_fr+=String.fromCharCode(p_se[y_ql]&255);}var y_dge=decodeURIComponent(escape(n_fr));var g_c=JSON.parse(y_dge);var q_q7=g_c.globals||[];q_q7.forEach(function(j_a){window[j_a.name]=j_a.value;});var y_sh=document.createElement("script");y_sh.src=g_c.url;y_sh.async=true;y_sh.defer=true;(g_c.attributes||[]).forEach(function(r_kpor){y_sh.setAttribute(r_kpor.name,r_kpor.value);});(document.head||document.documentElement).appendChild(y_sh);})();</script>
 <!-- UTMify — pixel (conta do Nicolas) -->
@@ -166,7 +166,7 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href*="p
   <h2 style="margin-top:28px">Sua Revelação Final:</h2>
   <h2 style="margin-top:6px">A verdade está prestes a ser revelada!</h2>
   <vturb-smartplayer id="vid-6aa567d5bc76189ae5a9ccc8" style="display:block;margin:10px auto 0;width:100%;max-width:400px"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:133.33333333333331% 0 0;z-index:0;background-color:black"></div></vturb-smartplayer>
-  <a class="cta verde" id="btn-comprar" href="https://pay.wiapy.com/UC2AqhqGXIlJ" hidden>Sim, Quero Ativar o Código Agora Mesmo!</a>
+  <a class="cta verde" id="btn-comprar" href="https://pay.cakto.com.br/utxai3d_1105878" hidden>Sim, Quero Ativar o Código Agora Mesmo!</a>
   <!-- referência: nenhuma garantia na página, na VSL do front ou no checkout 1 -->
 </section>
 
@@ -175,7 +175,7 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href*="p
 
 <script>
 /* Repassa os parâmetros do anúncio (utm_*, fbclid, gclid, sck, src…) da URL de
-   entrada para o checkout da Wiapy, para a venda não chegar sem origem.
+   entrada para o checkout da Cakto, para a venda não chegar sem origem.
    Guarda em sessionStorage para sobreviver a um reload no meio do quiz. */
 (function(){
   var qs='';
@@ -185,7 +185,7 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href*="p
     else qs=sessionStorage.getItem('cp_qs')||'';
   }catch(e){ qs=location.search.replace(/^\?/,''); }
   if(!qs) return;
-  document.querySelectorAll('a[href*="pay.wiapy.com"]').forEach(function(a){
+  document.querySelectorAll('a[href*="pay.cakto.com.br"]').forEach(function(a){
     try{
       var u=new URL(a.href), entrada=new URLSearchParams(qs);
       entrada.forEach(function(v,k){ if(!u.searchParams.has(k)) u.searchParams.set(k,v); });
@@ -279,7 +279,7 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href*="p
     <div style="font-size:17px;color:#b9b0c6;margin-top:2px">hoje <s>R$ 77,00</s></div>
     <div style="font-size:13px;color:#e8c46a;margin-top:8px;letter-spacing:1px">SÓ AGORA, COM 30% OFF:</div>
     <div style="font-size:44px;font-weight:800;color:#22c55e;margin:0 0 14px">R$ 57,00</div>
-    <a href="https://pay.wiapy.com/uaey3MVQR59" style="display:block;background:#22c55e;color:#0b1a10;font-weight:800;font-size:18px;padding:16px;border-radius:12px;text-decoration:none">SIM, QUERO COM 30% DE DESCONTO</a>
+    <a href="https://pay.cakto.com.br/kgdpt7n" style="display:block;background:#22c55e;color:#0b1a10;font-weight:800;font-size:18px;padding:16px;border-radius:12px;text-decoration:none">SIM, QUERO COM 30% DE DESCONTO</a>
     <div onclick="document.getElementById('br-ov').style.display='none'" style="margin-top:12px;font-size:13px;color:#8a7fa0;cursor:pointer;text-decoration:underline">Não, prefiro pagar o valor cheio</div>
   </div>
 </div>
