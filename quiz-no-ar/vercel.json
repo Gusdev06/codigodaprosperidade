@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/quizprosperidade/", "permanent": false }
+  ],
+  "cleanUrls": false,
+  "trailingSlash": true
+}
