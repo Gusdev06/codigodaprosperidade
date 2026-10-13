@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Código da Prosperidade: leitura gratuita</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#4a22b3;color:#fff;-webkit-font-smoothing:antialiased}
+  header{padding:18px 16px 6px;text-align:center}
+  .selo{display:inline-block;border:2px solid #ceb654;color:#ceb654;font-weight:700;letter-spacing:1px;padding:8px 14px;border-radius:10px;font-size:14px}
+  main{max-width:420px;margin:0 auto;padding:0 16px 40px}
+  section{display:none;padding-top:8px}
+  section.ativa{display:block}
+  h1{font-size:26px;line-height:1.25;text-align:center;text-decoration:underline;margin:14px 0 10px}
+  h2{font-size:21px;line-height:1.3;text-align:center;margin:14px 0 10px}
+  p{font-size:17px;line-height:1.45;text-align:center;margin:8px 0}
+  .sub{font-size:15px;opacity:.9}
+  .foto{width:100%;max-width:320px;border-radius:14px;display:block;margin:12px auto}
+  .barra{height:8px;background:#2a125f;border-radius:6px;margin:8px 0 14px;overflow:hidden}
+  .barra i{display:block;height:100%;background:#ceb654;width:0;transition:width .6s}
+  .opcoes{list-style:none;padding:0;margin:14px 0}
+  .opcoes li{background:#0d8ee6;border-radius:12px;margin:10px 0}
+  .opcoes button{width:100%;background:none;border:0;color:#fff;font-weight:700;font-size:16px;text-align:left;padding:14px 12px;display:flex;gap:12px;align-items:center;cursor:pointer}
+  .opcoes button span:first-child{font-size:26px}
+  .cta{display:block;width:100%;background:#ceb654;color:#fff;font-weight:700;font-size:17px;text-transform:uppercase;text-align:center;border:0;border-radius:12px;padding:16px 12px;text-decoration:none;cursor:pointer;animation:pulso 1.6s infinite;margin-top:14px}
+  .cta.verde{background:#088728;text-transform:none;font-size:19px}
+  @keyframes pulso{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+  .analise{height:26px;background:#2a125f;border-radius:8px;margin:20px 0 6px;overflow:hidden;position:relative}
+  .analise i{display:block;height:100%;background:#ceb654;width:0;transition:width 4s linear}
+  .analise b{position:absolute;inset:0;text-align:center;line-height:26px;font-size:13px}
+  .texto-esc{opacity:0;transition:opacity .5s}
+  .texto-esc.visivel{opacity:1}
+  .cartas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+  .carta{aspect-ratio:82/138;border-radius:8px;background:#2a125f;border:2px solid #ceb654;position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;color:#ceb654;transition:transform .5s}
+  .carta.virada{background:#f3e7c2;color:#2a125f;font-size:10px;font-weight:700;text-align:center;padding:4px;transform:rotateY(180deg)}
+  .carta.virada span{transform:rotateY(180deg);display:block}
+  .carta.inativa{opacity:.35;pointer-events:none}
+  .carta .selo-num{position:absolute;top:-8px;right:-8px;width:22px;height:22px;border-radius:50%;background:#ceb654;color:#2a125f;font-size:12px;font-weight:700;line-height:22px;text-align:center}
+  .player{position:relative;width:100%;padding-top:133.33%;background:#000;border-radius:12px;overflow:hidden;margin-top:10px}
+  .player>*{position:absolute;inset:0;width:100%;height:100%}
+  .placeholder{display:flex;align-items:center;justify-content:center;color:#ccc;font-size:14px;text-align:center;padding:20px}
+  .garantia{font-size:14px;opacity:.95;margin-top:16px}
+  footer{max-width:420px;margin:0 auto;padding:10px 16px 30px;font-size:12px;line-height:1.4;opacity:.75;text-align:center}
+  [hidden]{display:none !important}
+
+  html,body{min-height:100%}
+  body{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+  header,main,footer{width:100%}
+  main{max-width:min(520px,100% - 32px);padding:0 0 32px}
+  h1{font-size:clamp(22px,5.5vw,30px)}
+  h2{font-size:clamp(18px,4.8vw,24px)}
+  p{font-size:clamp(15px,4.2vw,18px)}
+  .opcoes button{font-size:clamp(15px,4vw,17px)}
+  .cta{font-size:clamp(15px,4.2vw,19px)}
+  .foto{max-width:min(320px,80%)}
+  @media (min-width:768px){main{max-width:560px}.cartas{gap:14px}}
+  .carta{background:none;border:0;padding:0;overflow:visible}.carta img{width:100%;height:100%;object-fit:contain;display:block;border-radius:8px}.carta.virada{background:none;padding:0;transform:rotateY(180deg)}.carta.virada img{transform:rotateY(180deg)}
+</style>
+</head>
+<body>
+<header><span class="selo">LEITURA GRATUITA</span></header>
+<main>
+
+<section id="tela-1" class="ativa">
+  <h1>Descubra de Graça o Que as Cartas Têm a Dizer Sobre a Sua Vida!</h1>
+  <p>O baralho dourado da prosperidade aponta o caminho certo para <strong>tirar do lugar o que está travando a sua vida.</strong></p>
+  <img class="foto" src="/hquizprosperidade/iris.jpg" alt="Íris sentada à mesa, três cartas douradas fechadas à frente">
+  <button class="cta" data-ir="2">TOQUE AQUI E RECEBA SUA LEITURA GRÁTIS!</button>
+</section>
+
+<section id="tela-2">
+  <div class="barra"><i style="width:20%"></i></div>
+  <h2>Qual dessas frases mais parece com o que você vem sentindo este ano?</h2>
+  <ul class="opcoes">
+    <li><button data-ir="3"><span>😪</span><span>Faço tudo certo e mesmo assim nada sai do lugar.</span></button></li>
+    <li><button data-ir="3"><span>😔</span><span>Por fora está tudo bem, mas por dentro falta alguma coisa.</span></button></li>
+    <li><button data-ir="3"><span>🫨</span><span>Tenho uma escolha grande pela frente e não sei pra que lado ir.</span></button></li>
+    <li><button data-ir="3"><span>🤔</span><span>Pressinto uma virada chegando, só não sei de onde.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-3">
+  <div class="barra"><i style="width:40%"></i></div>
+  <h2>Pensando nas pessoas da sua vida... qual frase bate mais com o seu coração?</h2>
+  <ul class="opcoes">
+    <li><button data-ir="4"><span>💔</span><span>Dou tudo de mim, mas na hora do aperto ninguém aparece.</span></button></li>
+    <li><button data-ir="4"><span>🙁</span><span>Carrego a casa inteira enquanto todo mundo segue a vida.</span></button></li>
+    <li><button data-ir="4"><span>😓</span><span>Já me dei tanto que nem sei mais o que ficou pra mim.</span></button></li>
+    <li><button data-ir="4"><span>🥺</span><span>Por mais que eu ame e me esforce, parece que nunca basta.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-4">
+  <div class="barra"><i style="width:55%"></i></div>
+  <h2>O que você mais quer ver mudar na sua vida este ano?</h2>
+  <p class="sub">Marque a opção que mais combina com a fase que você está vivendo.</p>
+  <ul class="opcoes">
+    <li><button data-ir="5"><span>💰</span><span>Ver a vida financeira finalmente andar.</span></button></li>
+    <li><button data-ir="5"><span>💌</span><span>Encontrar um amor de verdade.</span></button></li>
+    <li><button data-ir="5"><span>🍀</span><span>Ter paz dentro de mim.</span></button></li>
+    <li><button data-ir="5"><span>🙏</span><span>Descobrir o meu rumo e o meu propósito.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-5">
+  <div class="barra"><i style="width:70%"></i></div>
+  <h2>Já aconteceu de olhar pros lados, ver todo mundo indo pra frente... e sentir que só você continua parada no mesmo ponto?</h2>
+  <p class="sub">As cartas conseguem apontar de onde vem essa sensação que não passa.</p>
+  <ul class="opcoes">
+    <li><button data-ir="6"><span>✅</span><span>Sim, é exatamente assim que eu me sinto!</span></button></li>
+    <li><button data-ir="6"><span>🤔</span><span>De vez em quando... mas deve ser só uma fase.</span></button></li>
+    <li><button data-ir="6"><span>❔</span><span>Sinto isso, mas não faço ideia do motivo.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-6">
+  <div class="barra"><i style="width:85%"></i></div>
+  <p><strong>(Só mais uma pergunta e a sua leitura começa)</strong></p>
+  <p>Se HOJE as cartas apontassem o que está travando a sua vida e entregassem o passo a passo para destravar...</p>
+  <h2>Você estaria pronta para seguir o que elas disserem?</h2>
+  <ul class="opcoes">
+    <li><button data-ir="7"><span>✅</span><span>Sim, estou pronta.</span></button></li>
+    <li><button data-ir="7"><span>😔</span><span>Sim, mas tenho receio de me frustrar mais uma vez.</span></button></li>
+    <li><button data-ir="7"><span>🤔</span><span>Ainda não sei, depende do que aparecer.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-7">
+  <div class="analise"><i id="analise-barra"></i><b id="analise-pct">0%</b></div>
+  <p class="sub">Lendo as suas respostas...</p>
+  <p class="texto-esc" data-t="4000"><strong>Com base no que você acabou de me contar...</strong><br><strong>O universo vai separar, entre milhares de arranjos possíveis...</strong></p>
+  <p class="texto-esc" data-t="5000"><strong>Somente as 8 cartas que conseguem conversar com a sua energia agora.</strong></p>
+  <p class="texto-esc" data-t="6000"><strong>Você vai escolher só 3 delas e descobrir o caminho certo para destravar a sua vida em 2026.</strong></p>
+  <p class="texto-esc" data-t="7000"><strong>Respire fundo.</strong></p>
+  <button class="cta" id="btn-cartas" data-ir="8" hidden style="text-transform:none">Quero Escolher as Minhas Cartas</button>
+</section>
+
+<section id="tela-8">
+  <div class="barra"><i style="width:90%"></i></div>
+  <h2>As cartas estão na mesa, só para você:</h2>
+  <p><strong>Não escolha com a cabeça. Escolha com o coração.</strong></p>
+  <p>Toque em 3 cartas, uma por vez, <strong>na ordem que a sua intuição pedir:</strong></p>
+  <div class="cartas" id="grade-cartas">
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-1.png" alt="Carta 1"></div>
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-2.png" alt="Carta 2"></div>
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-3.png" alt="Carta 3"></div>
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-4.png" alt="Carta 4"></div>
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-5.png" alt="Carta 5"></div>
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-6.png" alt="Carta 6"></div>
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-7.png" alt="Carta 7"></div>
+    <div class="carta"><img src="/hquizprosperidade/cartas/verso-8.png" alt="Carta 8"></div>
+  </div>
+  <button class="cta" id="btn-leitura" data-ir="9" hidden>REVELAR A MINHA LEITURA</button>
+</section>
+
+<section id="tela-9">
+  <div class="player">{{VSL_EMBED}}</div>
+  <a class="cta verde" id="btn-comprar" href="{{CHECKOUT_URL}}" hidden>SIM, QUERO ATIVAR O MEU CÓDIGO AGORA!</a>
+  <p class="garantia" id="garantia" hidden>Garantia incondicional de 7 dias: se não fizer sentido para você, devolvemos tudo.</p>
+</section>
+
+</main>
+<footer>Este conteúdo tem caráter espiritual e de entretenimento, não substitui orientação profissional, médica ou financeira e não garante resultados.</footer>
+
+<script>
+(function(){
+  var frentes=["A Roda da Fortuna","O Louco","A Torre"];
+  var escolhidas=0;
+  function ir(n){
+    document.querySelectorAll('section').forEach(function(s){s.classList.remove('ativa')});
+    document.getElementById('tela-'+n).classList.add('ativa');
+    window.scrollTo(0,0);
+    if(n===7) analisar();
+    if(n===9) vsl();
+  }
+  document.querySelectorAll('[data-ir]').forEach(function(b){
+    b.addEventListener('click',function(){ir(parseInt(b.getAttribute('data-ir'),10))});
+  });
+  function analisar(){
+    var barra=document.getElementById('analise-barra'),pct=document.getElementById('analise-pct'),t0=Date.now();
+    requestAnimationFrame(function(){barra.style.width='100%'});
+    var tick=setInterval(function(){var p=Math.min(100,Math.round((Date.now()-t0)/40));pct.textContent=p+'%';if(p>=100)clearInterval(tick)},100);
+    document.querySelectorAll('.texto-esc').forEach(function(el){setTimeout(function(){el.classList.add('visivel')},parseInt(el.getAttribute('data-t'),10))});
+    setTimeout(function(){document.getElementById('btn-cartas').hidden=false},7000);
+  }
+  document.querySelectorAll('#grade-cartas .carta').forEach(function(c){
+    c.addEventListener('pointerdown',function(){
+      if(c.classList.contains('virada')||escolhidas>=3)return;
+      escolhidas++;
+      c.classList.add('virada');
+      var fr=['roda','louco','torre'][escolhidas-1];c.innerHTML='<img src="/hquizprosperidade/cartas/'+fr+'.png" alt="'+frentes[escolhidas-1]+'"><i class="selo-num">'+escolhidas+'</i>';
+      if(escolhidas===3){
+        document.querySelectorAll('#grade-cartas .carta:not(.virada)').forEach(function(o){o.classList.add('inativa')});
+        setTimeout(function(){document.getElementById('btn-leitura').hidden=false},600);
+      }
+    });
+  });
+  function vsl(){
+    var espera=1020000; /* 17:00 em ms */
+    var chave='cp_botao_liberado';
+    try{ if(localStorage.getItem(chave)) espera=0; }catch(e){}
+    setTimeout(function(){
+      document.getElementById('btn-comprar').hidden=false;
+      document.getElementById('garantia').hidden=false;
+      try{ localStorage.setItem(chave,String(Date.now())); }catch(e){}
+    },espera);
+  }
+})();
+</script>
+</body>
+</html>

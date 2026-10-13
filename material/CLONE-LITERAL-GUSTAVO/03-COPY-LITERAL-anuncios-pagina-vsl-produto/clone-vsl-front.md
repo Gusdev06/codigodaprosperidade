@@ -1,0 +1,1472 @@
+> REFERÊNCIA LITERAL (A Fórmula da Prosperidade / Cassandra Montenegro) — montada em 2026-09-12 para comparação com a versão homologada. Não publicar como está.
+
+# VSL do front (20:06) — versão literal da referência
+
+Fontes: `v1/funil-completo.md` (bloco "VSL" e tabela de beats), `_tools/vsl-vsl-quiz-vsl2-braco-live.blocks.md` (fala completa com timestamps, Whisper large-v3-turbo) e `criativos/transcricoes/vsl-quiz-vsl2-braco-live.srt`.
+
+## Ficha do player
+- Presente: sim | Player: vturb/converteai, conta `37209f46-f3bf-4549-a72e-f25bf0388e60`, player `6a42c048641d860e23c55335`, nome interno no vturb **"VSL_FRONT_V01_OF075 - 77$ - ON - PIT CORTADO 1,1X - ON"** | URL do player: https://scripts.converteai.net/37209f46-f3bf-4549-a72e-f25bf0388e60/players/6a42c048641d860e23c55335/v4/player.js
+- URL do arquivo: master `https://m3u8.vturb.net/t-<token de sessão>/37209f46-f3bf-4549-a72e-f25bf0388e60/6a42be8fd7338761a2d2e259/main.m3u8` (token muda a cada carga; fora do navegador devolve um vídeo mock). Segmentos públicos e sem token: `https://cdn.converteai.net/37209f46-f3bf-4549-a72e-f25bf0388e60/6a42be8fd7338761a2d2e259/video/720p/segment_0.ts` … `segment_301.ts` (302 segmentos de 4,004 s). Variantes: 270x360, 360x480, 540x720 @29,97 fps.
+- Duração: **20:06** (1206 s pela playlist) | Autoplay: sim, mudo, com overlay "Clique para ouvir" | Botão aparece aos: **17:00** (1020 s, `delayToShow` do botão; a espera é de relógio, começa ao abrir a tela)
+- Baixada: **criativos/originais/vsl-quiz-vsl2-braco-live.mp4** (720p, playlist reconstruída em `_tools/pagina/playlists/vsl-quiz-vsl2-braco-live-720p.m3u8`, `ffmpeg -c copy`; ffprobe na seção "Arquivos de vídeo baixados")
+- Decupagem: apontada para o Dário (não transcrita aqui)
+
+## Tabela de beats (funil-completo)
+Complementa a "Seção 09: VSL 2" do dossiê acima. Apresentadora se identifica só como "a sensitiva" (17 anos, "linhagem ancestral de ciganas da Romênia", cita Virginia Fonseca e Mariana Rios como clientes). Nome próprio "Cassandra Montenegro" aparece apenas nos PDFs do produto.
+
+| Tempo | Beat | Conteúdo (resumo com citação curta) |
+|---|---|---|
+| 00:00–01:04 | Abertura + promessa numérica | Combinação das 3 cartas "acontece em uma a cada 100 mil leituras"; seguindo o direcionamento "você começará a manifestar 2 mil, 5 mil, até 6 mil reais antes do próximo fim de semana" |
+| 01:04–01:36 | Autoridade | 17 anos, ciganas da Romênia, TV/internet, celebridades |
+| 01:36–04:13 | Leitura carta a carta | O Louco = beira de uma virada financeira (Pix inesperado de R$ 2 mil, dívida paga com juros, sorteio de supermercado, benefício); A Torre = derruba o que bloqueia; citação bíblica do grão de mostarda |
+| 04:13–07:23 | A Roda da Fortuna + 3 casos | "Chega de escassez"; dona Marlene (diarista, BH, Pix de R$ 13 mil da patroa), Cláudia (Campinas, carro 0 km sorteado pela nota fiscal), dona Teresa (58, R$ 47 mil na Bahia da Sorte após "seguir o Código por sete dias") |
+| 07:23–11:05 | Mecanismo do problema | "Amarração de pobreza" plantada na infância + inveja/olho gordo; por que gratidão e simpatia não resolvem |
+| 11:05–12:43 | Mais 2 casos | Seu Carlos (pedreiro, Goiânia, terreno barato + dinheiro do primo → casa própria); dona Raimunda (costureira, Fortaleza, advogado aparece, benefício de R$ 4.200/mês) |
+| 12:43–15:26 | **Stack falado** | "O Código da Prosperidade é dividido em três fases. Cada fase é um ritual guiado de cinco minutos": **Fase 1** meditação guiada de quebra da amarração de pobreza (áudio gravado, orações ciganas, 5 min, 1 vez); **Fase 2** ritual de ativação da frequência de abundância (áudio 5 min, 7 dias seguidos antes de dormir); **Fase 3** ritual de abertura dos caminhos do dinheiro (5 min, "funciona como um ímã"). **Complementos**: mapa energético da sua casa (guia: vassoura atrás da porta, espelho, objetos quebrados); calendário cósmico da prosperidade 2026 (12 dias); guia de blindagem contra inveja e olho gordo; ritual da Lua Nova de prosperidade (mensal) |
+| 15:26–16:28 | **Âncora falada** | "presencialmente o Código da Prosperidade custa 3 mil reais"; analogia do médico que não nega o remédio |
+| 16:28–17:30 | **Preço falado** | "você não vai pagar R$ 3.000, nem R$ 1.000, nem R$ 500. O seu acesso ao Código da Prosperidade completo vai ser de apenas R$ 77. Ou em 12 vezes de R$ 7,96 no cartão" — comparação com lanche de delivery. Âncora falada: R$ 3.000 ÷ R$ 77 = **39x** |
+| 17:30–18:01 | Instrução de compra | "Logo abaixo vai aparecer um botão. Você clica, preenche seus dados, realiza o pagamento… Em poucos minutos você recebe tudo no seu e-mail" (o botão aparece de fato aos 17:00) |
+| 18:01–19:06 | Urgência | Janela cósmica; "se você sair dessa página… a única opção vai ser presencialmente no meu consultório em São Paulo, pagando R$ 3.000,00" |
+| 19:06–20:06 | Fechamento | Recapitula os 4 casos; "Clica no botão abaixo, agora. Ativa o código da prosperidade" |
+| — | **Garantia** | **Nenhuma garantia é falada na VSL do front** (nem na página, nem no checkout). |
+
+Divergência promessa × entrega (para a Lívia): a VSL vende **3 áudios/rituais guiados de 5 minutos + 4 complementos**; a área de membros entrega **textos + 6 PDFs (sem nenhum áudio, sem vídeo)** e dois apps externos (um pede e-mail de compra; o outro tem a "Jornada" de 7 dias com os nomes exatos das 3 fases e dos bônus — ver "Produto entregue"). A "Numerologia Judaica" (bump) e a "Constelação Familiar" (OTO2) aparecem no app como "Módulos bônus". As leituras eram fixas (Roda da Fortuna, Louco, Torre) e a VSL confirma os três nomes.
+
+## Transcrição literal completa (blocos de ~30 s)
+
+- **[00:00–00:33]** Parabéns por ter solicitado a leitura gratuita das suas cartas. E eu preciso te dizer algo que me deixou impressionada. Em 17 anos lendo cartas, eu nunca vi uma combinação que revelasse um bloqueio financeiro tão forte quanto o seu. E ao mesmo tempo, um potencial de abundância tão grande. É como se algo tiver rancado a porta da sua prosperidade tão fortemente, que nem mesmo exercícios de lei da atração, orações ou simpatias conseguem quebrar esse bloqueio financeiro. Porém, essas três cartas que você puxou mostram o caminho para desbloquear a abundância financeira na sua vida.
+- **[00:33–01:04]** Por isso é tão importante que você preste atenção em cada detalhe do que eu vou te revelar agora. E preciso dizer que estou impressionada, porque essa combinação de cartas que você puxou acontece em uma a cada 100 mil leituras. E se você seguir o direcionamento delas, você começará a manifestar 2 mil, 5 mil, até 6 mil reais antes do próximo fim de semana. Mas antes, deixa eu me apresentar rapidamente. Eu sou a sensitiva, fui iniciada há 17 anos por uma linhagem ancestral de ciganas da Romênia. Talvez você já tenha me visto na TV ou na internet, onde fiquei conhecida depois que a Virginia Fonseca e a Mariana Rios
+- **[01:04–01:36]** contaram publicamente que consultaram comigo e que as leituras mudaram a vida financeira delas. Mas não foram só elas. Ao longo desses 17 anos, já atendi mais de 30 mil pessoas. De empresários e celebridades a faxineiras, donas de casa e até garis que viviam na pobreza e hoje têm uma vida que nunca imaginaram que teriam. Essas pessoas me procuraram porque entenderam que, por mais que se esforce, é praticamente impossível prosperar na vida se você estiver com um bloqueio financeiro travando tudo. E o tarô é a ferramenta mais poderosa para identificar isso.
+- **[01:36–02:06]** E as três cartas que você tirou me mostram exatamente qual é o seu bloqueio e como quebrá-lo. Então preste bastante atenção porque eu preciso explicar cada carta na ordem que você puxou. A primeira carta é o louco. Ela significa que você está na beira de uma virada financeira, que pode mudar absolutamente tudo na sua vida. Eu estou falando de coisas como um pix inesperado de dois mil reais caindo na sua conta do nada. Alguém que te devia anos finalmente te pagando a dívida com juros. Um sorteio de supermercado, em que o seu nome é o premiado.
+- **[02:06–02:41]** Uma aposentadoria, um benefício que você nem sabia que tinha direito. Um presente em dinheiro que aparece de onde você menos espera. E por mais que você ache isso uma loucura ou algo impossível, saiba que isso acontece todos os dias com milhares de pessoas. E também pode acontecer com você. Se você tiver fé e seguir o que eu estou vendo nas cartas. Porque como está na Bíblia, se tiveres fé do tamanho de um grão de mostarda, seria capaz de mover montanhas. Ou seja, desde que você acredite de verdade, você será capaz de materializar pix na sua conta até o próximo fim de semana.
+- **[02:41–03:11]** E não só isso, eu estou falando de abundância de verdade. A abundância que o universo determinou para a sua vida. Uma casa própria do jeito que você sempre sonhou. Um carro zero, uma conta bancária com dinheiro guardado. Que você tem o suficiente e que vai continuar tendo. É exatamente isso que o louco está dizendo. Que é possível para você. E se você acha isso impossível, então deixa eu te contar uma história rápida de um jovem que consultou com minha avó em 1941. Ele era camelô, toda a família era pobre.
+- **[03:12–03:42]** E durante a leitura, as cartas revelaram que ele tinha um potencial de riqueza gigantesco, mas que estava bloqueado. Então ela disse o que ele precisava fazer, inclusive mudar seu nome de Sr. Abravanel por Silvio Santos. E ele seguiu, sem duvidar, sem questionar, com fé, e saiu de camelô para dono de um império bilionário. O louco no tarô é exatamente isso. É a carta de quem está prestes a dar um salto que ninguém entende. Um salto que vai mudar tudo. E o salto só acontece para quem tem a coragem de acreditar.
+- **[03:42–04:13]** Mesmo quando todo mundo chama de loucura. A pergunta é, você tem essa fé? Porque se você tiver, as próximas cartas vão te mostrar exatamente o que está para acontecer na sua vida financeira. Agora a terceira carta. Essa é a que mais me impressionou. A terceira carta que você puxou é a Roda da Fortuna. E quando eu vi essa carta aparecer logo depois de Olouco e a Torre, eu tive que parar, respirar e olhar de novo. Porque a roda da fortuna é a carta da virada. Ela significa que o ciclo de escassez está chegando ao fim. Que a roda está girando.
+- **[04:13–04:43]** E que o lado da abundância está vindo acima. A roda da fortuna aparece quando o universo decide que chega. Chega de escassez. Chega de apertar. Chega de contar moedas no fim do mês. Chegou a sua vez. E não estou falando de um dia, quem sabe, talvez. Estou falando de uma mudança real e concreta. Dinheiro que hoje você não tem. Entrando na sua vida nos próximos dias. Aquela conta atrasada que tira o seu sono. sendo paga. Aquele sonho que você guarda há anos, finalmente se tornando possível. Mas lembre-se de uma coisa, para o universo nada é impossível.
+- **[04:43–05:15]** Uma casa nova, um carro novo, 10 mil reais extra na sua conta, tudo isso para o universo não significa nada. Ele materializa isso com a mesma facilidade que você respira. A questão nunca foi se o universo pode te dar. A questão sempre foi se você está aberta para receber. E eu vou te provar que isso é real, porque eu vi acontecer milhares de vezes com pessoas que seguiram minhas leituras, como a dona Marlene, de 63 anos, que é diarista em Belo Horizonte. Nunca foi à escola. Mal sabia escrever o próprio nome. Ela fez uma consulta comigo num momento em que não tinha dinheiro nem pro ônibus.
+- **[05:16–05:46]** Eu fiz a leitura, mostrei o caminho do Código da Prosperidade. Ela seguiu as orientações com fé. Uma semana depois, a patroa dela enviou um Pix de 13 mil reais pra ela reformar a casa. Agora imagine isso, 13 mil reais. Do nada, em uma semana. A Cláudia, de 42 anos, é dona de casa em Campinas. Tem três filhos. O marido tinha acabado de ficar desempregado. E para piorar, o Palio 2009 deles quebrou. Era o carro que o marido usava para fazer entregas e bicos. A Cláudia não sabia mais o que fazer. Foi quando ela fez a consulta comigo.
+- **[05:46–06:18]** Eu puxei as cartas, fiz a leitura e expliquei o código da prosperidade. Ela seguiu tudo com fé. Dez dias depois, ela foi ao supermercado fazer a compra do mês. Colocou o CPF na nota fiscal, como sempre fazia. E na semana seguinte, recebeu uma ligação. Seu nome tinha sido sorteado. Um carro zero quilômetro. No momento mais difícil da vida dela, o universo entregou exatamente o que a família precisava. E também aconteceu com a dona Teresa, de 58 anos. Toda semana, sem falta, ela ia até a lotérica e comprava um bilhete da Bahia da Sorte.
+- **[06:18–06:53]** Fazia isso há mais de seis anos. Os filhos dela viviam dizendo, Mãe, para de jogar dinheiro fora, a senhora nunca vai ganhar. E ela quase acreditou neles, até que ela fez uma consulta comigo. E na leitura, as cartas que eu li revelaram algo que me chamou a atenção. Expliquei pra ela. que precisava seguir o Código da Prosperidade por sete dias, então jogar na sexta-feira, que era o dia em que a sua energia financeira estava mais forte. Ela fez exatamente o que eu disse. E no sábado de manhã, o telefone dela tocou. Dona Tereza tinha ganhado 47 mil reais no Bahia da Sorte.
+- **[06:53–07:23]** E eu poderia continuar mostrando aqui os milhares de casos de pessoas que consultaram comigo e saíram de casos de pobreza e conquistaram a abundância e prosperidade. E muitos dos casos em que as pessoas consideram impossível. Mas essa é a questão. Para o universo, nada é impossível. Porque quando você ouve e segue o que ele fala, ele sempre entrega. Pode ser 13 mil reais num envelope. Pode ser um carro zero, uma casa própria, um bilhete premiado. A única coisa que ele precisa é que você esteja aberta para receber. E se você está ouvindo isso e sentindo algo no peito, uma vontade de acreditar,
+- **[07:23–07:53]** um pressentimento de que, dessa vez, tem algo bom para acontecer na sua vida, isso não é por acaso. É porque você é exatamente como essas mulheres. Você sempre soube, lá no fundo, que merecia mais. Mesmo quando todo mundo ao seu redor se contentava com pouco. Veja bem, você nasceu para prosperar. É por isso que você sente essa inquietação, essa sensação de que tem algo maior esperando por você. Essa certeza silenciosa de que a sua vida deveria ser diferente. Não é imaginação, é a sua essência te dizendo que você está vivendo abaixo do que foi destinada a viver.
+- **[07:53–08:24]** E olha, sabe todas as vezes que você ajoelhou, todas as vezes que você sentiu um aperto no peito e disse do fundo do seu coração, meu Deus, me ajuda? As suas orações não foram ignoradas. Ele te ouviu e te respondeu. Ele separou dinheiro para você, separou oportunidades, separou prosperidade. Mas como a amarração de pobreza estava ativa, nada conseguia chegar. Era como se tivesse um vidro blindado entre você e tudo que é seu por direito. Você via a abundância do outro lado, mas não conseguia tocar até agora. Porque essas três cartas que você puxou, o louco, a torre e a roda da fortuna, acabam de revelar que a amarração está enfraquecendo.
+- **[08:24–08:56]** A roda está girando a seu favor e o universo está prestes a entregar tudo que já é seu. Mas existe uma condição, porque é agora que você precisa agir. Enquanto a roda da fortuna está alinhada com a sua energia de uma maneira que raramente acontece. É como se todas as forças do universo estivessem convergindo para um único ponto, a sua prosperidade. Mas isso é uma janela cósmica passageira e não fica aberta para sempre. É como uma estrela cadente. Se você vê e faz seu desejo, o desejo se realiza.
+- **[08:56–09:28]** Mas se deixa passar, ela já foi. E é por isso que você precisa agir agora. Enquanto a roda está girando a seu favor. Enquanto a amarração está fraca. Enquanto o universo está com as mãos estendidas, pronto para te entregar tudo. Você precisa fazer algo. Você precisa ativar o que eu chamo de código da prosperidade. Veja bem, o código da prosperidade é algo que eu desenvolvi a partir das leituras que faço há 17 anos. É um protocolo espiritual de tarô, de quebra da amarração de pobreza e ativação da abundância na sua vida.
+- **[09:28–10:02]** que eu desenvolvi ao longo de 17 anos, baseado nos ensinamentos da minha linhagem ancestral de ciganas. E ele funciona em três etapas. Primeiro, ele quebra a amarração de pobreza, remove a energia de escassez que está grudada em você e na sua casa, limpando o caminho para o dinheiro chegar. Segundo, ele ativa a sua frequência de abundância, alinha sua energia com a prosperidade, para que o universo finalmente consiga te entregar o que já é seu. Terceiro, ele abre os caminhos do dinheiro através de rituais específicos que atraem dinheiro rápido, oportunidades inesperadas e prosperidade contínua.
+- **[10:02–10:32]** E se você chegou até aqui, é porque o universo decidiu que essa é a hora de você ativar o código da prosperidade. Mas você precisa entender que o código da prosperidade é algo personalizado, algo que eu crio a partir de cada leitura para quebrar a amarração e ativar a abundância na vida daquela pessoa. porque cada amarração é diferente. Depende de quais crenças foram plantadas na sua infância. Depende de como a energia circula dentro da sua casa. Depende do histórico espiritual da sua família.
+- **[10:33–11:04]** Depende do que as cartas revelam sobre você. Por isso, eu sempre fiz o Código da Prosperidade de forma presencial no meu consultório em São Paulo. Porque eu preciso analisar a leitura, entender a amarração daquela pessoa e montar o protocolo certo para ela. E isso leva tempo. E por isso, eu consigo atender poucas pessoas por mês. Porém, como estou aqui fazendo essa leitura com você pela internet. E as cartas estão me mostrando com clareza o que está bloqueando a sua prosperidade. Eu vou te dar acesso ao código da prosperidade para você fazer de casa. Com o mesmo protocolo, os mesmos rituais, a mesma eficácia.
+- **[11:05–11:40]** Para você começar a manifestar abundância ainda hoje, como aconteceu com o seu Carlos, de 51 anos, que é pedreiro em Goiânia. A vida inteira construindo casa para os outros. Mas nunca conseguiu construir a dele. Morava de aluguel com a esposa e dois filhos. Ele fez a consulta comigo online, eu fiz a leitura e passei o código da prosperidade para ele seguir por sete dias. São rituais simples de cinco minutos, ele seguiu tudo. Uma semana depois, o dono de um terreno perto de onde ele morava procurou ele e ofereceu o terreno por um valor tão baixo que parecia piada. Na mesma semana, um primo que mora no exterior mandou um dinheiro inesperado, dizendo que era uma dívida antiga da família.
+- **[11:40–12:10]** Com o terreno barato e o dinheiro do primo, seu Carlos começou a construir. Hoje mora na casa própria, no terreno que o universo colocou no caminho dele. E a dona Raimunda, 62 anos, costureira em Fortaleza. Vivia com o dinheiro da costura, que mal dava para o básico. Fez a consulta comigo online, ativou o Código da Prosperidade, seguiu os rituais por sete dias. Uma semana depois, apareceu na porta da casa dela um advogado que ela nunca tinha visto na vida. Ele disse que ela tinha direito a um benefício do governo
+- **[12:10–12:43]** que ela nem sabia que existia. Cuidou de toda a papelada. E hoje, dona Raimunda recebe R$ 4.200 por mês. sem falta, um dinheiro que sempre foi dela por direito, mas que ela nunca soube que existia, até o Código da Prosperidade abrir esse caminho. Agora, deixa eu te explicar exatamente como o Código da Prosperidade funciona. O Código da Prosperidade é dividido em três fases. Cada fase é um ritual guiado de cinco minutos que você faz no conforto da sua casa. Na primeira fase, você vai seguir a meditação guiada de quebra da amarração de pobreza.
+- **[12:43–13:18]** É um áudio gravado por mim, com as orações ancestrais da minha linhagem cigana, que dissolve a energia de escassez que está grudada em você. Você coloca o fone de ouvido, aperta o play, fecha os olhos e escuta. Em cinco minutos, o áudio faz o trabalho. Ele limpa as crenças de pobreza que foram plantadas na sua infância, remove a energia negativa de inveja e olho gordo, e abre espaço para a prosperidade entrar. Você faz isso uma vez e já sente a diferença. É como tirar um peso das costas, que você nem sabia que estava carregando. Na segunda fase, você vai receber o ritual de ativação da frequência de abundância.
+- **[13:18–13:51]** É uma meditação guiada de 5 minutos que alinha a sua energia com a prosperidade. Quando a amarração é quebrada, o caminho fica limpo. Mas você precisa ativar a sua frequência para que o universo saiba que você está pronta para receber. Esse ritual faz exatamente isso. Você ouve o áudio por 7 dias seguidos, de preferência antes de dormir. E durante esses 7 dias, a sua energia vai se alinhar com a abundância. Na terceira fase, você vai receber o ritual de abertura dos caminhos do dinheiro. Esse é o ritual que atrai o dinheiro de forma ativa para a sua vida. Ele funciona como um ímã. Você faz o ritual de cinco minutos e ele envia um sinal para o universo dizendo
+- **[13:51–14:24]** eu estou pronta, pode entregar. E aí o dinheiro começa a chegar. Pode ser um pix inesperado, um sorteio, uma oportunidade de trabalho, um benefício que você não sabia que tinha direito. Alguém que te paga uma dívida antiga. A forma como o dinheiro chega varia, porque a amarração foi quebrada, A frequência foi ativada e os caminhos estão abertos. E além dessas três fases, você também vai receber o mapa energético da sua casa, um guia para identificar e corrigir tudo na sua casa que está bloqueando o fluxo de dinheiro. Vassoura atrás da porta, espelho na posição errada, objetos quebrados guardados por apego.
+- **[14:24–14:56]** Tudo isso trava a energia financeira. Em um dia, você transforma sua casa num imã de prosperidade. O calendário cósmico da prosperidade de 2026, os 12 dias mais poderosos do ano, para manifestar dinheiro, com o ritual exato para cada dia. São os dias em que a energia financeira está tão forte que o que levaria meses acontece em dias. O guia de blindagem contra inveja e olho gordo, um protocolo de proteção espiritual, para impedir que a inveja de quem não quer te ver crescer roube o dinheiro que chega. Porque não basta o dinheiro entrar, ele precisa ficar.
+- **[14:56–15:26]** Esse guia garante isso. O ritual da Lua Nova de prosperidade, todo mês, na Lua Nova, o universo abre uma janela para plantar intenções de dinheiro novo. Você vai receber um ritual específico para transformar cada Lua Nova numa oportunidade real de atrair uma conquista grande. Agora você entende por que o Código da Prosperidade é algo tão especial? Cada fase é montada a partir da leitura das cartas. Cada ritual foi desenvolvido ao longo de 17 anos, com base nos ensinamentos de sete gerações de ciganas.
+- **[15:26–15:56]** E cada pessoa que segue o protocolo tem um resultado diferente, porque a abundância que o universo reservou para cada um é única. É por isso que eu só consigo fazer isso com poucas pessoas, porque montar o código para cada pessoa leva tempo, leva análise, leva dedicação. E é por isso que presencialmente o Código da Prosperidade custa 3 mil reais. Mas eu sei de uma coisa, eu sei, pela leitura das suas cartas, que você está passando por um momento financeiro delicado, que não está sobrando muito dinheiro, que 3 mil reais não é a sua realidade agora.
+- **[15:56–16:27]** E que você não pode se dar ao luxo de pegar uma passagem para São Paulo, pagar hotel e ainda investir 3 mil reais no Código da Prosperidade Presencial. Eu entendo. E é justamente por isso que eu não posso te deixar ir embora sem uma solução. Porque seria como um médico que tem o remédio na mão, sabe que o paciente está doente. E se recusa a dar o remédio porque o paciente não pode pagar. Eu não vou fazer isso. O universo não permitiria. As cartas me mostraram que a roda da fortuna está girando a seu favor agora.
+- **[16:28–17:00]** A janela cósmica está aberta. Este é o momento perfeito para quebrar a amarração. E eu tenho o dever espiritual de te ajudar a acessar essa prosperidade. Não importa se você está em São Paulo, no interior do Maranhão ou em qualquer lugar do Brasil. O universo não escolhe por CEP. Ele escolhe por merecimento. E você merece. Por isso, eu vou te dar acesso ao código da prosperidade completo. com as três fases, com os rituais guiados, com todos os complementos. Tudo o que eu te expliquei agora. E você não vai pagar R$ 3.000, nem R$ 1.000, nem R$ 500.
+- **[17:00–17:30]** O seu acesso ao Código da Prosperidade completo vai ser de apenas R$ 77. Ou em 12 vezes de R$ 7,96 no cartão. Isso é menos do que você gasta com um lanche de delivery, que acaba em 20 minutos e não deixa nada. Só que diferente do lanche, o código da prosperidade vai te dar retorno. Retorno real, em dinheiro, em abundância, em prosperidade para a vida toda. O processo é simples. Logo abaixo vai aparecer um botão.
+- **[17:30–18:01]** Você clica, preenche seus dados, realiza o pagamento e pronto. Em poucos minutos você recebe tudo no seu e-mail. E já pode começar o primeiro ritual de 5 minutos. Hoje mesmo. E olha, eu estou fazendo a minha parte. Estou abrindo uma exceção que eu quase nunca faço. estou te dando acesso ao mesmo protocolo que eu fobro 3 mil reais presencialmente por uma fração do valor. Porque as cartas me mostraram que o universo quer que você prospere. E eu não vou ser o obstáculo entre você e a sua abundância.
+- **[18:01–18:32]** Agora, você precisa fazer a sua parte. Porque essa janela cósmica não vai ficar aberta para sempre. A roda da fortuna está girando a seu favor agora. Mas a roda gira. E se você não agir enquanto ela está do seu lado? Ela vai girar para o outro lado. E aí a oportunidade passou. Essa página, esse valor, essa condição. só existem agora, porque as cartas mostraram que agora é o momento. Se você sair dessa página e quiser acessar o Código da Prosperidade depois, a única opção vai ser presencialmente no meu consultório em São Paulo, pagando R$ 3.000,00.
+- **[18:32–19:05]** Se tiver vaga, então não deixa passar. E agora chegou o momento da decisão. Você tem dois caminhos à sua frente. Caminho 1, você fecha essa página e volta para a mesma vida de sempre. A mesma vida apertada, contando moedas no fim do mês. vendo as contas chegando e o dinheiro não, trabalhando o mês inteiro para no final não sobrar nada, com a amarração de pobreza grudada em você, bloqueando tudo, travando tudo e a roda da fortuna girando para o lado errado. Enquanto você fica pensando, por que eu não fiz quando tive a chance? Ou caminho dois, você ativa o código da prosperidade.
+- **[19:06–19:43]** Agora, quebra a amarração de pobreza de uma vez por todas, faz o ritual de cinco minutos e nos próximos dias o dinheiro começa a chegar. Um pix inesperado, uma oportunidade que aparece do nada, uma conta que se resolve, mais dinheiro chega, porque a amarração foi quebrada, a frequência foi ativada, os caminhos estão abertos e a roda da fortuna está girando a seu favor. Dívidas pagas, contas em dia, dinheiro sobrando, uma casa nova, um carro novo, a vida que você sempre mereceu. Tudo isso é possível, tudo isso é real, porque a dona Marlene viveu isso, a Cláudia viveu isso, a dona Tereza viveu isso, o seu Carlos viveu isso.
+- **[19:43–20:06]** E agora é a sua vez. O louco te mostrou que a virada é possível. A torre vai derrubar o que te bloqueia. A roda da fortuna está girando. Só falta você ativar o código. Clica no botão abaixo, agora. Ativa o código da prosperidade. E deixa o universo te entregar tudo o que já é seu por direito. A janela está aberta. A roda está girando. O momento é agora. Clica no botão e agora.
+
+<details><summary>Legenda SRT completa (criativos/transcricoes/vsl-quiz-vsl2-braco-live.srt)</summary>
+
+```
+1
+00:00:00,000 --> 00:00:03,540
+Parabéns por ter solicitado a leitura gratuita das suas cartas.
+
+2
+00:00:03,700 --> 00:00:06,960
+E eu preciso te dizer algo que me deixou impressionada.
+
+3
+00:00:07,120 --> 00:00:13,040
+Em 17 anos lendo cartas, eu nunca vi uma combinação que revelasse um bloqueio financeiro tão forte quanto o seu.
+
+4
+00:00:13,400 --> 00:00:16,280
+E ao mesmo tempo, um potencial de abundância tão grande.
+
+5
+00:00:16,460 --> 00:00:19,860
+É como se algo tiver rancado a porta da sua prosperidade tão fortemente,
+
+6
+00:00:20,020 --> 00:00:26,640
+que nem mesmo exercícios de lei da atração, orações ou simpatias conseguem quebrar esse bloqueio financeiro.
+
+7
+00:00:26,640 --> 00:00:33,560
+Porém, essas três cartas que você puxou mostram o caminho para desbloquear a abundância financeira na sua vida.
+
+8
+00:00:33,860 --> 00:00:38,760
+Por isso é tão importante que você preste atenção em cada detalhe do que eu vou te revelar agora.
+
+9
+00:00:38,980 --> 00:00:45,480
+E preciso dizer que estou impressionada, porque essa combinação de cartas que você puxou acontece em uma a cada 100 mil leituras.
+
+10
+00:00:45,660 --> 00:00:52,740
+E se você seguir o direcionamento delas, você começará a manifestar 2 mil, 5 mil, até 6 mil reais antes do próximo fim de semana.
+
+11
+00:00:52,900 --> 00:00:54,520
+Mas antes, deixa eu me apresentar rapidamente.
+
+12
+00:00:54,520 --> 00:00:59,340
+Eu sou a sensitiva, fui iniciada há 17 anos por uma linhagem ancestral de ciganas da Romênia.
+
+13
+00:00:59,440 --> 00:01:01,720
+Talvez você já tenha me visto na TV ou na internet,
+
+14
+00:01:01,900 --> 00:01:04,660
+onde fiquei conhecida depois que a Virginia Fonseca e a Mariana Rios
+
+15
+00:01:04,660 --> 00:01:09,080
+contaram publicamente que consultaram comigo e que as leituras mudaram a vida financeira delas.
+
+16
+00:01:09,200 --> 00:01:10,180
+Mas não foram só elas.
+
+17
+00:01:10,440 --> 00:01:13,780
+Ao longo desses 17 anos, já atendi mais de 30 mil pessoas.
+
+18
+00:01:13,980 --> 00:01:19,580
+De empresários e celebridades a faxineiras, donas de casa e até garis que viviam na pobreza
+
+19
+00:01:19,580 --> 00:01:22,760
+e hoje têm uma vida que nunca imaginaram que teriam.
+
+20
+00:01:22,760 --> 00:01:27,160
+Essas pessoas me procuraram porque entenderam que, por mais que se esforce,
+
+21
+00:01:27,420 --> 00:01:33,280
+é praticamente impossível prosperar na vida se você estiver com um bloqueio financeiro travando tudo.
+
+22
+00:01:33,360 --> 00:01:36,200
+E o tarô é a ferramenta mais poderosa para identificar isso.
+
+23
+00:01:36,320 --> 00:01:40,980
+E as três cartas que você tirou me mostram exatamente qual é o seu bloqueio e como quebrá-lo.
+
+24
+00:01:41,060 --> 00:01:46,220
+Então preste bastante atenção porque eu preciso explicar cada carta na ordem que você puxou.
+
+25
+00:01:46,300 --> 00:01:48,000
+A primeira carta é o louco.
+
+26
+00:01:48,000 --> 00:01:53,840
+Ela significa que você está na beira de uma virada financeira, que pode mudar absolutamente tudo na sua vida.
+
+27
+00:01:54,000 --> 00:01:59,140
+Eu estou falando de coisas como um pix inesperado de dois mil reais caindo na sua conta do nada.
+
+28
+00:01:59,300 --> 00:02:02,380
+Alguém que te devia anos finalmente te pagando a dívida com juros.
+
+29
+00:02:02,520 --> 00:02:06,560
+Um sorteio de supermercado, em que o seu nome é o premiado.
+
+30
+00:02:06,700 --> 00:02:10,480
+Uma aposentadoria, um benefício que você nem sabia que tinha direito.
+
+31
+00:02:10,720 --> 00:02:13,900
+Um presente em dinheiro que aparece de onde você menos espera.
+
+32
+00:02:13,900 --> 00:02:21,380
+E por mais que você ache isso uma loucura ou algo impossível, saiba que isso acontece todos os dias com milhares de pessoas.
+
+33
+00:02:21,400 --> 00:02:23,400
+E também pode acontecer com você.
+
+34
+00:02:23,520 --> 00:02:26,660
+Se você tiver fé e seguir o que eu estou vendo nas cartas.
+
+35
+00:02:26,880 --> 00:02:32,760
+Porque como está na Bíblia, se tiveres fé do tamanho de um grão de mostarda, seria capaz de mover montanhas.
+
+36
+00:02:33,120 --> 00:02:41,260
+Ou seja, desde que você acredite de verdade, você será capaz de materializar pix na sua conta até o próximo fim de semana.
+
+37
+00:02:41,260 --> 00:02:44,980
+E não só isso, eu estou falando de abundância de verdade.
+
+38
+00:02:45,300 --> 00:02:47,800
+A abundância que o universo determinou para a sua vida.
+
+39
+00:02:48,280 --> 00:02:50,980
+Uma casa própria do jeito que você sempre sonhou.
+
+40
+00:02:51,140 --> 00:02:53,920
+Um carro zero, uma conta bancária com dinheiro guardado.
+
+41
+00:02:54,020 --> 00:02:57,000
+Que você tem o suficiente e que vai continuar tendo.
+
+42
+00:02:57,100 --> 00:02:59,400
+É exatamente isso que o louco está dizendo.
+
+43
+00:02:59,660 --> 00:03:01,800
+Que é possível para você.
+
+44
+00:03:01,960 --> 00:03:05,440
+E se você acha isso impossível, então deixa eu te contar uma história rápida
+
+45
+00:03:05,440 --> 00:03:08,760
+de um jovem que consultou com minha avó em 1941.
+
+46
+00:03:08,760 --> 00:03:11,840
+Ele era camelô, toda a família era pobre.
+
+47
+00:03:12,020 --> 00:03:16,740
+E durante a leitura, as cartas revelaram que ele tinha um potencial de riqueza gigantesco,
+
+48
+00:03:16,880 --> 00:03:18,060
+mas que estava bloqueado.
+
+49
+00:03:18,240 --> 00:03:24,880
+Então ela disse o que ele precisava fazer, inclusive mudar seu nome de Sr. Abravanel por Silvio Santos.
+
+50
+00:03:25,160 --> 00:03:32,280
+E ele seguiu, sem duvidar, sem questionar, com fé, e saiu de camelô para dono de um império bilionário.
+
+51
+00:03:32,420 --> 00:03:34,500
+O louco no tarô é exatamente isso.
+
+52
+00:03:34,620 --> 00:03:37,980
+É a carta de quem está prestes a dar um salto que ninguém entende.
+
+53
+00:03:37,980 --> 00:03:39,680
+Um salto que vai mudar tudo.
+
+54
+00:03:39,860 --> 00:03:42,320
+E o salto só acontece para quem tem a coragem de acreditar.
+
+55
+00:03:42,680 --> 00:03:44,460
+Mesmo quando todo mundo chama de loucura.
+
+56
+00:03:44,580 --> 00:03:46,100
+A pergunta é, você tem essa fé?
+
+57
+00:03:46,200 --> 00:03:52,320
+Porque se você tiver, as próximas cartas vão te mostrar exatamente o que está para acontecer na sua vida financeira.
+
+58
+00:03:52,480 --> 00:03:53,700
+Agora a terceira carta.
+
+59
+00:03:54,060 --> 00:03:55,720
+Essa é a que mais me impressionou.
+
+60
+00:03:55,900 --> 00:03:59,080
+A terceira carta que você puxou é a Roda da Fortuna.
+
+61
+00:03:59,180 --> 00:04:02,680
+E quando eu vi essa carta aparecer logo depois de Olouco e a Torre,
+
+62
+00:04:02,880 --> 00:04:06,480
+eu tive que parar, respirar e olhar de novo.
+
+63
+00:04:06,480 --> 00:04:08,760
+Porque a roda da fortuna é a carta da virada.
+
+64
+00:04:08,960 --> 00:04:12,040
+Ela significa que o ciclo de escassez está chegando ao fim.
+
+65
+00:04:12,220 --> 00:04:13,380
+Que a roda está girando.
+
+66
+00:04:13,480 --> 00:04:15,360
+E que o lado da abundância está vindo acima.
+
+67
+00:04:15,580 --> 00:04:18,600
+A roda da fortuna aparece quando o universo decide que chega.
+
+68
+00:04:18,780 --> 00:04:19,720
+Chega de escassez.
+
+69
+00:04:19,940 --> 00:04:20,820
+Chega de apertar.
+
+70
+00:04:21,000 --> 00:04:22,780
+Chega de contar moedas no fim do mês.
+
+71
+00:04:22,960 --> 00:04:23,940
+Chegou a sua vez.
+
+72
+00:04:24,060 --> 00:04:26,060
+E não estou falando de um dia, quem sabe, talvez.
+
+73
+00:04:26,420 --> 00:04:29,020
+Estou falando de uma mudança real e concreta.
+
+74
+00:04:29,660 --> 00:04:31,600
+Dinheiro que hoje você não tem.
+
+75
+00:04:31,840 --> 00:04:33,840
+Entrando na sua vida nos próximos dias.
+
+76
+00:04:34,080 --> 00:04:35,980
+Aquela conta atrasada que tira o seu sono.
+
+77
+00:04:35,980 --> 00:04:40,380
+sendo paga. Aquele sonho que você guarda há anos, finalmente se tornando possível.
+
+78
+00:04:40,580 --> 00:04:43,500
+Mas lembre-se de uma coisa, para o universo nada é impossível.
+
+79
+00:04:43,680 --> 00:04:46,940
+Uma casa nova, um carro novo, 10 mil reais extra na sua conta,
+
+80
+00:04:47,380 --> 00:04:49,200
+tudo isso para o universo não significa nada.
+
+81
+00:04:49,480 --> 00:04:52,280
+Ele materializa isso com a mesma facilidade que você respira.
+
+82
+00:04:52,400 --> 00:04:54,920
+A questão nunca foi se o universo pode te dar.
+
+83
+00:04:55,080 --> 00:04:57,640
+A questão sempre foi se você está aberta para receber.
+
+84
+00:04:57,900 --> 00:05:02,160
+E eu vou te provar que isso é real, porque eu vi acontecer milhares de vezes
+
+85
+00:05:02,160 --> 00:05:05,440
+com pessoas que seguiram minhas leituras, como a dona Marlene,
+
+86
+00:05:05,440 --> 00:05:08,820
+de 63 anos, que é diarista em Belo Horizonte.
+
+87
+00:05:09,080 --> 00:05:10,260
+Nunca foi à escola.
+
+88
+00:05:10,620 --> 00:05:12,340
+Mal sabia escrever o próprio nome.
+
+89
+00:05:12,500 --> 00:05:15,920
+Ela fez uma consulta comigo num momento em que não tinha dinheiro nem pro ônibus.
+
+90
+00:05:16,060 --> 00:05:19,080
+Eu fiz a leitura, mostrei o caminho do Código da Prosperidade.
+
+91
+00:05:19,260 --> 00:05:21,220
+Ela seguiu as orientações com fé.
+
+92
+00:05:21,420 --> 00:05:26,400
+Uma semana depois, a patroa dela enviou um Pix de 13 mil reais
+
+93
+00:05:26,400 --> 00:05:27,860
+pra ela reformar a casa.
+
+94
+00:05:28,020 --> 00:05:30,180
+Agora imagine isso, 13 mil reais.
+
+95
+00:05:30,400 --> 00:05:31,940
+Do nada, em uma semana.
+
+96
+00:05:32,220 --> 00:05:35,000
+A Cláudia, de 42 anos, é dona de casa em Campinas.
+
+97
+00:05:35,000 --> 00:05:38,100
+Tem três filhos. O marido tinha acabado de ficar desempregado.
+
+98
+00:05:38,160 --> 00:05:40,480
+E para piorar, o Palio 2009 deles quebrou.
+
+99
+00:05:40,620 --> 00:05:43,100
+Era o carro que o marido usava para fazer entregas e bicos.
+
+100
+00:05:43,260 --> 00:05:44,660
+A Cláudia não sabia mais o que fazer.
+
+101
+00:05:44,820 --> 00:05:46,160
+Foi quando ela fez a consulta comigo.
+
+102
+00:05:46,500 --> 00:05:50,140
+Eu puxei as cartas, fiz a leitura e expliquei o código da prosperidade.
+
+103
+00:05:50,300 --> 00:05:51,460
+Ela seguiu tudo com fé.
+
+104
+00:05:51,780 --> 00:05:55,900
+Dez dias depois, ela foi ao supermercado fazer a compra do mês.
+
+105
+00:05:56,100 --> 00:05:58,960
+Colocou o CPF na nota fiscal, como sempre fazia.
+
+106
+00:05:59,080 --> 00:06:01,260
+E na semana seguinte, recebeu uma ligação.
+
+107
+00:06:01,420 --> 00:06:03,160
+Seu nome tinha sido sorteado.
+
+108
+00:06:03,360 --> 00:06:04,640
+Um carro zero quilômetro.
+
+109
+00:06:05,000 --> 00:06:09,780
+No momento mais difícil da vida dela, o universo entregou exatamente o que a família precisava.
+
+110
+00:06:10,020 --> 00:06:12,820
+E também aconteceu com a dona Teresa, de 58 anos.
+
+111
+00:06:13,060 --> 00:06:18,000
+Toda semana, sem falta, ela ia até a lotérica e comprava um bilhete da Bahia da Sorte.
+
+112
+00:06:18,200 --> 00:06:19,940
+Fazia isso há mais de seis anos.
+
+113
+00:06:20,160 --> 00:06:21,820
+Os filhos dela viviam dizendo,
+
+114
+00:06:22,060 --> 00:06:25,560
+Mãe, para de jogar dinheiro fora, a senhora nunca vai ganhar.
+
+115
+00:06:25,740 --> 00:06:29,100
+E ela quase acreditou neles, até que ela fez uma consulta comigo.
+
+116
+00:06:29,400 --> 00:06:33,800
+E na leitura, as cartas que eu li revelaram algo que me chamou a atenção.
+
+117
+00:06:34,000 --> 00:06:34,800
+Expliquei pra ela.
+
+118
+00:06:34,800 --> 00:06:38,260
+que precisava seguir o Código da Prosperidade por sete dias,
+
+119
+00:06:38,440 --> 00:06:39,820
+então jogar na sexta-feira,
+
+120
+00:06:39,980 --> 00:06:43,280
+que era o dia em que a sua energia financeira estava mais forte.
+
+121
+00:06:43,420 --> 00:06:45,100
+Ela fez exatamente o que eu disse.
+
+122
+00:06:45,260 --> 00:06:47,820
+E no sábado de manhã, o telefone dela tocou.
+
+123
+00:06:47,980 --> 00:06:53,340
+Dona Tereza tinha ganhado 47 mil reais no Bahia da Sorte.
+
+124
+00:06:53,480 --> 00:06:56,260
+E eu poderia continuar mostrando aqui os milhares de casos de pessoas
+
+125
+00:06:56,260 --> 00:06:58,520
+que consultaram comigo e saíram de casos de pobreza
+
+126
+00:06:58,520 --> 00:07:00,680
+e conquistaram a abundância e prosperidade.
+
+127
+00:07:00,780 --> 00:07:03,860
+E muitos dos casos em que as pessoas consideram impossível.
+
+128
+00:07:03,860 --> 00:07:06,940
+Mas essa é a questão. Para o universo, nada é impossível.
+
+129
+00:07:07,020 --> 00:07:10,760
+Porque quando você ouve e segue o que ele fala, ele sempre entrega.
+
+130
+00:07:10,860 --> 00:07:12,800
+Pode ser 13 mil reais num envelope.
+
+131
+00:07:13,080 --> 00:07:16,960
+Pode ser um carro zero, uma casa própria, um bilhete premiado.
+
+132
+00:07:17,060 --> 00:07:19,760
+A única coisa que ele precisa é que você esteja aberta para receber.
+
+133
+00:07:19,960 --> 00:07:23,440
+E se você está ouvindo isso e sentindo algo no peito, uma vontade de acreditar,
+
+134
+00:07:23,580 --> 00:07:27,180
+um pressentimento de que, dessa vez, tem algo bom para acontecer na sua vida,
+
+135
+00:07:27,380 --> 00:07:30,280
+isso não é por acaso. É porque você é exatamente como essas mulheres.
+
+136
+00:07:30,520 --> 00:07:33,140
+Você sempre soube, lá no fundo, que merecia mais.
+
+137
+00:07:33,140 --> 00:07:36,340
+Mesmo quando todo mundo ao seu redor se contentava com pouco.
+
+138
+00:07:36,560 --> 00:07:38,840
+Veja bem, você nasceu para prosperar.
+
+139
+00:07:38,920 --> 00:07:40,940
+É por isso que você sente essa inquietação,
+
+140
+00:07:41,120 --> 00:07:43,980
+essa sensação de que tem algo maior esperando por você.
+
+141
+00:07:44,140 --> 00:07:47,880
+Essa certeza silenciosa de que a sua vida deveria ser diferente.
+
+142
+00:07:48,060 --> 00:07:50,680
+Não é imaginação, é a sua essência te dizendo
+
+143
+00:07:50,680 --> 00:07:53,760
+que você está vivendo abaixo do que foi destinada a viver.
+
+144
+00:07:53,960 --> 00:07:55,900
+E olha, sabe todas as vezes que você ajoelhou,
+
+145
+00:07:56,060 --> 00:07:58,060
+todas as vezes que você sentiu um aperto no peito
+
+146
+00:07:58,060 --> 00:08:00,340
+e disse do fundo do seu coração, meu Deus, me ajuda?
+
+147
+00:08:00,500 --> 00:08:02,160
+As suas orações não foram ignoradas.
+
+148
+00:08:02,160 --> 00:08:03,880
+Ele te ouviu e te respondeu.
+
+149
+00:08:04,060 --> 00:08:07,940
+Ele separou dinheiro para você, separou oportunidades, separou prosperidade.
+
+150
+00:08:08,040 --> 00:08:11,060
+Mas como a amarração de pobreza estava ativa, nada conseguia chegar.
+
+151
+00:08:11,240 --> 00:08:14,420
+Era como se tivesse um vidro blindado entre você e tudo que é seu por direito.
+
+152
+00:08:14,580 --> 00:08:17,620
+Você via a abundância do outro lado, mas não conseguia tocar até agora.
+
+153
+00:08:17,740 --> 00:08:21,960
+Porque essas três cartas que você puxou, o louco, a torre e a roda da fortuna,
+
+154
+00:08:22,180 --> 00:08:24,700
+acabam de revelar que a amarração está enfraquecendo.
+
+155
+00:08:24,820 --> 00:08:30,420
+A roda está girando a seu favor e o universo está prestes a entregar tudo que já é seu.
+
+156
+00:08:30,420 --> 00:08:34,880
+Mas existe uma condição, porque é agora que você precisa agir.
+
+157
+00:08:35,000 --> 00:08:41,320
+Enquanto a roda da fortuna está alinhada com a sua energia de uma maneira que raramente acontece.
+
+158
+00:08:41,640 --> 00:08:47,720
+É como se todas as forças do universo estivessem convergindo para um único ponto, a sua prosperidade.
+
+159
+00:08:47,880 --> 00:08:51,760
+Mas isso é uma janela cósmica passageira e não fica aberta para sempre.
+
+160
+00:08:51,920 --> 00:08:53,260
+É como uma estrela cadente.
+
+161
+00:08:53,420 --> 00:08:56,840
+Se você vê e faz seu desejo, o desejo se realiza.
+
+162
+00:08:56,980 --> 00:08:59,040
+Mas se deixa passar, ela já foi.
+
+163
+00:08:59,040 --> 00:09:01,960
+E é por isso que você precisa agir agora.
+
+164
+00:09:02,160 --> 00:09:04,240
+Enquanto a roda está girando a seu favor.
+
+165
+00:09:04,440 --> 00:09:06,280
+Enquanto a amarração está fraca.
+
+166
+00:09:06,420 --> 00:09:10,800
+Enquanto o universo está com as mãos estendidas, pronto para te entregar tudo.
+
+167
+00:09:10,960 --> 00:09:12,240
+Você precisa fazer algo.
+
+168
+00:09:12,380 --> 00:09:15,700
+Você precisa ativar o que eu chamo de código da prosperidade.
+
+169
+00:09:15,860 --> 00:09:22,180
+Veja bem, o código da prosperidade é algo que eu desenvolvi a partir das leituras que faço há 17 anos.
+
+170
+00:09:22,340 --> 00:09:28,400
+É um protocolo espiritual de tarô, de quebra da amarração de pobreza e ativação da abundância na sua vida.
+
+171
+00:09:28,400 --> 00:09:34,680
+que eu desenvolvi ao longo de 17 anos, baseado nos ensinamentos da minha linhagem ancestral de ciganas.
+
+172
+00:09:34,760 --> 00:09:36,240
+E ele funciona em três etapas.
+
+173
+00:09:36,420 --> 00:09:42,020
+Primeiro, ele quebra a amarração de pobreza, remove a energia de escassez que está grudada em você e na sua casa,
+
+174
+00:09:42,220 --> 00:09:43,940
+limpando o caminho para o dinheiro chegar.
+
+175
+00:09:44,500 --> 00:09:49,420
+Segundo, ele ativa a sua frequência de abundância, alinha sua energia com a prosperidade,
+
+176
+00:09:49,580 --> 00:09:54,260
+para que o universo finalmente consiga te entregar o que já é seu.
+
+177
+00:09:54,260 --> 00:09:58,160
+Terceiro, ele abre os caminhos do dinheiro através de rituais específicos
+
+178
+00:09:58,160 --> 00:10:02,540
+que atraem dinheiro rápido, oportunidades inesperadas e prosperidade contínua.
+
+179
+00:10:02,660 --> 00:10:09,460
+E se você chegou até aqui, é porque o universo decidiu que essa é a hora de você ativar o código da prosperidade.
+
+180
+00:10:09,620 --> 00:10:14,020
+Mas você precisa entender que o código da prosperidade é algo personalizado,
+
+181
+00:10:14,340 --> 00:10:21,580
+algo que eu crio a partir de cada leitura para quebrar a amarração e ativar a abundância na vida daquela pessoa.
+
+182
+00:10:21,580 --> 00:10:23,460
+porque cada amarração é diferente.
+
+183
+00:10:23,660 --> 00:10:26,300
+Depende de quais crenças foram plantadas na sua infância.
+
+184
+00:10:26,700 --> 00:10:29,720
+Depende de como a energia circula dentro da sua casa.
+
+185
+00:10:29,940 --> 00:10:32,260
+Depende do histórico espiritual da sua família.
+
+186
+00:10:33,160 --> 00:10:35,580
+Depende do que as cartas revelam sobre você.
+
+187
+00:10:35,760 --> 00:10:40,880
+Por isso, eu sempre fiz o Código da Prosperidade de forma presencial no meu consultório em São Paulo.
+
+188
+00:10:40,980 --> 00:10:46,400
+Porque eu preciso analisar a leitura, entender a amarração daquela pessoa e montar o protocolo certo para ela.
+
+189
+00:10:46,540 --> 00:10:47,400
+E isso leva tempo.
+
+190
+00:10:47,540 --> 00:10:50,140
+E por isso, eu consigo atender poucas pessoas por mês.
+
+191
+00:10:50,140 --> 00:10:53,360
+Porém, como estou aqui fazendo essa leitura com você pela internet.
+
+192
+00:10:53,580 --> 00:10:57,720
+E as cartas estão me mostrando com clareza o que está bloqueando a sua prosperidade.
+
+193
+00:10:57,900 --> 00:11:00,940
+Eu vou te dar acesso ao código da prosperidade para você fazer de casa.
+
+194
+00:11:01,100 --> 00:11:04,960
+Com o mesmo protocolo, os mesmos rituais, a mesma eficácia.
+
+195
+00:11:05,080 --> 00:11:12,580
+Para você começar a manifestar abundância ainda hoje, como aconteceu com o seu Carlos, de 51 anos, que é pedreiro em Goiânia.
+
+196
+00:11:12,720 --> 00:11:14,620
+A vida inteira construindo casa para os outros.
+
+197
+00:11:14,840 --> 00:11:16,260
+Mas nunca conseguiu construir a dele.
+
+198
+00:11:16,460 --> 00:11:18,660
+Morava de aluguel com a esposa e dois filhos.
+
+199
+00:11:18,660 --> 00:11:24,280
+Ele fez a consulta comigo online, eu fiz a leitura e passei o código da prosperidade para ele seguir por sete dias.
+
+200
+00:11:24,480 --> 00:11:27,300
+São rituais simples de cinco minutos, ele seguiu tudo.
+
+201
+00:11:27,460 --> 00:11:33,420
+Uma semana depois, o dono de um terreno perto de onde ele morava procurou ele e ofereceu o terreno por um valor tão baixo que parecia piada.
+
+202
+00:11:33,600 --> 00:11:40,020
+Na mesma semana, um primo que mora no exterior mandou um dinheiro inesperado, dizendo que era uma dívida antiga da família.
+
+203
+00:11:40,200 --> 00:11:44,380
+Com o terreno barato e o dinheiro do primo, seu Carlos começou a construir.
+
+204
+00:11:44,620 --> 00:11:48,520
+Hoje mora na casa própria, no terreno que o universo colocou no caminho dele.
+
+205
+00:11:48,660 --> 00:11:52,020
+E a dona Raimunda, 62 anos, costureira em Fortaleza.
+
+206
+00:11:52,140 --> 00:11:54,960
+Vivia com o dinheiro da costura, que mal dava para o básico.
+
+207
+00:11:55,200 --> 00:11:58,640
+Fez a consulta comigo online, ativou o Código da Prosperidade,
+
+208
+00:11:59,060 --> 00:12:00,920
+seguiu os rituais por sete dias.
+
+209
+00:12:01,180 --> 00:12:05,360
+Uma semana depois, apareceu na porta da casa dela um advogado
+
+210
+00:12:05,360 --> 00:12:08,120
+que ela nunca tinha visto na vida.
+
+211
+00:12:08,320 --> 00:12:10,760
+Ele disse que ela tinha direito a um benefício do governo
+
+212
+00:12:10,760 --> 00:12:12,460
+que ela nem sabia que existia.
+
+213
+00:12:12,620 --> 00:12:13,840
+Cuidou de toda a papelada.
+
+214
+00:12:13,980 --> 00:12:17,780
+E hoje, dona Raimunda recebe R$ 4.200 por mês.
+
+215
+00:12:17,780 --> 00:12:23,140
+sem falta, um dinheiro que sempre foi dela por direito, mas que ela nunca soube que existia,
+
+216
+00:12:23,280 --> 00:12:26,120
+até o Código da Prosperidade abrir esse caminho.
+
+217
+00:12:26,440 --> 00:12:30,220
+Agora, deixa eu te explicar exatamente como o Código da Prosperidade funciona.
+
+218
+00:12:30,580 --> 00:12:33,200
+O Código da Prosperidade é dividido em três fases.
+
+219
+00:12:33,420 --> 00:12:38,560
+Cada fase é um ritual guiado de cinco minutos que você faz no conforto da sua casa.
+
+220
+00:12:38,760 --> 00:12:43,900
+Na primeira fase, você vai seguir a meditação guiada de quebra da amarração de pobreza.
+
+221
+00:12:43,900 --> 00:12:48,680
+É um áudio gravado por mim, com as orações ancestrais da minha linhagem cigana,
+
+222
+00:12:48,820 --> 00:12:51,360
+que dissolve a energia de escassez que está grudada em você.
+
+223
+00:12:51,520 --> 00:12:54,480
+Você coloca o fone de ouvido, aperta o play, fecha os olhos e escuta.
+
+224
+00:12:54,620 --> 00:12:56,660
+Em cinco minutos, o áudio faz o trabalho.
+
+225
+00:12:56,760 --> 00:12:59,800
+Ele limpa as crenças de pobreza que foram plantadas na sua infância,
+
+226
+00:13:00,100 --> 00:13:02,600
+remove a energia negativa de inveja e olho gordo,
+
+227
+00:13:02,720 --> 00:13:05,600
+e abre espaço para a prosperidade entrar.
+
+228
+00:13:05,880 --> 00:13:08,220
+Você faz isso uma vez e já sente a diferença.
+
+229
+00:13:08,500 --> 00:13:12,700
+É como tirar um peso das costas, que você nem sabia que estava carregando.
+
+230
+00:13:12,700 --> 00:13:18,280
+Na segunda fase, você vai receber o ritual de ativação da frequência de abundância.
+
+231
+00:13:18,400 --> 00:13:22,580
+É uma meditação guiada de 5 minutos que alinha a sua energia com a prosperidade.
+
+232
+00:13:22,720 --> 00:13:25,240
+Quando a amarração é quebrada, o caminho fica limpo.
+
+233
+00:13:25,340 --> 00:13:29,880
+Mas você precisa ativar a sua frequência para que o universo saiba que você está pronta para receber.
+
+234
+00:13:30,100 --> 00:13:31,820
+Esse ritual faz exatamente isso.
+
+235
+00:13:31,960 --> 00:13:35,320
+Você ouve o áudio por 7 dias seguidos, de preferência antes de dormir.
+
+236
+00:13:35,520 --> 00:13:38,940
+E durante esses 7 dias, a sua energia vai se alinhar com a abundância.
+
+237
+00:13:38,940 --> 00:13:42,660
+Na terceira fase, você vai receber o ritual de abertura dos caminhos do dinheiro.
+
+238
+00:13:42,880 --> 00:13:46,360
+Esse é o ritual que atrai o dinheiro de forma ativa para a sua vida.
+
+239
+00:13:46,520 --> 00:13:47,760
+Ele funciona como um ímã.
+
+240
+00:13:48,140 --> 00:13:51,960
+Você faz o ritual de cinco minutos e ele envia um sinal para o universo dizendo
+
+241
+00:13:51,960 --> 00:13:53,620
+eu estou pronta, pode entregar.
+
+242
+00:13:53,800 --> 00:13:55,420
+E aí o dinheiro começa a chegar.
+
+243
+00:13:55,780 --> 00:13:59,600
+Pode ser um pix inesperado, um sorteio, uma oportunidade de trabalho,
+
+244
+00:13:59,800 --> 00:14:01,920
+um benefício que você não sabia que tinha direito.
+
+245
+00:14:02,120 --> 00:14:03,760
+Alguém que te paga uma dívida antiga.
+
+246
+00:14:03,900 --> 00:14:07,020
+A forma como o dinheiro chega varia, porque a amarração foi quebrada,
+
+247
+00:14:07,020 --> 00:14:10,340
+A frequência foi ativada e os caminhos estão abertos.
+
+248
+00:14:10,580 --> 00:14:14,980
+E além dessas três fases, você também vai receber o mapa energético da sua casa,
+
+249
+00:14:15,120 --> 00:14:19,560
+um guia para identificar e corrigir tudo na sua casa que está bloqueando o fluxo de dinheiro.
+
+250
+00:14:19,660 --> 00:14:24,680
+Vassoura atrás da porta, espelho na posição errada, objetos quebrados guardados por apego.
+
+251
+00:14:24,920 --> 00:14:26,600
+Tudo isso trava a energia financeira.
+
+252
+00:14:26,700 --> 00:14:31,680
+Em um dia, você transforma sua casa num imã de prosperidade.
+
+253
+00:14:31,680 --> 00:14:37,200
+O calendário cósmico da prosperidade de 2026, os 12 dias mais poderosos do ano,
+
+254
+00:14:37,600 --> 00:14:40,960
+para manifestar dinheiro, com o ritual exato para cada dia.
+
+255
+00:14:41,160 --> 00:14:46,540
+São os dias em que a energia financeira está tão forte que o que levaria meses acontece em dias.
+
+256
+00:14:46,700 --> 00:14:50,680
+O guia de blindagem contra inveja e olho gordo, um protocolo de proteção espiritual,
+
+257
+00:14:50,820 --> 00:14:54,080
+para impedir que a inveja de quem não quer te ver crescer roube o dinheiro que chega.
+
+258
+00:14:54,240 --> 00:14:56,780
+Porque não basta o dinheiro entrar, ele precisa ficar.
+
+259
+00:14:56,940 --> 00:14:58,140
+Esse guia garante isso.
+
+260
+00:14:58,140 --> 00:15:06,700
+O ritual da Lua Nova de prosperidade, todo mês, na Lua Nova, o universo abre uma janela para plantar intenções de dinheiro novo.
+
+261
+00:15:06,880 --> 00:15:14,180
+Você vai receber um ritual específico para transformar cada Lua Nova numa oportunidade real de atrair uma conquista grande.
+
+262
+00:15:14,300 --> 00:15:17,520
+Agora você entende por que o Código da Prosperidade é algo tão especial?
+
+263
+00:15:17,760 --> 00:15:20,500
+Cada fase é montada a partir da leitura das cartas.
+
+264
+00:15:20,640 --> 00:15:26,940
+Cada ritual foi desenvolvido ao longo de 17 anos, com base nos ensinamentos de sete gerações de ciganas.
+
+265
+00:15:26,940 --> 00:15:30,520
+E cada pessoa que segue o protocolo tem um resultado diferente,
+
+266
+00:15:30,760 --> 00:15:33,940
+porque a abundância que o universo reservou para cada um é única.
+
+267
+00:15:34,180 --> 00:15:36,540
+É por isso que eu só consigo fazer isso com poucas pessoas,
+
+268
+00:15:36,720 --> 00:15:40,940
+porque montar o código para cada pessoa leva tempo, leva análise, leva dedicação.
+
+269
+00:15:41,200 --> 00:15:44,660
+E é por isso que presencialmente o Código da Prosperidade custa 3 mil reais.
+
+270
+00:15:44,900 --> 00:15:48,580
+Mas eu sei de uma coisa, eu sei, pela leitura das suas cartas,
+
+271
+00:15:48,760 --> 00:15:51,520
+que você está passando por um momento financeiro delicado,
+
+272
+00:15:51,620 --> 00:15:53,540
+que não está sobrando muito dinheiro,
+
+273
+00:15:53,840 --> 00:15:56,660
+que 3 mil reais não é a sua realidade agora.
+
+274
+00:15:56,940 --> 00:16:02,600
+E que você não pode se dar ao luxo de pegar uma passagem para São Paulo,
+
+275
+00:16:02,760 --> 00:16:07,920
+pagar hotel e ainda investir 3 mil reais no Código da Prosperidade Presencial.
+
+276
+00:16:08,080 --> 00:16:08,680
+Eu entendo.
+
+277
+00:16:08,780 --> 00:16:12,780
+E é justamente por isso que eu não posso te deixar ir embora sem uma solução.
+
+278
+00:16:12,900 --> 00:16:17,200
+Porque seria como um médico que tem o remédio na mão, sabe que o paciente está doente.
+
+279
+00:16:17,420 --> 00:16:20,800
+E se recusa a dar o remédio porque o paciente não pode pagar.
+
+280
+00:16:21,040 --> 00:16:22,120
+Eu não vou fazer isso.
+
+281
+00:16:22,260 --> 00:16:23,760
+O universo não permitiria.
+
+282
+00:16:23,760 --> 00:16:27,860
+As cartas me mostraram que a roda da fortuna está girando a seu favor agora.
+
+283
+00:16:28,200 --> 00:16:30,040
+A janela cósmica está aberta.
+
+284
+00:16:30,220 --> 00:16:32,980
+Este é o momento perfeito para quebrar a amarração.
+
+285
+00:16:33,160 --> 00:16:37,040
+E eu tenho o dever espiritual de te ajudar a acessar essa prosperidade.
+
+286
+00:16:37,200 --> 00:16:41,740
+Não importa se você está em São Paulo, no interior do Maranhão ou em qualquer lugar do Brasil.
+
+287
+00:16:41,940 --> 00:16:43,960
+O universo não escolhe por CEP.
+
+288
+00:16:44,180 --> 00:16:45,620
+Ele escolhe por merecimento.
+
+289
+00:16:45,740 --> 00:16:46,640
+E você merece.
+
+290
+00:16:46,800 --> 00:16:49,920
+Por isso, eu vou te dar acesso ao código da prosperidade completo.
+
+291
+00:16:49,920 --> 00:16:54,220
+com as três fases, com os rituais guiados, com todos os complementos.
+
+292
+00:16:54,360 --> 00:16:55,760
+Tudo o que eu te expliquei agora.
+
+293
+00:16:55,980 --> 00:17:00,060
+E você não vai pagar R$ 3.000, nem R$ 1.000, nem R$ 500.
+
+294
+00:17:00,380 --> 00:17:07,000
+O seu acesso ao Código da Prosperidade completo vai ser de apenas R$ 77.
+
+295
+00:17:07,580 --> 00:17:12,860
+Ou em 12 vezes de R$ 7,96 no cartão.
+
+296
+00:17:13,020 --> 00:17:15,940
+Isso é menos do que você gasta com um lanche de delivery,
+
+297
+00:17:16,160 --> 00:17:18,480
+que acaba em 20 minutos e não deixa nada.
+
+298
+00:17:18,480 --> 00:17:22,360
+Só que diferente do lanche, o código da prosperidade vai te dar retorno.
+
+299
+00:17:22,560 --> 00:17:27,060
+Retorno real, em dinheiro, em abundância, em prosperidade para a vida toda.
+
+300
+00:17:27,300 --> 00:17:28,520
+O processo é simples.
+
+301
+00:17:28,800 --> 00:17:30,420
+Logo abaixo vai aparecer um botão.
+
+302
+00:17:30,560 --> 00:17:34,020
+Você clica, preenche seus dados, realiza o pagamento e pronto.
+
+303
+00:17:34,200 --> 00:17:36,700
+Em poucos minutos você recebe tudo no seu e-mail.
+
+304
+00:17:36,840 --> 00:17:40,340
+E já pode começar o primeiro ritual de 5 minutos.
+
+305
+00:17:40,600 --> 00:17:41,420
+Hoje mesmo.
+
+306
+00:17:41,640 --> 00:17:43,280
+E olha, eu estou fazendo a minha parte.
+
+307
+00:17:43,460 --> 00:17:46,800
+Estou abrindo uma exceção que eu quase nunca faço.
+
+308
+00:17:46,800 --> 00:17:54,280
+estou te dando acesso ao mesmo protocolo que eu fobro 3 mil reais presencialmente por uma fração do valor.
+
+309
+00:17:54,420 --> 00:17:57,740
+Porque as cartas me mostraram que o universo quer que você prospere.
+
+310
+00:17:57,900 --> 00:18:01,100
+E eu não vou ser o obstáculo entre você e a sua abundância.
+
+311
+00:18:01,380 --> 00:18:03,540
+Agora, você precisa fazer a sua parte.
+
+312
+00:18:03,700 --> 00:18:06,300
+Porque essa janela cósmica não vai ficar aberta para sempre.
+
+313
+00:18:06,500 --> 00:18:08,680
+A roda da fortuna está girando a seu favor agora.
+
+314
+00:18:08,860 --> 00:18:09,760
+Mas a roda gira.
+
+315
+00:18:09,880 --> 00:18:12,040
+E se você não agir enquanto ela está do seu lado?
+
+316
+00:18:12,140 --> 00:18:13,240
+Ela vai girar para o outro lado.
+
+317
+00:18:13,380 --> 00:18:14,560
+E aí a oportunidade passou.
+
+318
+00:18:14,820 --> 00:18:16,680
+Essa página, esse valor, essa condição.
+
+319
+00:18:16,800 --> 00:18:20,700
+só existem agora, porque as cartas mostraram que agora é o momento.
+
+320
+00:18:21,020 --> 00:18:25,340
+Se você sair dessa página e quiser acessar o Código da Prosperidade depois,
+
+321
+00:18:25,680 --> 00:18:30,720
+a única opção vai ser presencialmente no meu consultório em São Paulo,
+
+322
+00:18:30,860 --> 00:18:32,420
+pagando R$ 3.000,00.
+
+323
+00:18:32,720 --> 00:18:35,280
+Se tiver vaga, então não deixa passar.
+
+324
+00:18:35,540 --> 00:18:37,620
+E agora chegou o momento da decisão.
+
+325
+00:18:37,760 --> 00:18:39,340
+Você tem dois caminhos à sua frente.
+
+326
+00:18:39,660 --> 00:18:43,400
+Caminho 1, você fecha essa página e volta para a mesma vida de sempre.
+
+327
+00:18:43,620 --> 00:18:46,560
+A mesma vida apertada, contando moedas no fim do mês.
+
+328
+00:18:46,800 --> 00:18:51,980
+vendo as contas chegando e o dinheiro não, trabalhando o mês inteiro para no final não sobrar nada,
+
+329
+00:18:52,140 --> 00:18:58,840
+com a amarração de pobreza grudada em você, bloqueando tudo, travando tudo e a roda da fortuna girando para o lado errado.
+
+330
+00:18:59,040 --> 00:19:02,320
+Enquanto você fica pensando, por que eu não fiz quando tive a chance?
+
+331
+00:19:02,580 --> 00:19:05,800
+Ou caminho dois, você ativa o código da prosperidade.
+
+332
+00:19:06,120 --> 00:19:11,100
+Agora, quebra a amarração de pobreza de uma vez por todas, faz o ritual de cinco minutos
+
+333
+00:19:11,100 --> 00:19:14,360
+e nos próximos dias o dinheiro começa a chegar.
+
+334
+00:19:14,360 --> 00:19:27,940
+Um pix inesperado, uma oportunidade que aparece do nada, uma conta que se resolve, mais dinheiro chega, porque a amarração foi quebrada, a frequência foi ativada, os caminhos estão abertos e a roda da fortuna está girando a seu favor.
+
+335
+00:19:28,240 --> 00:19:34,740
+Dívidas pagas, contas em dia, dinheiro sobrando, uma casa nova, um carro novo, a vida que você sempre mereceu.
+
+336
+00:19:35,120 --> 00:19:43,100
+Tudo isso é possível, tudo isso é real, porque a dona Marlene viveu isso, a Cláudia viveu isso, a dona Tereza viveu isso, o seu Carlos viveu isso.
+
+337
+00:19:43,100 --> 00:19:44,420
+E agora é a sua vez.
+
+338
+00:19:44,640 --> 00:19:46,940
+O louco te mostrou que a virada é possível.
+
+339
+00:19:47,160 --> 00:19:49,140
+A torre vai derrubar o que te bloqueia.
+
+340
+00:19:49,260 --> 00:19:51,020
+A roda da fortuna está girando.
+
+341
+00:19:51,240 --> 00:19:53,200
+Só falta você ativar o código.
+
+342
+00:19:53,440 --> 00:19:55,360
+Clica no botão abaixo, agora.
+
+343
+00:19:56,020 --> 00:19:57,880
+Ativa o código da prosperidade.
+
+344
+00:19:58,040 --> 00:20:01,000
+E deixa o universo te entregar tudo o que já é seu por direito.
+
+345
+00:20:01,240 --> 00:20:02,460
+A janela está aberta.
+
+346
+00:20:02,620 --> 00:20:03,580
+A roda está girando.
+
+347
+00:20:03,640 --> 00:20:04,460
+O momento é agora.
+
+348
+00:20:04,660 --> 00:20:06,000
+Clica no botão e agora.
+```
+
+</details>
