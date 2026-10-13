@@ -239,8 +239,10 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href*="p
       document.head.appendChild(sp);
     }
 
-    /* botão de compra só aparece quando a VSL termina (API do smartplayer). Se a
-       API não responder em ~20 s, cai no relógio antigo de 17:00 como rede de segurança. */
+    /* botão de compra aparece no minuto 17:00 do vídeo (posição da VSL, não relógio:
+       pausa segura, avanço adianta), ou no fim se a VSL for mais curta. Se a API do
+       smartplayer não responder em ~20 s, cai no relógio de 17:00 como rede de segurança. */
+    var MIN_BOTAO=1020;
     var chave='cp_botao_liberado', liberado=false;
     function libera(){
       if(liberado) return; liberado=true;
@@ -257,10 +259,10 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href*="p
           clearInterval(poll);
           inst.on('ended',libera);
           inst.on('timeupdate',function(){
-            var t=(inst.video&&inst.video.currentTime)||inst.currentTime||0;
+            var t=0; try{ t=(inst.instance&&inst.instance.currentTime)||(inst.video&&inst.video.currentTime)||inst.currentTime||0; }catch(e){}
             var d=0;
             try{ d=(inst.instance&&inst.instance.duration)||(inst.video&&inst.video.duration)||inst.duration||0; }catch(e){}
-            if(d&&t>=d-1) libera();
+            if(t>=MIN_BOTAO||(d&&t>=d-1)) libera();
           });
           return;
         }
