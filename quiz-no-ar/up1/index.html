@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script>/* Repõe as UTMs guardadas no quiz na URL desta página (sem tirar o upsellToken) e nos links de checkout: a Cakto usa window.location.href pra atribuir a venda do upsell. */
+(function(){try{var d=JSON.parse(localStorage.getItem('cp_utms')||'null');if(!d||Date.now()>d.exp)return;var u=new URL(location.href),mud=false;for(var k in d.p){if(!u.searchParams.has(k)){u.searchParams.set(k,d.p[k]);mud=true;}}if(mud)history.replaceState(null,'',u.toString());
+var aplica=function(){document.querySelectorAll('a[href*="pay.cakto.com.br"]').forEach(function(a){try{var x=new URL(a.href);for(var k in d.p){if(!x.searchParams.has(k))x.searchParams.set(k,d.p[k]);}a.href=x.toString();}catch(e){}});};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',aplica);else aplica();}catch(e){}})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>UPSELL 1 – .</title>
