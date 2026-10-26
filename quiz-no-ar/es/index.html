@@ -169,9 +169,8 @@
   <h2 style="margin-top:28px">Tu Revelación Final:</h2>
   <h2 style="margin-top:6px">¡La verdad está a punto de ser revelada!</h2>
 
-  <!-- VSL_ES: colar player aqui -->
-  <!-- Cuando exista la VSL en español: pegar aquí el <vturb-smartplayer id="vid-..."> del player ES,
-       llenar VSL_ES_SCRIPT en el script de abajo y cambiar VSL_ES_ATIVA a true. -->
+  <!-- VSL ES (versión México, 21:13; precio "diecisiete dólares" en 18:07) -->
+  <vturb-smartplayer id="vid-6ad041f9c462b5bf37cc45dd" style="display: block; margin: 10px auto 0; width: 100%; max-width: 400px; border-radius: 12px; overflow: hidden;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
 
   <a class="cta verde btn-comprar" href="https://pay.cakto.com.br/5993dmv_1244406">¡Sí, Quiero Activar el Código Ahora Mismo!</a>
 
@@ -276,14 +275,12 @@
 
 (function(){
   /* ===== VSL EN ESPAÑOL =====
-     Hoy no hay VSL ES: los botones de compra quedan visibles de inmediato.
-     Cuando exista el player ES:
-       1) pegar el <vturb-smartplayer> en el lugar marcado "VSL_ES" en la tela-9;
-       2) llenar VSL_ES_SCRIPT con la URL del player.js;
-       3) cambiar VSL_ES_ATIVA a true -> los botones vuelven a aparecer a los 17:00 (ESPERA_BOTAO_MS). */
-  var VSL_ES_ATIVA = false;
-  var VSL_ES_SCRIPT = '';          // ej.: <URL del player.js de la cuenta vturb ES>
-  var ESPERA_BOTAO_MS = 1020000;   // 17:00 en ms (momento del precio en la VSL)
+     Player vturb vid-6ad041f9c462b5bf37cc45dd (versión México, 21:13), pegado en la tela-9.
+     Los botones de compra aparecen en MIN_BOTAO (posición del video). Para volver a la
+     carta de ventas en texto sin video: VSL_ES_ATIVA = false. */
+  var VSL_ES_ATIVA = true;
+  var VSL_ES_SCRIPT = 'https://scripts.converteai.net/8961d838-aff2-4dce-9b39-e84022d332ce/players/6ad041f9c462b5bf37cc45dd/v4/player.js';
+  var MIN_BOTAO = 1083;            // 18:03 del video: el precio sale en 18:07
 
   var frentes=["La Rueda de la Fortuna","El Loco","La Torre"];
   var escolhidas=0;
@@ -328,14 +325,34 @@
       sp.async=true;
       document.head.appendChild(sp);
     }
-    var espera=ESPERA_BOTAO_MS;
-    var chave='cp_es_botao_liberado';
-    try{ if(localStorage.getItem(chave)) espera=0; }catch(e){}
-    botoes().forEach(function(b){b.hidden=true});
-    setTimeout(function(){
+    /* con VSL la página queda como la PT: solo video + botón (la carta de ventas en texto se oculta) */
+    var cv=document.querySelector('.carta-vendas'); if(cv) cv.hidden=true;
+    /* el botón aparece por la POSICIÓN del video (pausar no adelanta, avanzar sí).
+       Si la API del smartplayer no responde en ~20 s, cae en el reloj como red de seguridad. */
+    var chave='cp_es_botao_liberado', liberado=false;
+    function libera(){
+      if(liberado) return; liberado=true;
       botoes().forEach(function(b){b.hidden=false});
       try{ localStorage.setItem(chave,String(Date.now())); }catch(e){}
-    },espera);
+    }
+    botoes().forEach(function(b){b.hidden=true});
+    try{ if(localStorage.getItem(chave)){ libera(); return; } }catch(e){}
+    var tent=0, poll=setInterval(function(){
+      tent++;
+      try{
+        var sp=window.smartplayer;
+        var inst=sp&&sp.instances&&sp.instances[0];
+        if(inst&&typeof inst.on==='function'){
+          clearInterval(poll);
+          inst.on('timeupdate',function(){
+            var t=0; try{ t=(inst.instance&&inst.instance.currentTime)||0; }catch(e){}
+            if(t>=MIN_BOTAO) libera();
+          });
+          return;
+        }
+      }catch(e){}
+      if(tent>40){ clearInterval(poll); setTimeout(libera,MIN_BOTAO*1000); }
+    },500);
   }
 })();
 </script>
