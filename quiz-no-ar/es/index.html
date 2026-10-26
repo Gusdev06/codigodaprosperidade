@@ -192,6 +192,9 @@
     <p>Y si crees que es imposible, déjame contarte una historia rápida de un joven que consultó a mi abuela en 1941. Era vendedor ambulante, toda su familia era pobre. Y en la lectura, las cartas revelaron que tenía un potencial de riqueza gigantesco, pero que estaba bloqueado. Ella le dijo qué hacer, incluso cambiar su nombre de señor Abravanel a Silvio Santos, el famoso presentador de televisión brasileño. Y él lo siguió, sin dudar, sin cuestionar, con fe, y pasó de vendedor ambulante a dueño de un imperio multimillonario.</p>
     <p>El Loco en el tarot es exactamente eso. Es la carta de quien está por dar un salto que nadie entiende. Un salto que lo va a cambiar todo. Y ese salto solo llega para quien tiene el valor de creer. Aunque todo el mundo lo llame locura. La pregunta es: ¿tienes esa fe? Porque si la tienes, las próximas cartas te van a mostrar exactamente lo que está por pasar en tu vida financiera.</p>
 
+    <h3>La segunda carta: La Torre</h3>
+    <p>La segunda carta que sacaste es La Torre. Y no te asustes. La Torre es la carta que derriba lo que está mal construido. Es el amarre de pobreza cayéndose. Todo lo que te tenía atada a la escasez, las deudas, la mala suerte, la envidia, empieza a derrumbarse. Y cuando algo así se cae, se abre espacio para lo nuevo.</p>
+
     <h3>La Rueda de la Fortuna</h3>
     <p>Ahora, la tercera carta. Esta es la que más me impresionó. La tercera carta que sacaste es la Rueda de la Fortuna. Y cuando vi esta carta salir justo después de El Loco y La Torre, tuve que parar, respirar y volver a mirar. Porque la Rueda de la Fortuna es la carta del giro. Significa que el ciclo de escasez está llegando a su fin. Que la rueda está girando. Y que el lado de la abundancia está subiendo.</p>
     <p>La Rueda de la Fortuna sale cuando el universo dice: basta. Basta de escasez. Basta de aprietos. Basta de contar monedas a fin de mes. Llegó tu turno. Y no hablo de algún día, quién sabe, tal vez. Hablo de un cambio real y concreto. Dinero que hoy no tienes, entrando a tu vida en los próximos días. Esa cuenta atrasada que te quita el sueño, ya pagada. Ese sueño que guardas hace años, por fin haciéndose posible.</p>
@@ -282,7 +285,7 @@
   var VSL_ES_SCRIPT = 'https://scripts.converteai.net/8961d838-aff2-4dce-9b39-e84022d332ce/players/6ad041f9c462b5bf37cc45dd/v4/player.js';
   var MIN_BOTAO = 1083;            // 18:03 del video: el precio sale en 18:07
 
-  var frentes=["La Rueda de la Fortuna","El Loco","La Torre"];
+  var frentes=["El Loco","La Torre","La Rueda de la Fortuna"];
   var escolhidas=0;
   function botoes(){return document.querySelectorAll('.btn-comprar')}
   function ir(n){
@@ -307,7 +310,7 @@
       if(c.classList.contains('virada')||escolhidas>=3)return;
       escolhidas++;
       c.classList.add('virada');
-      var fr=['roda','louco','torre'][escolhidas-1];c.innerHTML='<img src="/es/cartas/'+fr+'.png" alt="'+frentes[escolhidas-1]+'"><i class="selo-num">'+escolhidas+'</i>';
+      var fr=['louco','torre','roda'][escolhidas-1];c.innerHTML='<img src="/es/cartas/'+fr+'.png" alt="'+frentes[escolhidas-1]+'"><i class="selo-num">'+escolhidas+'</i>';
       if(escolhidas===3){
         document.querySelectorAll('#grade-cartas .carta:not(.virada)').forEach(function(o){o.classList.add('inativa')});
         setTimeout(function(){document.getElementById('btn-leitura').hidden=false},600);
