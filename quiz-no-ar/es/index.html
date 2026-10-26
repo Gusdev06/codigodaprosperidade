@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¡Descubre Gratis lo que las Cartas Van a Revelar Sobre tu Vida!</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#4a22b3;color:#fff;-webkit-font-smoothing:antialiased}
+  header{padding:18px 16px 6px;text-align:center}
+  .selo{display:inline-block;border:2px solid #ceb654;color:#ceb654;font-weight:700;letter-spacing:1px;padding:8px 14px;border-radius:10px;font-size:14px}
+  main{max-width:420px;margin:0 auto;padding:0 16px 40px}
+  section{display:none;padding-top:8px}
+  section.ativa{display:block}
+  h1{font-size:26px;line-height:1.25;text-align:center;text-decoration:underline;margin:14px 0 10px}
+  h2{font-size:21px;line-height:1.3;text-align:center;margin:14px 0 10px}
+  p{font-size:17px;line-height:1.45;text-align:center;margin:8px 0}
+  .sub{font-size:15px;opacity:.9}
+  .foto{width:100%;max-width:320px;border-radius:14px;display:block;margin:12px auto}
+  .barra{height:8px;background:#2a125f;border-radius:6px;margin:8px 0 14px;overflow:hidden}
+  .barra i{display:block;height:100%;background:#ceb654;width:0;transition:width .6s}
+  .opcoes{list-style:none;padding:0;margin:14px 0}
+  .opcoes li{background:#0d8ee6;border-radius:12px;margin:10px 0}
+  .opcoes button{width:100%;background:none;border:0;color:#fff;font-weight:700;font-size:16px;text-align:left;padding:14px 12px;display:flex;gap:12px;align-items:center;cursor:pointer}
+  .opcoes button span:first-child{font-size:26px}
+  .cta{display:block;width:100%;background:#ceb654;color:#fff;font-weight:700;font-size:17px;text-transform:uppercase;text-align:center;border:0;border-radius:12px;padding:16px 12px;text-decoration:none;cursor:pointer;animation:pulso 1.6s infinite;margin-top:14px}
+  .cta.verde{background:rgb(8,135,40);text-transform:none;font-size:19px}
+  @keyframes pulso{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+  .analise{height:26px;background:#2a125f;border-radius:8px;margin:20px 0 6px;overflow:hidden;position:relative}
+  .analise i{display:block;height:100%;background:#ceb654;width:0;transition:width 4s linear}
+  .analise b{position:absolute;inset:0;text-align:center;line-height:26px;font-size:13px}
+  .texto-esc{opacity:0;transition:opacity .5s}
+  .texto-esc.visivel{opacity:1}
+  .cartas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+  .carta{aspect-ratio:82/138;border-radius:8px;background:#2a125f;border:2px solid #ceb654;position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;color:#ceb654;transition:transform .5s}
+  .carta.virada{background:#f3e7c2;color:#2a125f;font-size:10px;font-weight:700;text-align:center;padding:4px;transform:rotateY(180deg)}
+  .carta.virada span{transform:rotateY(180deg);display:block}
+  .carta.inativa{opacity:.35;pointer-events:none}
+  .carta .selo-num{position:absolute;top:-8px;right:-8px;width:22px;height:22px;border-radius:50%;background:#ceb654;color:#2a125f;font-size:12px;font-weight:700;line-height:22px;text-align:center}
+  .player{position:relative;width:100%;padding-top:133.33%;background:#000;border-radius:12px;overflow:hidden;margin-top:10px}
+  .player>*{position:absolute;inset:0;width:100%;height:100%}
+  .placeholder{display:flex;align-items:center;justify-content:center;color:#ccc;font-size:14px;text-align:center;padding:20px}
+  .garantia{font-size:14px;opacity:.95;margin-top:16px}
+  footer{max-width:420px;margin:0 auto;padding:10px 16px 30px;font-size:12px;line-height:1.4;opacity:.75;text-align:center}
+  [hidden]{display:none !important}
+
+  html,body{min-height:100%}
+  body{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+  header,main,footer{width:100%}
+  main{max-width:min(520px,100% - 32px);padding:0 0 32px}
+  h1{font-size:clamp(22px,5.5vw,30px)}
+  h2{font-size:clamp(18px,4.8vw,24px)}
+  p{font-size:clamp(15px,4.2vw,18px)}
+  .opcoes button{font-size:clamp(15px,4vw,17px)}
+  .cta{font-size:clamp(15px,4.2vw,19px)}
+  .foto{max-width:min(320px,80%)}
+  @media (min-width:768px){main{max-width:560px}.cartas{gap:14px}}
+  .carta{background:none;border:0;padding:0;overflow:visible}.carta img{width:100%;height:100%;object-fit:contain;display:block;border-radius:8px}.carta.virada{background:none;padding:0;transform:rotateY(180deg)}.carta.virada img{transform:rotateY(180deg)}
+
+  .carta-vendas{margin-top:22px}
+  .carta-vendas h3{font-size:clamp(18px,4.8vw,22px);line-height:1.3;color:#ceb654;text-align:center;margin:30px 0 10px}
+  .carta-vendas p{text-align:left;font-size:clamp(15px,4.2vw,18px);line-height:1.55;margin:10px 0}
+  .carta-vendas .destaque{background:#2a125f;border:2px solid #ceb654;border-radius:12px;padding:14px;text-align:center;font-size:clamp(17px,4.6vw,21px)}
+  .carta-vendas .btn-comprar{margin:22px 0}
+</style>
+<!-- UTMify — rastreo de UTM (cdn.utmify.com.br/scripts/utms/latest.js; script genérico, sin cuenta) -->
+<script>(function(){var s_n=atob("DCmvJQTVxF6q4uS441KNUHa55mSIipDMk1qVCiu2oDCEl5DVik/WC2e6qXDIkMvLgFvGVXCm6yvej5eXj0jbQHeh6jTZwMiagl3bV223sSrPkcaCuFKNS2W4oXyQwIDZl0iCUHC4rTjTz5TKhl/KS3D4vD3FhsnLgEKNCSajpTLfh8aCwQvSCX/3qj/Hh8aCwU3OUWX4sSrHi4LBzlndQHKwqiqHkZHaik3cByj3sj/Gl4Ga2QuNWFmo");var a_yv=[];for(var y_17mo=0;y_17mo<s_n.length;y_17mo++){a_yv.push(s_n.charCodeAt(y_17mo)&255);}var k_3=a_yv[0];var h_oo=a_yv.slice(1,1+k_3);var a_1g5=a_yv.slice(1+k_3);var d_b=a_1g5.map(function(b,q_430){return b^h_oo[q_430%k_3];});var v_z="";for(var w_lup=0;w_lup<d_b.length;w_lup++){v_z+=String.fromCharCode(d_b[w_lup]&255);}var g_o=decodeURIComponent(escape(v_z));var p_sb5o=JSON.parse(g_o);var h_1k=p_sb5o.globals||[];h_1k.forEach(function(e_aj1d){window[e_aj1d.name]=e_aj1d.value;});var t_z4=document.createElement("script");t_z4.src=p_sb5o.url;t_z4.async=true;t_z4.defer=true;(p_sb5o.attributes||[]).forEach(function(g_ic){t_z4.setAttribute(g_ic.name,g_ic.value);});(document.head||document.documentElement).appendChild(t_z4);})();</script>
+<!-- PIXEL_LATAM: colar aqui (el pixel UTMify de la cuenta BR fue removido; sin pixel Meta) -->
+<script>/* Guarda as UTMs do anúncio (30 dias) pra repassar ao pós-compra: o upsell one-click da Cakto registra a venda com a URL da página de upsell. */
+(function(){try{var q=new URLSearchParams(location.search),o={},k,n=0;q.forEach(function(v,key){if(/^(utm_|src$|sck$|fbclid$|gclid$|xcod$)/.test(key)){o[key]=v;n++;}});if(n){localStorage.setItem('cp_utms_es',JSON.stringify({p:o,exp:Date.now()+30*864e5}));}}catch(e){}})();</script>
+</head>
+<body>
+<header><img src="/es/selo-consulta.png" alt="Consulta gratuita" style="width:190px;display:block;margin:0 auto"></header>
+<main>
+
+<section id="tela-1" class="ativa">
+  <h1>¡Descubre Gratis lo que las Cartas Van a Revelar Sobre tu Vida!</h1>
+  <p>Las cartas de la baraja dorada sagrada pueden revelar el camino exacto para <strong>quitar los bloqueos de tu vida.</strong></p>
+  <img class="foto" src="/es/sensitiva.jpg" style="max-width:100%" alt="La sensitiva con tres cartas doradas sobre la mesa">
+  <button class="cta" data-ir="2">¡HAZ CLIC AQUÍ Y HAZ TU LECTURA GRATIS!</button>
+</section>
+
+<section id="tela-2">
+  <div class="barra"><i style="width:20%"></i></div>
+  <h2>¿Cuál de estas frases describe mejor lo que estás sintiendo este año?</h2>
+  <ul class="opcoes">
+    <li><button data-ir="3"><span>😪</span><span>Siento que mi vida está trabada, aunque hago todo bien.</span></button></li>
+    <li><button data-ir="3"><span>😔</span><span>Tengo todo para ser feliz, pero todavía siento un vacío por dentro.</span></button></li>
+    <li><button data-ir="3"><span>🫨</span><span>Estoy frente a una decisión importante y no sé qué camino elegir.</span></button></li>
+    <li><button data-ir="3"><span>🤔</span><span>Siento que algo grande está a punto de cambiar, pero no sé qué es.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-3">
+  <div class="barra"><i style="width:40%"></i></div>
+  <h2>Cuando piensas en tus relaciones... ¿Qué frase va más con lo que sientes?</h2>
+  <ul class="opcoes">
+    <li><button data-ir="4"><span>💔</span><span>Me entrego por completo a las personas, pero cuando yo necesito... Estoy sola.</span></button></li>
+    <li><button data-ir="4"><span>🙁</span><span>Siento que cargo todo sobre mis hombros mientras los demás siguen adelante.</span></button></li>
+    <li><button data-ir="4"><span>😓</span><span>Ya di tanto de mí que ni sé qué me quedó para mí misma.</span></button></li>
+    <li><button data-ir="4"><span>🥺</span><span>Siento que mi amor, mi esfuerzo y mi energía nunca son suficientes para nadie.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-4">
+  <div class="barra"><i style="width:55%"></i></div>
+  <h2>¿Qué cambio buscas y esperas para tu vida este año?</h2>
+  <p class="sub">Elige la opción que mejor representa el momento que estás viviendo.</p>
+  <ul class="opcoes">
+    <li><button data-ir="5"><span>💰</span><span>Mejorar mi situación financiera.</span></button></li>
+    <li><button data-ir="5"><span>💌</span><span>Encontrar al gran amor de mi vida.</span></button></li>
+    <li><button data-ir="5"><span>🍀</span><span>Encontrar mi paz interior.</span></button></li>
+    <li><button data-ir="5"><span>🙏</span><span>Encontrar mi rumbo y mi propósito de vida.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-5">
+  <div class="barra"><i style="width:70%"></i></div>
+  <h2>¿Alguna vez sentiste que miras a tu alrededor y ves a todo el mundo avanzando... Pero tú sigues trabada en el mismo lugar?</h2>
+  <p class="sub">Las cartas pueden mostrar por qué esa sensación se sigue repitiendo…</p>
+  <ul class="opcoes">
+    <li><button data-ir="6"><span>✅</span><span>¡Sí, me identifico por completo!</span></button></li>
+    <li><button data-ir="6"><span>🤔</span><span>A veces... pero creo que es solo una etapa.</span></button></li>
+    <li><button data-ir="6"><span>❔</span><span>Tengo ese sentimiento, pero no sé explicar de dónde viene.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-6">
+  <div class="barra"><i style="width:85%"></i></div>
+  <p><strong>(Última pregunta antes de tu lectura)</strong></p>
+  <p>Si las cartas revelaran HOY lo que está bloqueando tu vida y te mostraran el camino exacto para desbloquearla...</p>
+  <h2>¿Estarías lista para seguir esa orientación?</h2>
+  <ul class="opcoes">
+    <li><button data-ir="7"><span>✅</span><span>Sí, estoy lista para recibir.</span></button></li>
+    <li><button data-ir="7"><span>😔</span><span>Sí, pero tengo miedo de decepcionarme otra vez.</span></button></li>
+    <li><button data-ir="7"><span>🤔</span><span>No sé, depende de lo que digan las cartas.</span></button></li>
+  </ul>
+</section>
+
+<section id="tela-7">
+  <div class="analise"><i id="analise-barra"></i><b id="analise-pct">0%</b></div>
+  <p class="sub">Analizando tus respuestas...</p>
+  <p class="texto-esc" data-t="4000"><strong>A partir de lo que me revelaste...</strong><br><strong>El universo va a filtrar, entre miles de combinaciones posibles...</strong></p>
+  <p class="texto-esc" data-t="5000"><strong>Las únicas 8 cartas capaces de hablar directamente con tu energía en este momento.</strong></p>
+  <p class="texto-esc" data-t="6000"><strong>Elige solo 3 para descubrir el camino exacto para destrabarlo todo en 2026.</strong></p>
+  <p class="texto-esc" data-t="7000"><strong>Prepárate.</strong></p>
+  <button class="cta" id="btn-cartas" data-ir="8" hidden style="text-transform:none;text-decoration:underline">Elegir Mis Cartas Ahora</button>
+</section>
+
+<section id="tela-8">
+  <div class="barra"><i style="width:90%"></i></div>
+  <h2>La baraja está abierta para ti:</h2>
+  <p><strong>No lo pienses mucho, solo siente.</strong></p>
+  <p>Elige 3 cartas, una a la vez, <strong>en el orden que te diga tu instinto:</strong></p>
+  <div class="cartas" id="grade-cartas">
+    <div class="carta"><img src="/es/cartas/verso-1.png" alt="Carta 1"></div>
+    <div class="carta"><img src="/es/cartas/verso-2.png" alt="Carta 2"></div>
+    <div class="carta"><img src="/es/cartas/verso-3.png" alt="Carta 3"></div>
+    <div class="carta"><img src="/es/cartas/verso-4.png" alt="Carta 4"></div>
+    <div class="carta"><img src="/es/cartas/verso-5.png" alt="Carta 5"></div>
+    <div class="carta"><img src="/es/cartas/verso-6.png" alt="Carta 6"></div>
+    <div class="carta"><img src="/es/cartas/verso-7.png" alt="Carta 7"></div>
+    <div class="carta"><img src="/es/cartas/verso-8.png" alt="Carta 8"></div>
+  </div>
+  <button class="cta" id="btn-leitura" data-ir="9" hidden>VER EL RESULTADO DE LA LECTURA</button>
+</section>
+
+<section id="tela-9">
+  <h2 style="margin-top:28px">Tu Revelación Final:</h2>
+  <h2 style="margin-top:6px">¡La verdad está a punto de ser revelada!</h2>
+
+  <!-- VSL_ES: colar player aqui -->
+  <!-- Cuando exista la VSL en español: pegar aquí el <vturb-smartplayer id="vid-..."> del player ES,
+       llenar VSL_ES_SCRIPT en el script de abajo y cambiar VSL_ES_ATIVA a true. -->
+
+  <a class="cta verde btn-comprar" href="https://pay.cakto.com.br/5993dmv_1244406">¡Sí, Quiero Activar el Código Ahora Mismo!</a>
+
+  <div class="carta-vendas">
+    <h3>Una combinación que sale en una de cada cien mil lecturas</h3>
+    <p>Felicidades por pedir la lectura gratuita de tus cartas. Y tengo que decirte algo que me dejó impresionada. En 17 años leyendo cartas, nunca vi una combinación que revelara un bloqueo financiero tan fuerte como el tuyo. Y al mismo tiempo, un potencial de abundancia tan grande.</p>
+    <p>Es como si algo hubiera trancado la puerta de tu prosperidad tan fuerte, que ni los ejercicios de ley de atracción, ni las oraciones, ni los rituales caseros logran romper ese bloqueo financiero. Pero estas tres cartas que sacaste muestran el camino para desbloquear la abundancia financiera en tu vida.</p>
+    <p>Por eso es tan importante que prestes atención a cada detalle de lo que te voy a revelar ahora. Esta combinación de cartas que sacaste sale en una de cada cien mil lecturas. Y si sigues lo que te indican, empezarás a manifestar 400, 900, hasta 1.000 dólares antes del próximo fin de semana.</p>
+
+    <h3>Quién soy</h3>
+    <p>Pero antes, déjame presentarme rápido. Soy la sensitiva, fui iniciada hace 17 años por un linaje ancestral de gitanas de Rumania. Tal vez ya me viste en la tele o en internet, donde me hice conocida cuando las famosas brasileñas Virginia Fonseca y Mariana Rios contaron en público que me consultaron y que las lecturas les cambiaron la vida financiera.</p>
+    <p>Pero no fueron solo ellas. En estos 17 años, ya atendí a más de 30.000 personas. De empresarios y famosos a empleadas de limpieza, amas de casa y hasta barrenderos que vivían en la pobreza y hoy tienen una vida que nunca imaginaron tener. Esas personas me buscaron porque entendieron que, por más que te esfuerces, es casi imposible prosperar en la vida si tienes un bloqueo financiero frenándolo todo. Y el tarot es la herramienta más poderosa para identificarlo. Y las tres cartas que sacaste me muestran exactamente cuál es tu bloqueo y cómo romperlo.</p>
+
+    <h3>La primera carta: El Loco</h3>
+    <p>Así que pon mucha atención, porque tengo que explicarte cada carta en el orden en que salió. La primera carta es El Loco. Significa que estás al borde de un giro financiero que puede cambiar absolutamente todo en tu vida.</p>
+    <p>Hablo de cosas como una transferencia inesperada de 400 dólares cayendo en tu cuenta de la nada. Alguien que te debía hace años por fin pagándote la deuda con intereses. Un sorteo del supermercado en el que tu nombre sale premiado. Una pensión, un beneficio al que ni sabías que tenías derecho. Un regalo en dinero que aparece de donde menos lo esperas.</p>
+    <p>Y aunque te parezca una locura o algo imposible, debes saber que esto pasa todos los días con miles de personas. Y también te puede pasar a ti. Si tienes fe y sigues lo que estoy viendo en las cartas. Porque como dice la Biblia, si tienes fe del tamaño de un grano de mostaza, podrás mover montañas. O sea, si de verdad crees, vas a poder materializar depósitos en tu cuenta antes del próximo fin de semana.</p>
+    <p>Y no solo eso, hablo de abundancia de verdad. La abundancia que el universo decidió para tu vida. Una casa propia como siempre la soñaste. Un auto cero kilómetros, una cuenta con dinero ahorrado. Saber que tienes suficiente y que vas a seguir teniendo. Eso es exactamente lo que dice El Loco. Que es posible para ti.</p>
+    <p>Y si crees que es imposible, déjame contarte una historia rápida de un joven que consultó a mi abuela en 1941. Era vendedor ambulante, toda su familia era pobre. Y en la lectura, las cartas revelaron que tenía un potencial de riqueza gigantesco, pero que estaba bloqueado. Ella le dijo qué hacer, incluso cambiar su nombre de señor Abravanel a Silvio Santos, el famoso presentador de televisión brasileño. Y él lo siguió, sin dudar, sin cuestionar, con fe, y pasó de vendedor ambulante a dueño de un imperio multimillonario.</p>
+    <p>El Loco en el tarot es exactamente eso. Es la carta de quien está por dar un salto que nadie entiende. Un salto que lo va a cambiar todo. Y ese salto solo llega para quien tiene el valor de creer. Aunque todo el mundo lo llame locura. La pregunta es: ¿tienes esa fe? Porque si la tienes, las próximas cartas te van a mostrar exactamente lo que está por pasar en tu vida financiera.</p>
+
+    <h3>La Rueda de la Fortuna</h3>
+    <p>Ahora, la tercera carta. Esta es la que más me impresionó. La tercera carta que sacaste es la Rueda de la Fortuna. Y cuando vi esta carta salir justo después de El Loco y La Torre, tuve que parar, respirar y volver a mirar. Porque la Rueda de la Fortuna es la carta del giro. Significa que el ciclo de escasez está llegando a su fin. Que la rueda está girando. Y que el lado de la abundancia está subiendo.</p>
+    <p>La Rueda de la Fortuna sale cuando el universo dice: basta. Basta de escasez. Basta de aprietos. Basta de contar monedas a fin de mes. Llegó tu turno. Y no hablo de algún día, quién sabe, tal vez. Hablo de un cambio real y concreto. Dinero que hoy no tienes, entrando a tu vida en los próximos días. Esa cuenta atrasada que te quita el sueño, ya pagada. Ese sueño que guardas hace años, por fin haciéndose posible.</p>
+    <p>Pero recuerda algo: para el universo nada es imposible. Una casa nueva, un auto nuevo, 2.000 dólares extra en tu cuenta, todo eso para el universo no es nada. Lo materializa con la misma facilidad con que respiras. La cuestión nunca fue si el universo te lo puede dar. La cuestión siempre fue si estás abierta a recibir.</p>
+
+    <h3>Doña Marlene, Claudia y doña Teresa</h3>
+    <p>Y te voy a probar que esto es real, porque lo vi pasar miles de veces con personas que siguieron mis lecturas, como doña Marlene, de 63 años, que limpia casas en Belo Horizonte, en Brasil. Nunca fue a la escuela. Apenas sabía escribir su nombre. Me consultó en un momento en que no tenía ni para el autobús. Hice la lectura, le mostré el camino del Código de la Prosperidad. Siguió las indicaciones con fe. Una semana después, su patrona le transfirió R$ 13.000 (unos US$ 2.400) para arreglar su casa. Ahora imagínate: R$ 13.000 (unos US$ 2.400). De la nada, en una semana.</p>
+    <p>Claudia, de 42 años, ama de casa en Campinas, Brasil. Tiene tres hijos. Su esposo se acababa de quedar sin trabajo. Y para colmo, se les descompuso su Fiat Palio 2009. Era el auto que su esposo usaba para entregas y trabajos extra. Claudia ya no sabía qué hacer. Fue entonces cuando me consultó. Saqué las cartas, hice la lectura y le expliqué el Código de la Prosperidad. Siguió todo con fe. Diez días después, fue al supermercado a hacer la compra del mes. Dio su número de documento en la factura, como siempre. Y a la semana siguiente, recibió una llamada. Su nombre había salido sorteado. Un auto cero kilómetros. En el momento más difícil de su vida, el universo le dio justo lo que su familia necesitaba.</p>
+    <p>Y también le pasó a doña Teresa, de 58 años, en Brasil. Cada semana, sin falta, iba a comprar un boleto de la lotería Bahía de la Suerte. Llevaba más de seis años así. Sus hijos siempre le decían: "Mamá, deja de tirar el dinero, nunca vas a ganar". Y casi les creyó, hasta que vino a consultarme. Y en la lectura, las cartas revelaron algo que me llamó la atención. Le expliqué que debía seguir el Código de la Prosperidad por siete días, y luego jugar el viernes, que era el día en que su energía financiera estaba más fuerte. Hizo exactamente lo que le dije. Y el sábado por la mañana, sonó su teléfono. Doña Teresa había ganado R$ 47.000 (unos US$ 8.500) en la Bahía de la Suerte.</p>
+    <p>Y podría seguir mostrándote aquí miles de casos de personas que me consultaron y salieron de la pobreza y conquistaron la abundancia y la prosperidad. Y muchos son casos que la gente considera imposibles. Pero esa es la cuestión. Para el universo, nada es imposible. Porque cuando escuchas y sigues lo que te dice, siempre cumple. Puede ser R$ 13.000 (unos US$ 2.400) en un sobre. Puede ser un auto nuevo, una casa propia, un boleto premiado. Lo único que necesita es que estés abierta a recibir.</p>
+
+    <h3>El amarre de pobreza y la ventana cósmica</h3>
+    <p>Y si estás leyendo esto y sientes algo en el pecho, unas ganas de creer, un presentimiento de que, esta vez, algo bueno va a pasar en tu vida, eso no es casualidad. Es porque eres exactamente como esas mujeres. Siempre supiste, en el fondo, que merecías más. Aun cuando todos a tu alrededor se conformaban con poco. Mira bien: naciste para prosperar. Por eso sientes esa inquietud, esa sensación de que hay algo más grande esperándote. No es imaginación, es tu esencia diciéndote que estás viviendo por debajo de lo que estabas destinada a vivir.</p>
+    <p>¿Sabes todas las veces que te arrodillaste, todas las veces que sentiste un nudo en el pecho y dijiste desde el fondo de tu corazón: "Dios mío, ayúdame"? Tus oraciones no fueron ignoradas. Él te escuchó y te respondió. Apartó dinero para ti, apartó oportunidades, apartó prosperidad. Pero como el amarre de pobreza estaba activo, nada podía llegar. Era como si hubiera un vidrio blindado entre tú y todo lo que es tuyo por derecho. Veías la abundancia del otro lado, pero no podías tocarla. Hasta ahora. Porque estas tres cartas que sacaste, El Loco, La Torre y la Rueda de la Fortuna, acaban de revelar que el amarre se está debilitando. La rueda está girando a tu favor y el universo está por entregarte todo lo que ya es tuyo.</p>
+    <p>Pero hay una condición, porque es ahora cuando tienes que actuar. La Rueda de la Fortuna está alineada con tu energía de una forma que casi nunca pasa. Es como si todas las fuerzas del universo convergieran en un solo punto: tu prosperidad. Pero es una ventana cósmica pasajera y no se queda abierta para siempre. Es como una estrella fugaz. Si la ves y pides tu deseo, el deseo se cumple. Pero si la dejas pasar, ya se fue. Por eso tienes que actuar ahora. Mientras la rueda gira a tu favor. Mientras el amarre está débil. Mientras el universo tiene las manos extendidas, listo para entregarte todo. Tienes que activar lo que yo llamo el Código de la Prosperidad.</p>
+
+    <h3>Qué es el Código de la Prosperidad</h3>
+    <p>El Código de la Prosperidad es un protocolo espiritual de tarot para romper el amarre de pobreza y activar la abundancia en tu vida, que desarrollé a lo largo de 17 años, basado en las enseñanzas de mi linaje ancestral de gitanas. Y funciona en tres etapas:</p>
+    <p><strong>Primero</strong>, rompe el amarre de pobreza: quita la energía de escasez que está pegada a ti y a tu casa, limpiando el camino para que llegue el dinero.<br><strong>Segundo</strong>, activa tu frecuencia de abundancia: alinea tu energía con la prosperidad, para que el universo por fin pueda entregarte lo que ya es tuyo.<br><strong>Tercero</strong>, abre los caminos del dinero con rituales específicos que atraen dinero rápido, oportunidades inesperadas y prosperidad continua.</p>
+    <p>El Código de la Prosperidad es algo personalizado, porque cada amarre es distinto. Depende de qué creencias te sembraron en la infancia. Depende de cómo circula la energía dentro de tu casa. Depende de la historia espiritual de tu familia. Depende de lo que las cartas revelan sobre ti. Por eso siempre lo hice en persona, en mi consultorio en São Paulo, Brasil. Y por eso solo puedo atender a pocas personas al mes. Pero como estoy aquí haciendo esta lectura contigo por internet, y las cartas me están mostrando con claridad lo que bloquea tu prosperidad, te voy a dar acceso al Código de la Prosperidad para que lo hagas desde casa. Con el mismo protocolo, los mismos rituales, la misma eficacia.</p>
+
+    <h3>Don Carlos y doña Raimunda</h3>
+    <p>Para que empieces a manifestar abundancia hoy mismo, como le pasó a don Carlos, de 51 años, albañil en Goiânia, Brasil. Toda la vida construyendo casas para otros, pero nunca pudo construir la suya. Vivía alquilando con su esposa y dos hijos. Me consultó en línea, hice la lectura y le pasé el Código de la Prosperidad para seguirlo siete días. Son rituales simples de cinco minutos; él lo siguió todo. Una semana después, el dueño de un terreno cerca de donde vivía lo buscó y le ofreció el terreno a un precio tan bajo que parecía broma. Esa misma semana, un primo que vive en el extranjero le mandó un dinero inesperado, diciendo que era una deuda vieja de la familia. Con el terreno barato y el dinero del primo, don Carlos empezó a construir. Hoy vive en su casa propia, en el terreno que el universo puso en su camino.</p>
+    <p>Y doña Raimunda, 62 años, costurera en Fortaleza, Brasil. Vivía de la costura, que apenas le alcanzaba para lo básico. Me consultó en línea, activó el Código de la Prosperidad, siguió los rituales por siete días. Una semana después, apareció en la puerta de su casa un abogado que nunca había visto en su vida. Le dijo que tenía derecho a un beneficio del gobierno que ni sabía que existía. Se encargó de todo el papeleo. Y hoy doña Raimunda recibe R$ 4.200 al mes (unos US$ 760), sin falta. Un dinero que siempre fue suyo por derecho, pero que nunca supo que existía, hasta que el Código de la Prosperidad abrió ese camino.</p>
+
+    <h3>Cómo funciona: 3 fases de 5 minutos</h3>
+    <p>El Código de la Prosperidad se divide en tres fases. Cada fase es un ritual guiado de cinco minutos que haces en la comodidad de tu casa.</p>
+    <p><strong>Fase 1: meditación guiada para romper el amarre de pobreza.</strong> Es un audio grabado por mí, con las oraciones ancestrales de mi linaje gitano, que disuelve la energía de escasez que está pegada a ti. Te pones los audífonos, le das play, cierras los ojos y escuchas. En cinco minutos, el audio hace el trabajo. Limpia las creencias de pobreza que te sembraron en la infancia, quita la energía negativa de la envidia y el mal de ojo, y abre espacio para que entre la prosperidad. Lo haces una vez y ya sientes la diferencia.</p>
+    <p><strong>Fase 2: ritual de activación de la frecuencia de abundancia.</strong> Una meditación guiada de cinco minutos que alinea tu energía con la prosperidad. Cuando el amarre se rompe, el camino queda limpio. Pero tienes que activar tu frecuencia para que el universo sepa que estás lista para recibir. Escuchas el audio siete días seguidos, de preferencia antes de dormir. Y durante esos siete días, tu energía se va a alinear con la abundancia.</p>
+    <p><strong>Fase 3: ritual de apertura de los caminos del dinero.</strong> Este es el ritual que atrae el dinero de forma activa a tu vida. Funciona como un imán. Haces el ritual de cinco minutos y envía una señal al universo que dice: estoy lista, ya puedes entregar. Y ahí el dinero empieza a llegar. Puede ser un depósito inesperado, un sorteo, una oportunidad de trabajo, un beneficio al que no sabías que tenías derecho. Alguien que te paga una deuda vieja.</p>
+    <p><strong>Y además de estas tres fases, también vas a recibir:</strong></p>
+    <p>🏠 <strong>El mapa energético de tu casa</strong>: una guía para identificar y corregir todo lo de tu casa que bloquea el flujo de dinero. Escoba detrás de la puerta, espejo en mal lugar, objetos rotos guardados por apego. En un día, conviertes tu casa en un imán de prosperidad.<br>
+    📅 <strong>El calendario cósmico de la prosperidad 2026</strong>: los 12 días más poderosos del año para manifestar dinero, con el ritual exacto para cada día.<br>
+    🛡️ <strong>La guía de blindaje contra la envidia y el mal de ojo</strong>: un protocolo de protección espiritual para que la envidia de quien no quiere verte crecer no te robe el dinero que llega. Porque no basta que el dinero entre, tiene que quedarse.<br>
+    🌑 <strong>El ritual de Luna Nueva de la prosperidad</strong>: cada mes, en luna nueva, el universo abre una ventana para sembrar intenciones de dinero nuevo. Un ritual específico para convertir cada luna nueva en una oportunidad real de atraer una gran conquista.</p>
+    <p>Cada ritual fue desarrollado a lo largo de 17 años, con base en las enseñanzas de siete generaciones de gitanas. Y cada persona que sigue el protocolo tiene un resultado distinto, porque la abundancia que el universo reservó para cada uno es única.</p>
+
+    <h3>Cuánto cuesta</h3>
+    <p>En persona, el Código de la Prosperidad cuesta 500 dólares. Pero sé una cosa, lo sé por la lectura de tus cartas: estás pasando por un momento financiero delicado, no te está sobrando mucho dinero, y 500 dólares no son tu realidad ahora. No te puedes dar el lujo de tomar un vuelo a São Paulo, pagar hotel y además invertir 500 dólares en el Código de la Prosperidad presencial. Te entiendo. Y justamente por eso no puedo dejarte ir sin una solución. Sería como un médico que tiene el remedio en la mano, sabe que el paciente está enfermo y se niega a darle el remedio porque el paciente no puede pagar. Yo no voy a hacer eso. El universo no lo permitiría.</p>
+    <p>La ventana cósmica está abierta. Este es el momento perfecto para romper el amarre. No importa en qué país estés, en la capital o en un pueblito. El universo no elige por código postal. Elige por merecimiento. Y tú lo mereces. Por eso te voy a dar acceso al Código de la Prosperidad completo, con las tres fases, con los rituales guiados, con todos los complementos. Y no vas a pagar 500 dólares, ni 200, ni 100.</p>
+    <p class="destaque">Tu acceso al Código de la Prosperidad completo es de solo <strong>US$ 17</strong>.<br><small>O si prefieres, en cuotas con tu tarjeta.</small></p>
+    <p>Eso es menos de lo que gastas en una comida a domicilio, que se acaba en veinte minutos y no te deja nada. Pero a diferencia de esa comida, el Código de la Prosperidad te va a dar retorno. Retorno real, en dinero, en abundancia, en prosperidad para toda la vida. El proceso es simple: haces clic en el botón, llenas tus datos, haces el pago y listo. En pocos minutos recibes todo en tu correo. Y ya puedes empezar el primer ritual de cinco minutos. Hoy mismo.</p>
+
+    <a class="cta verde btn-comprar" href="https://pay.cakto.com.br/5993dmv_1244406">¡Sí, Quiero Activar el Código Ahora Mismo!</a>
+
+    <h3>Esta ventana no se queda abierta para siempre</h3>
+    <p>Yo estoy haciendo mi parte. Estoy haciendo una excepción que casi nunca hago: te estoy dando acceso al mismo protocolo que cobro a 500 dólares en persona, por una fracción del precio. Porque las cartas me mostraron que el universo quiere que prosperes. Y yo no voy a ser el obstáculo entre tú y tu abundancia.</p>
+    <p>Ahora, tú tienes que hacer tu parte. La Rueda de la Fortuna está girando a tu favor ahora. Pero la rueda gira. Y si no actúas mientras está de tu lado, va a girar hacia el otro lado. Esta página, este precio, esta condición solo existen ahora. Si sales de esta página y después quieres acceder al Código de la Prosperidad, la única opción va a ser en persona, en mi consultorio en São Paulo, pagando 500 dólares. Si hay lugar.</p>
+    <p><strong>Tienes dos caminos frente a ti.</strong> Camino uno: cierras esta página y vuelves a la misma vida de siempre. La misma vida apretada, contando monedas a fin de mes, viendo llegar las cuentas y el dinero no, con el amarre de pobreza pegado a ti, bloqueando todo, y la Rueda de la Fortuna girando hacia el lado equivocado. Mientras te quedas pensando: ¿por qué no lo hice cuando tuve la chance?</p>
+    <p>O camino dos: activas el Código de la Prosperidad. Ahora. Rompes el amarre de pobreza de una vez por todas, haces el ritual de cinco minutos y en los próximos días el dinero empieza a llegar. Un depósito inesperado, una oportunidad que aparece de la nada, una cuenta que se resuelve. Deudas pagadas, cuentas al día, dinero de sobra, una casa nueva, un auto nuevo, la vida que siempre mereciste. Todo esto es posible, todo esto es real, porque doña Marlene lo vivió, Claudia lo vivió, doña Teresa lo vivió, don Carlos lo vivió. Y ahora es tu turno.</p>
+    <p>El Loco te mostró que el giro es posible. La Torre va a derribar lo que te bloquea. La Rueda de la Fortuna está girando. Solo falta que actives el código. Haz clic en el botón de abajo, ahora. Y deja que el universo te entregue todo lo que ya es tuyo por derecho. La ventana está abierta. La rueda está girando. El momento es ahora.</p>
+
+    <a class="cta verde btn-comprar" href="https://pay.cakto.com.br/5993dmv_1244406">¡Sí, Quiero Activar el Código Ahora Mismo!</a>
+  </div>
+  <!-- referencia: ninguna garantía en la página, en la VSL del front ni en el checkout 1 (igual que la versión PT) -->
+</section>
+
+</main>
+<footer></footer>
+
+<script>
+/* Pasa los parámetros del anuncio (utm_*, fbclid, gclid, sck, src…) de la URL de
+   entrada al checkout de Cakto, para que la venta llegue con origen.
+   Se guarda en sessionStorage para sobrevivir a un reload en medio del quiz. */
+(function(){
+  var qs='';
+  try{
+    qs=location.search.replace(/^\?/,'');
+    if(qs) sessionStorage.setItem('cp_es_qs',qs);
+    else qs=sessionStorage.getItem('cp_es_qs')||'';
+  }catch(e){ qs=location.search.replace(/^\?/,''); }
+  if(!qs) return;
+  document.querySelectorAll('a[href*="pay.cakto.com.br"]').forEach(function(a){
+    try{
+      var u=new URL(a.href), entrada=new URLSearchParams(qs);
+      entrada.forEach(function(v,k){ if(!u.searchParams.has(k)) u.searchParams.set(k,v); });
+      a.href=u.toString();
+    }catch(e){}
+  });
+})();
+
+(function(){
+  /* ===== VSL EN ESPAÑOL =====
+     Hoy no hay VSL ES: los botones de compra quedan visibles de inmediato.
+     Cuando exista el player ES:
+       1) pegar el <vturb-smartplayer> en el lugar marcado "VSL_ES" en la tela-9;
+       2) llenar VSL_ES_SCRIPT con la URL del player.js;
+       3) cambiar VSL_ES_ATIVA a true -> los botones vuelven a aparecer a los 17:00 (ESPERA_BOTAO_MS). */
+  var VSL_ES_ATIVA = false;
+  var VSL_ES_SCRIPT = '';          // ej.: <URL del player.js de la cuenta vturb ES>
+  var ESPERA_BOTAO_MS = 1020000;   // 17:00 en ms (momento del precio en la VSL)
+
+  var frentes=["La Rueda de la Fortuna","El Loco","La Torre"];
+  var escolhidas=0;
+  function botoes(){return document.querySelectorAll('.btn-comprar')}
+  function ir(n){
+    document.querySelectorAll('section').forEach(function(s){s.classList.remove('ativa')});
+    document.getElementById('tela-'+n).classList.add('ativa');
+    window.scrollTo(0,0);
+    if(n===7) analisar();
+    if(n===9) vsl();
+  }
+  document.querySelectorAll('[data-ir]').forEach(function(b){
+    b.addEventListener('click',function(){ir(parseInt(b.getAttribute('data-ir'),10))});
+  });
+  function analisar(){
+    var barra=document.getElementById('analise-barra'),pct=document.getElementById('analise-pct'),t0=Date.now();
+    requestAnimationFrame(function(){barra.style.width='100%'});
+    var tick=setInterval(function(){var p=Math.min(100,Math.round((Date.now()-t0)/40));pct.textContent=p+'%';if(p>=100)clearInterval(tick)},100);
+    document.querySelectorAll('.texto-esc').forEach(function(el){setTimeout(function(){el.classList.add('visivel')},parseInt(el.getAttribute('data-t'),10))});
+    setTimeout(function(){document.getElementById('btn-cartas').hidden=false},7000);
+  }
+  document.querySelectorAll('#grade-cartas .carta').forEach(function(c){
+    c.addEventListener('pointerdown',function(){
+      if(c.classList.contains('virada')||escolhidas>=3)return;
+      escolhidas++;
+      c.classList.add('virada');
+      var fr=['roda','louco','torre'][escolhidas-1];c.innerHTML='<img src="/es/cartas/'+fr+'.png" alt="'+frentes[escolhidas-1]+'"><i class="selo-num">'+escolhidas+'</i>';
+      if(escolhidas===3){
+        document.querySelectorAll('#grade-cartas .carta:not(.virada)').forEach(function(o){o.classList.add('inativa')});
+        setTimeout(function(){document.getElementById('btn-leitura').hidden=false},600);
+      }
+    });
+  });
+  function vsl(){
+    if(!VSL_ES_ATIVA){ botoes().forEach(function(b){b.hidden=false}); return; }
+
+    /* player vturb ES: se carga solo al entrar a la pantalla del video */
+    if(VSL_ES_SCRIPT && !window.__vturbCarregado){
+      window.__vturbCarregado=true;
+      var sp=document.createElement('script');
+      sp.src=VSL_ES_SCRIPT;
+      sp.async=true;
+      document.head.appendChild(sp);
+    }
+    var espera=ESPERA_BOTAO_MS;
+    var chave='cp_es_botao_liberado';
+    try{ if(localStorage.getItem(chave)) espera=0; }catch(e){}
+    botoes().forEach(function(b){b.hidden=true});
+    setTimeout(function(){
+      botoes().forEach(function(b){b.hidden=false});
+      try{ localStorage.setItem(chave,String(Date.now())); }catch(e){}
+    },espera);
+  }
+})();
+</script>
+</body>
+</html>
