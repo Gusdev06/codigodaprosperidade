@@ -39,8 +39,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   <!-- VSL_ES: colar player aqui -->
 
   <div class="esconder">
-    <a class="cta" href="https://pay.cakto.com.br/3ztti5n">✨ ¡Sí, Lo Quiero Con el Descuento!</a>
-    <div class="center"><a class="nao" href="https://pay.cakto.com.br/h4bw4y4">No, gracias.</a></div>
+    <a class="cta" href="#comprar">✨ ¡Sí, Lo Quiero Con el Descuento!</a>
   </div>
 
   <div class="carta-vendas">
@@ -50,8 +49,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   </div>
 
   <div class="esconder">
-    <a class="cta" href="https://pay.cakto.com.br/3ztti5n">✨ ¡Sí, Lo Quiero Con el Descuento!</a>
-    <div class="center"><a class="nao" href="https://pay.cakto.com.br/h4bw4y4">No, gracias.</a></div>
+    <a class="cta" href="#comprar">✨ ¡Sí, Lo Quiero Con el Descuento!</a>
   </div>
 
   <div class="carta-vendas">
@@ -65,8 +63,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   </div>
 
   <div class="esconder">
-    <a class="cta" href="https://pay.cakto.com.br/3ztti5n">✨ ¡Sí, Lo Quiero Con el Descuento!</a>
-    <div class="center"><a class="nao" href="https://pay.cakto.com.br/h4bw4y4">No, gracias.</a></div>
+    <div id="comprar"></div>
+    <!-- HOTMART - Sales Funnel Widget (one-click, funil "CDP ES - Upsells" 286258) -->
+    <div id="hotmart-sales-funnel"></div>
   </div>
 </div>
 
@@ -143,5 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (alreadyElsDisplayed) { setTimeout(showHiddenElements, 100); }
 });
 </script>
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')</script>
 </body>
 </html>

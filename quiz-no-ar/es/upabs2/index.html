@@ -102,22 +102,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
   <div class="esconder">
     <div id="comprar"></div>
-    <cakto-upsell-buttons>
-      <cakto-upsell-accept
-        bg-color="#22c55e"
-        text-color="#ffffff"
-        upsell-accept-url="members_area" offer-id="ygsxmyz" offer-type="upsell"
-        app-base-url="https://app.cakto.com.br"
-        upsell-reject-url="https://codigodaprosperidade-ivory.vercel.app/es/dowup02"
-      >¡SÍ, QUIERO LA CONSTELACIÓN FAMILIAR!</cakto-upsell-accept>
-      <div class="center">
-      <cakto-upsell-reject upsell-reject-url="https://codigodaprosperidade-ivory.vercel.app/es/dowup02">No, gracias.</cakto-upsell-reject>
-      </div>
-    </cakto-upsell-buttons>
+    <!-- HOTMART - Sales Funnel Widget (one-click, funil "CDP ES - Upsells" 286258) -->
+    <div id="hotmart-sales-funnel"></div>
   </div>
 </div>
 
-<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')</script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 /* ===== VSL EN ESPAÑOL =====
