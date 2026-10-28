@@ -2,6 +2,16 @@
 
 Funil completo do Código da Prosperidade. Site estático, sem build.
 
+## Atualização ES — 28/10/2026: upsells sem VSL
+
+`quiz-no-ar/es/up1/` e `quiz-no-ar/es/upabs2/` foram reorganizados para vender com texto e prévias reais: oferta e preço no topo (US$ 27 / US$ 43), entregáveis, card de decisão, FAQ, imagens ampliáveis e, no UP1, amostra de 20 segundos do áudio. CSS/JS e prévias ficam em `quiz-no-ar/es/upsell-assets/`.
+
+No ES, o pagamento usa o **widget oficial Hotmart** do funil 286258; aceite/recusa continuam na plataforma. O JS copia nenhuma credencial e não cria cobranças. Mantém parâmetros desconhecidos da query para o contexto Hotmart. Uma visita pública apenas com parâmetros de atribuição mostra a orientação de voltar pela confirmação da compra, em vez de montar um iframe de upsell inválido. O conteúdo é descrito como material digital espiritual; sem promessa de consulta individual, taxa NASA ou ganhos garantidos.
+
+Entrega ES vigente: link por e-mail, conforme `../latam/hotmart-migracao-2026-10-28.md`. A descrição de Cakto nas seções históricas abaixo se refere ao funil PT/implementação anterior.
+
+Deploy confirmado pelo CLI em 28/10: `dpl_3ELzjQfTMCHLgD9WcyBWLjtkYf7w`, alias `codigodaprosperidade-ivory.vercel.app`, projeto `codigodaprosperidade`, root directory `quiz-no-ar`. QA em 320/390/1440 px; prévias, FAQ, áudio e âncoras testados. **Compra real de teste/one-click continua pendente.** As VSLs ES dos upsells ficaram para 29/10 por decisão do Gusta.
+
 ## Rotas
 
 | Rota | O que é |
