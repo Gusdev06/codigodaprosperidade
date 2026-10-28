@@ -37,7 +37,7 @@
   // Hotmart forwards the purchase context in the query string. A direct public
   // visit has no such context and would otherwise embed an invalid_upsell error.
   // Keep unknown query keys intact so current/future Hotmart parameters work.
-  const attributionKey = /^(utm_.*|fbclid|gclid|gbraid|wbraid|sck|src|sub[0-9]*|subid[0-9]*|qa)$/i;
+  const attributionKey = /^(utm_.*|fbclid|gclid|gbraid|wbraid|xcod|sck|src|sub[0-9]*|subid[0-9]*|qa)$/i;
   const hasPurchaseContext = Array.from(new URLSearchParams(window.location.search).keys())
     .some(key => !attributionKey.test(key));
   if (!hasPurchaseContext) {

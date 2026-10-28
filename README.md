@@ -2,6 +2,12 @@
 
 Funil completo do Código da Prosperidade. Site estático, sem build.
 
+## Correção de atribuição ES — 28/10/2026 (posterior ao redesign)
+
+A venda chegou à UTMify sem origem. O funil mantinha o script genérico usado com Cakto (`data-utmify-prevent-xcod-sck`), que impedia gerar a codificação necessária à integração Hotmart. Nos cinco HTMLs de venda ES, os dois carregadores antigos foram substituídos por um único script oficial Hotmart, equivalente ao enviado pelo Gusta: `https://cdn.utmify.com.br/scripts/utms/latest.js`, com apenas `data-utmify-prevent-subids`, async/defer. O pixel UTMify original foi preservado.
+
+Nenhuma campanha foi editada. O script transforma as cinco UTMs atuais em `xcod`/`sck` com separador `hQwK21wXxR`. Teste isolado no Chrome, sem pixel ou compra, confirmou origem, campanha, conjunto, anúncio, posicionamento, checkoutMode e bid nos três links. Visita pública com apenas `xcod` não é tratada como sessão de compra no componente de oferta. Atribuição de uma nova compra real ainda precisa ser acompanhada; a mudança não recupera automaticamente a origem da venda anterior.
+
 ## Atualização ES — 28/10/2026: upsells sem VSL
 
 `quiz-no-ar/es/up1/` e `quiz-no-ar/es/upabs2/` foram reorganizados para vender com texto e prévias reais: oferta e preço no topo (US$ 27 / US$ 43), entregáveis, card de decisão, FAQ, imagens ampliáveis e, no UP1, amostra de 20 segundos do áudio. CSS/JS e prévias ficam em `quiz-no-ar/es/upsell-assets/`.
