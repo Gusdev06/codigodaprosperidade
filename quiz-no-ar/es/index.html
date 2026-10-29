@@ -403,9 +403,9 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     <div id="depo" hidden>
       <h3 class="depo-tit">Ellas siguieron el camino de sus cartas</h3>
       <div class="carrossel">
-        <div class="dv"><div class="tela"><video playsinline preload="none" poster="/es/lectura/v/teresa.jpg" src="/es/lectura/v/teresa.mp4"></video><button class="play" type="button" aria-label="Reproducir">▶</button></div><b>Doña Teresa, 58</b><small>Siete días de Código</small></div>
-        <div class="dv"><div class="tela"><video playsinline preload="none" poster="/es/lectura/v/marlene.jpg" src="/es/lectura/v/marlene.mp4"></video><button class="play" type="button" aria-label="Reproducir">▶</button></div><b>Doña Marlene, 63</b><small>Una semana después</small></div>
-        <div class="dv"><div class="tela"><video playsinline preload="none" poster="/es/lectura/v/claudia.jpg" src="/es/lectura/v/claudia.mp4"></video><button class="play" type="button" aria-label="Reproducir">▶</button></div><b>Claudia, 42</b><small>Diez días después</small></div>
+        <div class="dv"><div class="tela"><video playsinline controls preload="metadata" poster="/es/lectura/v/teresa.jpg" src="/es/lectura/v/teresa.mp4"></video></div><b>Doña Teresa, 58</b><small>Siete días de Código</small></div>
+        <div class="dv"><div class="tela"><video playsinline controls preload="metadata" poster="/es/lectura/v/marlene.jpg" src="/es/lectura/v/marlene.mp4"></video></div><b>Doña Marlene, 63</b><small>Una semana después</small></div>
+        <div class="dv"><div class="tela"><video playsinline controls preload="metadata" poster="/es/lectura/v/claudia.jpg" src="/es/lectura/v/claudia.mp4"></video></div><b>Claudia, 42</b><small>Diez días después</small></div>
       </div>
       <p class="micro">Desliza para ver más historias →</p>
     </div>
@@ -518,18 +518,25 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
   /* ===== SOM: narração da sensitiva (ElevenLabs "Matilda"), música ambiente e efeitos.
      Só liga depois de um toque (política de autoplay). Botão 🔊/🔇 fixo no topo. Arquivos em /es/lectura/a/. ===== */
-  var A={on:false,musica:null,voz:null,fila:0};
+  var A={on:false,musica:null,voz:null,fila:0,mudo:false};
   var bs=document.getElementById('btn-som');
-  function somUI(){ bs.textContent=A.on?'🔊':'🔇'; bs.setAttribute('aria-label',A.on?'Silenciar':'Activar sonido'); }
+  function somUI(){ var tocando=!A.mudo&&A.musica&&!A.musica.paused; bs.textContent=tocando?'🔊':'🔇'; bs.setAttribute('aria-label',tocando?'Silenciar':'Activar sonido'); }
+  /* música ambiente: começa no primeiro toque da pessoa (o navegador não deixa antes); a narração só com o botão */
+  function musicaLiga(){
+    if(A.mudo) return;
+    if(!A.musica){ A.musica=new Audio('/es/lectura/a/musica.mp3'); A.musica.loop=true; A.musica.volume=0.22; }
+    if(A.musica.paused){ var p=A.musica.play(); if(p&&p.then) p.then(somUI,function(){}); }
+  }
+  function primeiroToque(e){ if(e&&e.target&&e.target.closest&&e.target.closest('#btn-som')) return; musicaLiga(); document.removeEventListener('pointerdown',primeiroToque,true); }
+  document.addEventListener('pointerdown',primeiroToque,true);
   function somLiga(){
     if(A.on) return; A.on=true; somUI();
-    if(!A.musica){ A.musica=new Audio('/es/lectura/a/musica.mp3'); A.musica.loop=true; }
-    A.musica.volume=0.22; var p=A.musica.play(); if(p&&p.catch) p.catch(function(){});
+    A.mudo=false; musicaLiga();
     try{ var vv=document.getElementById('vid'); if(vv&&!vv.paused){ vv.muted=false; document.getElementById('som').hidden=true; } }catch(e){}
     ev('som_on');
   }
-  function somDesliga(){ A.on=false; somUI(); if(A.musica) A.musica.pause(); if(A.voz) A.voz.pause(); try{ document.getElementById('vid').muted=true; }catch(e){} }
-  bs.addEventListener('click',function(){ A.on?somDesliga():(somLiga(), narraTela()); });
+  function somDesliga(){ A.on=false; A.mudo=true; if(A.musica) A.musica.pause(); pararVoz(); somUI(); try{ document.getElementById('vid').muted=true; }catch(e){} }
+  bs.addEventListener('click',function(e){ e.stopPropagation(); var tocando=!A.mudo&&A.musica&&!A.musica.paused; if(tocando||A.on) somDesliga(); else { somLiga(); narraTela(); } });
   function duck(b){ if(A.musica) A.musica.volume=b?0.07:0.22; }
   /* canal único de voz: uma fala nova corta a anterior; o atraso evita pedaços de fala quando a pessoa avança rápido */
   function pararVoz(){ A.fila++; clearTimeout(A.tm); if(A.voz){ A.voz.onended=null; A.voz.onerror=null; A.voz.pause(); A.voz=null; } duck(false); }
@@ -709,7 +716,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     document.getElementById('sens-tit').textContent='La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
     vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg'; vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4';
     /* com o som ligado, o vídeo já toca com áudio e a música abaixa; se o navegador barrar, cai pro mudo */
-    pararVoz(); var comSom=A.on||A.video; vid.muted=!comSom; som.hidden=comSom; if(A.on&&A.musica) A.musica.volume=0.04;
+    pararVoz(); var comSom=A.on||A.video; vid.muted=!comSom; vid.controls=!!A.video; som.hidden=comSom; if(A.musica) A.musica.volume=0.04;
     var p=vid.play(); if(p&&p.catch) p.catch(function(){
       if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ som.hidden=false; if(!fimFeito) semVideo(i); }); }
       else { som.hidden=false; if(!fimFeito) semVideo(i); }
@@ -734,23 +741,19 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!dito&&fimFeito&&!A.voz&&!videoComSom()&&!A.fimFala){ dito=true; narra('oferta',null,500); } }); },{threshold:.35}).observe(of); })();
   function semVideo(de){ for(var k=de;k<3;k++) (function(k){ setTimeout(function(){virar(k)},(k-de)*1500); })(k); setTimeout(fim,(3-de)*1500+300); }
   vid.addEventListener('ended',function(){
-    if(A.musica&&A.on) A.musica.volume=0.22;
+    if(A.musica) A.musica.volume=0.22;
     if(A.fimFala&&fimFeito){ var ff=A.fimFala; A.fimFala=null; setTimeout(function(){ narra(ff,null,300); },0); return; }
     if(!fimFeito&&atual<2) passo(atual+1);
     else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
   });
-  function ouvirVideo(){ ev('video_som'); A.video=true; pararVoz(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; try{ vid.currentTime=0; }catch(e){} var p=vid.play(); if(p&&p.catch) p.catch(function(){ som.hidden=false; }); }
+  function ouvirVideo(){ ev('video_som'); A.video=true; pararVoz(); vid.muted=false; vid.controls=true; som.hidden=true; if(A.musica) A.musica.volume=0.04; if(vid.readyState>=1&&!vid.paused){ try{ vid.currentTime=0; }catch(e){} } var p=vid.play(); if(p&&p.catch) p.catch(function(){ vid.muted=true; var q=vid.play(); if(q&&q.catch) q.catch(function(){}); som.hidden=false; }); }
   som.addEventListener('click',function(e){ e.stopPropagation(); ouvirVideo(); });
   vid.parentNode.addEventListener('click',function(){ if(vid.muted||vid.paused) ouvirVideo(); });
   /* depoimentos (Teresa, Marlene, Claudia): um toca por vez, calam a narração e o vídeo da leitura */
   var depos=[].slice.call(document.querySelectorAll('#depo video'));
   depos.forEach(function(v){
-    var b=v.parentNode.querySelector('.play');
-    function toca(){ ev('depoimento'); b.hidden=true; v.controls=true; var p=v.play(); if(p&&p.catch) p.catch(function(){ v.muted=true; v.play(); }); }
-    b.addEventListener('click',function(e){ e.stopPropagation(); toca(); });
-    v.parentNode.addEventListener('click',function(){ if(v.paused&&!v.controls) toca(); });
-    v.addEventListener('play',function(){ pararVoz(); if(A.musica&&A.on) A.musica.volume=0.04; vid.pause(); b.hidden=true; depos.forEach(function(o){ if(o!==v&&!o.paused) o.pause(); }); });
-    ['pause','ended'].forEach(function(t){ v.addEventListener(t,function(){ if(A.musica&&A.on&&depos.every(function(o){return o.paused})) A.musica.volume=0.22; }); });
+    v.addEventListener('play',function(){ ev('depoimento'); pararVoz(); if(A.musica) A.musica.volume=0.04; vid.pause(); depos.forEach(function(o){ if(o!==v&&!o.paused) o.pause(); }); });
+    ['pause','ended'].forEach(function(t){ v.addEventListener(t,function(){ if(A.musica&&depos.every(function(o){return o.paused})) A.musica.volume=0.22; }); });
   });
   vid.addEventListener('play',function(){ depos.forEach(function(o){ if(!o.paused) o.pause(); }); });
   document.getElementById('pular').addEventListener('click',function(){ ev('pular_video'); pararVoz(); fim(); document.getElementById('corpo').scrollIntoView({behavior:'smooth'}); });
