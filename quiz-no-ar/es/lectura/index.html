@@ -126,7 +126,11 @@
   .sens{margin:14px auto 0;max-width:250px;text-align:center}
   .tela{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--gold-soft);box-shadow:0 14px 40px -12px rgba(0,0,0,.8)}
   .tela video{width:100%;height:100%;object-fit:cover;display:block}
-  .som{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);border:0;border-radius:999px;background:rgba(29,16,34,.82);color:var(--gold);font-weight:700;font-size:13px;padding:9px 14px;white-space:nowrap}
+  .tela{cursor:pointer}
+  .som{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;padding:0 12px 18px;border:0;background:linear-gradient(180deg,rgba(29,16,34,0) 35%,rgba(29,16,34,.85) 100%);color:var(--ivory);font-family:var(--sans);cursor:pointer}
+  .som .som-ico{width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--gold-ink);font-size:34px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(255,211,77,.7);animation:chama-som 1.5s infinite;margin-bottom:auto;margin-top:auto}
+  .som .som-txt{background:linear-gradient(90deg,var(--gold-2),var(--gold));color:var(--gold-ink);font-weight:700;font-size:15px;letter-spacing:.03em;text-transform:uppercase;border-radius:14px;padding:12px 14px;line-height:1.25;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+  @keyframes chama-som{0%{box-shadow:0 0 0 0 rgba(255,211,77,.7);transform:scale(1)}70%{box-shadow:0 0 0 22px rgba(255,211,77,0);transform:scale(1.06)}100%{box-shadow:0 0 0 0 rgba(255,211,77,0);transform:scale(1)}}
   .rc{cursor:pointer}.rc.tocando .flip img.frente{outline:2px solid var(--gold);outline-offset:2px}
   .depo{display:flex;gap:14px;align-items:center}
   .depo .tela{width:42%;flex:none;aspect-ratio:9/16}
@@ -362,7 +366,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   <p class="legenda" id="legenda"></p>
   <div class="sens" id="sens" hidden>
     <p class="eyebrow" id="sens-tit" style="margin:0 0 8px"></p>
-    <div class="tela"><video id="vid" playsinline muted preload="metadata"></video><button class="som" type="button" id="som">🔊 Toca para escuchar</button></div>
+    <div class="tela"><video id="vid" playsinline muted preload="metadata"></video><button class="som" type="button" id="som" aria-label="Escuchar a la sensitiva"><span class="som-ico">🔊</span><span class="som-txt">Toca aquí para escuchar<br>lo que dice tu carta</span></button></div>
   </div>
   <button class="text-button" type="button" id="pular" hidden>Ver toda mi lectura ahora ↓</button>
 
@@ -695,12 +699,12 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     atual=i; var c=seq[i];
     document.querySelectorAll('#reveal-cartas .rc').forEach(function(d,k){d.classList.toggle('tocando',k===i)});
     document.getElementById('sens-tit').textContent='La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
-    vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4'; vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg';
+    vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg'; vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4';
     /* com o som ligado, o vídeo já toca com áudio e a música abaixa; se o navegador barrar, cai pro mudo */
     pararVoz(); vid.muted=!A.on; som.hidden=A.on; if(A.on&&A.musica) A.musica.volume=0.04;
     var p=vid.play(); if(p&&p.catch) p.catch(function(){
-      if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ if(!fimFeito) semVideo(i); }); }
-      else if(!fimFeito) semVideo(i);
+      if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ som.hidden=false; if(!fimFeito) semVideo(i); }); }
+      else { som.hidden=false; if(!fimFeito) semVideo(i); }
     });
   }
   function passo(i){ virar(i); tocar(i); }
@@ -727,7 +731,9 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     if(!fimFeito&&atual<2) passo(atual+1);
     else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
   });
-  som.addEventListener('click',function(){ ev('video_som'); somLiga(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; vid.currentTime=0; vid.play(); });
+  function ouvirVideo(){ ev('video_som'); somLiga(); pararVoz(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; try{ vid.currentTime=0; }catch(e){} var p=vid.play(); if(p&&p.catch) p.catch(function(){ som.hidden=false; }); }
+  som.addEventListener('click',function(e){ e.stopPropagation(); ouvirVideo(); });
+  vid.parentNode.addEventListener('click',function(){ if(vid.muted||vid.paused) ouvirVideo(); });
   /* depoimentos (Teresa, Marlene, Claudia): um toca por vez, calam a narração e o vídeo da leitura */
   var depos=[].slice.call(document.querySelectorAll('#depo video'));
   depos.forEach(function(v){
@@ -755,7 +761,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     preencher(t); seq=t; fimFeito=false;
     box.querySelectorAll('.rc').forEach(function(d,i){ d.addEventListener('click',function(){ if(VIDEO&&fimFeito&&d.classList.contains('virada')) tocar(i); }); });
     if(revelado){ fim(); if(VIDEO){ document.getElementById('sens').hidden=false; tocar(0); } return; }
-    if(VIDEO){ document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; narra('revelacion',function(){ setTimeout(function(){passo(0)},300); }); }
+    if(VIDEO){ vid.poster='/es/lectura/v/'+CLIPE[t[0]]+'.jpg'; som.hidden=false; document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; narra('revelacion',function(){ setTimeout(function(){passo(0)},300); }); }
     else narra('revelacion',function(){ semVideo(0); });
   }
   function preencher(t){
