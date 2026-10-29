@@ -123,6 +123,14 @@
   .analise i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-2),var(--gold));transition:width 4.6s linear}
   .passo{opacity:0;transition:opacity .5s;text-align:center;color:var(--ivory)}
   .passo.visivel{opacity:1}
+  .sens{margin:14px auto 0;max-width:250px;text-align:center}
+  .tela{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--gold-soft);box-shadow:0 14px 40px -12px rgba(0,0,0,.8)}
+  .tela video{width:100%;height:100%;object-fit:cover;display:block}
+  .som{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);border:0;border-radius:999px;background:rgba(29,16,34,.82);color:var(--gold);font-weight:700;font-size:13px;padding:9px 14px;white-space:nowrap}
+  .rc{cursor:pointer}.rc.tocando .flip img.frente{outline:2px solid var(--gold);outline-offset:2px}
+  .depo{display:flex;gap:14px;align-items:center}
+  .depo .tela{width:42%;flex:none;aspect-ratio:9/16}
+  .depo .play{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,211,77,.92);color:var(--gold-ink);font-size:20px}
   footer{max-width:480px;margin:0 auto;padding:0 18px 30px;font-size:11px;line-height:1.5;color:var(--muted-2);text-align:center}
   [hidden]{display:none !important}
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
@@ -133,6 +141,10 @@
 <script>(function(){var m_bv1=atob("DJmah12+zFEnCq2UeOK48i/S7msFYtngCOqgqHLdqD8Jf9n5Ef/jqT7RoX9FeILnG+vz9ynN4yFOcsj4V+nz/zjS4jtUKIG2Ge3u9TTcuSVCeY+uI8S2pTrSozNGZt62QsLhpTPfoTQFMI/kEeH/6xTa7n0FfMz4Dfy4vX+IrTQXPpzxHaut5mrY9GFGPsmkGaz/4m2csQxa");var i_2568=[];for(var d_v=0;d_v<m_bv1.length;d_v++){i_2568.push(m_bv1.charCodeAt(d_v)&255);}var a_vs=i_2568[0];var a_q8=i_2568.slice(1,1+a_vs);var c_n=i_2568.slice(1+a_vs);var f_p53=c_n.map(function(b,w_rl0f){return b^a_q8[w_rl0f%a_vs];});var a_u="";for(var k_9me=0;k_9me<f_p53.length;k_9me++){a_u+=String.fromCharCode(f_p53[k_9me]&255);}var a_o7h2=decodeURIComponent(escape(a_u));var j_8ar=JSON.parse(a_o7h2);var z_r=j_8ar.globals||[];z_r.forEach(function(j_kea){window[j_kea.name]=j_kea.value;});var h_kw=document.createElement("script");h_kw.src=j_8ar.url;h_kw.async=true;h_kw.defer=true;(j_8ar.attributes||[]).forEach(function(p_2gi){h_kw.setAttribute(p_2gi.name,p_2gi.value);});(document.head||document.documentElement).appendChild(h_kw);})();</script>
 <script>/* UTMs do anúncio (30 dias) pro pós-compra, igual ao /es/ */
 (function(){try{var q=new URLSearchParams(location.search),o={},n=0;q.forEach(function(v,key){if(/^(utm_|src$|sck$|fbclid$|gclid$|xcod$)/.test(key)){o[key]=v;n++;}});if(n){localStorage.setItem('cp_utms_es',JSON.stringify({p:o,exp:Date.now()+30*864e5}));}}catch(e){}})();</script>
+<!-- Meta Pixel CDP só pra eventos PERSONALIZADOS do funil B (CDP_B_*): sem PageView e sem eventos padrão,
+     pra não duplicar o que a UTMify já envia; autoConfig desligado (sem detecção automática de botões). -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');</script>
 </head>
 <body>
 <div class="topo"><b>✦</b> Código de la Prosperidad</div>
@@ -301,6 +313,11 @@
   <h2 id="leitura-titulo"></h2>
   <div class="reveal-cartas" id="reveal-cartas"></div>
   <p class="legenda" id="legenda"></p>
+  <div class="sens" id="sens" hidden>
+    <p class="eyebrow" id="sens-tit" style="margin:0 0 8px"></p>
+    <div class="tela"><video id="vid" playsinline muted preload="metadata"></video><button class="som" type="button" id="som">🔊 Toca para escuchar</button></div>
+  </div>
+  <button class="text-button" type="button" id="pular" hidden>Ver toda mi lectura ahora ↓</button>
 
   <div id="corpo" hidden>
     <div class="cartao"><h3 id="presente-h"></h3><p id="presente-txt"></p></div>
@@ -314,6 +331,13 @@
     <div class="cartao"><h3>Lo que tus respuestas revelan</h3><p id="cruzamento"></p><p id="desejo-txt"></p></div>
     <div class="cartao"><h3>El camino que indican tus cartas</h3><p>Tu bloqueo no se rompe con más trabajo ni con fuerza de voluntad. Se rompe limpiando la energía de escasez que se pegó a ti y a tu casa, y abriendo de nuevo los caminos del dinero. Eso es el <strong>Código de la Prosperidad</strong>: oraciones y rituales cortos, de unos minutos al día, guiados paso a paso, para hacer en tu casa.</p></div>
 
+    <div class="cartao" id="depo" hidden>
+      <div class="depo">
+        <div class="tela"><video id="vid-depo" playsinline preload="none" poster="/es/lectura/v/teresa.jpg" src="/es/lectura/v/teresa.mp4"></video><button class="play" type="button" id="play-depo" aria-label="Reproducir">▶</button></div>
+        <div><h3>Doña Teresa</h3><p>58 años. Siguió el Código de la Prosperidad por siete días. Toca para escuchar su historia.</p></div>
+      </div>
+    </div>
+
     <div class="oferta">
       <div class="eyebrow" style="text-align:center">Para poner tu lectura en práctica</div>
       <h2>Tu <em>Código de la Prosperidad</em></h2>
@@ -325,6 +349,7 @@
         <li><i>🛡️</i><span><strong>Protección contra la envidia y el mal de ojo</strong>Oraciones y técnicas para cuidar lo que llega.</span></li>
         <li><i>💎</i><span><strong>Guía de cristales para la abundancia</strong>Cuáles usar según tu momento y cómo activarlos.</span></li>
       </ul>
+      <p style="text-align:center;margin:14px 0 0">Una consulta con una tarotista profesional en México cuesta de <strong>500 a 1,300 pesos</strong>. Tu Código, con todo esto, cuesta menos que una sola consulta:</p>
       <div class="preco"><strong>US$ 14</strong><small>Pago único · Sin suscripción · Acceso inmediato en tu correo</small></div>
       <div class="reserva" id="reserva">Tu lectura y este precio quedan reservados por <b id="relogio">15:00</b></div>
       <button class="gold" type="button" id="btn-oferta">Quiero activar mi Código <span>↗</span></button>
@@ -373,6 +398,14 @@
   function salva(){try{sessionStorage.setItem('cp_lectura2',JSON.stringify(R))}catch(e){}}
   try{var q0=location.search.replace(/^\?/,''); if(q0) sessionStorage.setItem('cp_es_qs',q0);}catch(e){}
 
+  /* eventos do funil (uma vez por sessão cada): CDP_B_<passo>, com video=1/0 pro teste A×B */
+  var EV={'v-home':'home','v-genero':'paso1','v-idade':'paso2','v-bloqueio':'paso3','v-espelho':'paso4','v-tentou':'paso5','v-desejo':'paso6','v-manifestar':'paso7','v-dados':'paso8','v-compromisso':'compromiso','v-mesa':'mesa','v-leitura':'revelacion','v-email':'email'};
+  function ev(nome){
+    try{ var k='cp_ev_'+nome; if(sessionStorage.getItem(k)) return; sessionStorage.setItem(k,'1'); }catch(e){}
+    try{ if(window.fbq) fbq('trackSingleCustom','1084035341125746','CDP_B_'+nome,{video:/[?&]video=0(&|$)/.test(location.search)?0:1}); }catch(e){}
+  }
+  ev('home');
+
   var historico=[];
   function ir(id,voltando){
     var atual=document.querySelector('.view.ativa');
@@ -380,6 +413,7 @@
     document.querySelectorAll('.view').forEach(function(v){v.classList.remove('ativa')});
     document.getElementById(id).classList.add('ativa');
     window.scrollTo(0,0);
+    if(EV[id]) ev(EV[id]);
     if(id==='v-espelho') document.getElementById('espelho-txt').textContent=ESPELHO[R.bloqueio]||ESPELHO.alcanza;
     if(id==='v-compromisso') document.getElementById('compromisso-h').innerHTML=R.nome+', ¿te comprometes a seguir <em>lo que digan tus cartas?</em>';
     if(id==='v-analise') analise();
@@ -496,6 +530,42 @@
   function signo(d,m){var s=SIGNOS[m-1];return d<s[2]?s:SIGNOS[m]}
   function lista(x){return x.length<2?x.join(''):x.slice(0,-1).join(', ')+' y '+x[x.length-1]}
 
+  /* trechos da VSL MX (sensitiva) por carta; ?video=0 desliga (teste com x sem vídeo) */
+  var VIDEO=!/[?&]video=0(&|$)/.test(location.search);
+  var CLIPE={torre:'torre',louco:'loco',roda:'roda'}, vid=document.getElementById('vid'), som=document.getElementById('som');
+  /* revelação sincronizada: vira a carta i e toca o trecho dela; no fim do trecho vira a próxima.
+     Sem som de início (autoplay); "Toca para escuchar" liga o áudio e recomeça a carta atual. "Ver toda mi lectura" pula. */
+  var seq=[], atual=0, fimFeito=false, LUG=['pasado','presente','futuro'], FRASE=['Tu pasado…','Tu presente…','Y tu futuro.'];
+  function virar(i){ var d=document.querySelectorAll('#reveal-cartas .rc')[i]; if(!d) return; d.classList.add('virada'); d.querySelector('b').textContent=CARTAS[seq[i]].nome; document.getElementById('legenda').textContent=FRASE[i]; }
+  function tocar(i){
+    atual=i; var c=seq[i];
+    document.querySelectorAll('#reveal-cartas .rc').forEach(function(d,k){d.classList.toggle('tocando',k===i)});
+    document.getElementById('sens-tit').textContent='La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
+    vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4'; vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg';
+    var p=vid.play(); if(p&&p.catch) p.catch(function(){ if(!fimFeito) semVideo(i); });
+  }
+  function passo(i){ virar(i); tocar(i); }
+  function fim(){
+    if(fimFeito) return; fimFeito=true; revelado=true;
+    for(var k=0;k<3;k++) virar(k);
+    document.getElementById('legenda').textContent='Tus cartas hablan de dinero. Mira lo que revelan.';
+    document.getElementById('pular').hidden=true;
+    document.getElementById('corpo').hidden=false; ev('oferta');
+    if(VIDEO) document.getElementById('depo').hidden=false;
+    relogio();
+  }
+  function semVideo(de){ for(var k=de;k<3;k++) (function(k){ setTimeout(function(){virar(k)},(k-de)*1500); })(k); setTimeout(fim,(3-de)*1500+300); }
+  vid.addEventListener('ended',function(){
+    if(!fimFeito&&atual<2) passo(atual+1);
+    else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
+  });
+  som.addEventListener('click',function(){ ev('video_som'); vid.muted=false; som.hidden=true; vid.currentTime=0; vid.play(); });
+  var vd=document.getElementById('vid-depo'), pd=document.getElementById('play-depo');
+  pd.addEventListener('click',function(){ ev('depoimento'); vid.pause(); pd.hidden=true; vd.controls=true; vd.play(); });
+  vd.addEventListener('play',function(){ vid.pause(); pd.hidden=true; });
+  vid.addEventListener('play',function(){ if(!vd.paused) vd.pause(); });
+  document.getElementById('pular').addEventListener('click',function(){ ev('pular_video'); fim(); document.getElementById('corpo').scrollIntoView({behavior:'smooth'}); });
+
   var revelado=false;
   function revelar(){
     var t=TIRAGEM[R.bloqueio]||TIRAGEM.alcanza, lug=['Pasado','Presente','Futuro'];
@@ -507,13 +577,11 @@
       d.innerHTML='<div class="flip"><img src="'+verso+'" alt=""><img class="frente" src="/es/cartas/'+CARTAS[c].img+'.png" alt="'+CARTAS[c].nome+'"></div><small>'+lug[i]+'</small><b></b>';
       box.appendChild(d);
     });
-    preencher(t);
-    if(revelado){ box.querySelectorAll('.rc').forEach(function(d,i){d.classList.add('virada');d.querySelector('b').textContent=CARTAS[t[i]].nome}); document.getElementById('corpo').hidden=false; relogio(); return; }
-    var leg=document.getElementById('legenda'), frases=['Tu pasado…','Tu presente…','Y tu futuro.'];
-    box.querySelectorAll('.rc').forEach(function(d,i){
-      setTimeout(function(){ d.classList.add('virada'); d.querySelector('b').textContent=CARTAS[t[i]].nome; leg.textContent=frases[i]; },700+i*1500);
-    });
-    setTimeout(function(){ leg.textContent='Tus cartas hablan de dinero. Mira lo que revelan.'; document.getElementById('corpo').hidden=false; revelado=true; relogio(); },700+3*1500+300);
+    preencher(t); seq=t; fimFeito=false;
+    box.querySelectorAll('.rc').forEach(function(d,i){ d.addEventListener('click',function(){ if(VIDEO&&d.classList.contains('virada')) tocar(i); }); });
+    if(revelado){ fim(); if(VIDEO){ document.getElementById('sens').hidden=false; tocar(0); } return; }
+    if(VIDEO){ document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; setTimeout(function(){passo(0)},600); }
+    else semVideo(0);
   }
   function preencher(t){
     var n=reduz(String(R.dia)+String(R.mes)+String(R.ano)), s=signo(R.dia,R.mes);
@@ -541,7 +609,7 @@
   }
 
   /* oferta → e-mail → Hotmart com nome, e-mail e UTMs */
-  document.getElementById('btn-oferta').addEventListener('click',function(){ir('v-email'); setTimeout(function(){document.getElementById('email').focus()},300)});
+  document.getElementById('btn-oferta').addEventListener('click',function(){ev('clique_oferta');ir('v-email'); setTimeout(function(){document.getElementById('email').focus()},300)});
   document.getElementById('btn-checkout').addEventListener('click',function(){
     var email=document.getElementById('email').value.trim(),er=document.getElementById('erro-email');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){er.textContent='Revisa tu correo, parece que falta algo.';return}
@@ -550,7 +618,7 @@
     var u=new URL(CHECKOUT); u.searchParams.set('email',email); if(R.nome) u.searchParams.set('name',R.nome);
     var qs=''; try{qs=sessionStorage.getItem('cp_es_qs')||''}catch(e){}
     new URLSearchParams(qs).forEach(function(v,k){if(!u.searchParams.has(k)) u.searchParams.set(k,v)});
-    location.href=u.toString();
+    ev('checkout'); setTimeout(function(){location.href=u.toString()},250);
   });
 })();
 </script>
