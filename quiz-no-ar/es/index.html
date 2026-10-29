@@ -173,6 +173,12 @@
   .selos2 div{border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center;font-size:11px;line-height:1.3;color:var(--muted)}
   .selos2 b{display:block;font-size:20px;margin-bottom:4px}
   .selos2 strong{color:var(--ivory)}
+  .escassez{display:flex;gap:12px;align-items:center;margin:14px 0 0;padding:12px;border-radius:14px;background:rgba(255,211,77,.07);border:1px solid var(--line)}
+  .escassez .esc-v{width:38%;flex:none}
+  .escassez p{margin:0;font-size:14px;color:var(--ivory);text-align:left}
+  .barra-esc{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#2a1630;border-top:1px solid var(--gold-soft);box-shadow:0 -10px 30px rgba(0,0,0,.5);font-size:14px;color:var(--ivory)}
+  .barra-esc b{color:var(--gold);font-variant-numeric:tabular-nums}
+  .barra-esc button{border:0;border-radius:999px;background:linear-gradient(90deg,var(--gold-2),var(--gold));color:var(--gold-ink);font-weight:700;font-size:13px;padding:10px 16px;white-space:nowrap}
   footer{max-width:480px;margin:0 auto;padding:0 18px 30px;font-size:11px;line-height:1.5;color:var(--muted-2);text-align:center}
   [hidden]{display:none !important}
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
@@ -385,6 +391,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
       <p>Hay una oración que las gitanas de mi linaje rezan solo con las tres cartas de cada persona. Mi abuela la guardó durante décadas y solo la entregaba en consulta, cuando en la tirada salían los arcanos del giro, como los tuyos.</p>
       <p>No se escribe igual para dos personas: se forma con <strong>tu nombre</strong>, <strong>tus tres arcanos</strong> y <strong>tu número de destino</strong>. Se reza siete noches seguidas, frente a una vela, y en tus días de apertura se reza siete veces.</p>
       <p>Cuando el camino se abre, el dinero que estaba detenido empieza a moverse: un depósito que no esperabas, una deuda que por fin te pagan, un cliente nuevo, un premio, un beneficio que ni sabías que tenías. Puedes empezar a sentir el cambio antes de terminar las siete noches.</p>
+      <p><strong>Si sigues lo que indican tus cartas, puedes empezar a manifestar 7 mil, 16 mil, hasta 18 mil pesos antes del próximo fin de semana.</strong> A doña Marlene, su patrona le transfirió 43 mil pesos una semana después. Doña Teresa ganó 150 mil pesos en la lotería después de sus siete días.</p>
     </div>
 
     <div class="tranca">
@@ -413,6 +420,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     <div class="oferta">
       <div class="eyebrow" style="text-align:center">Tu Código de la Prosperidad personal</div>
       <h2>7 noches para <em>abrir el camino de tu dinero</em></h2>
+      <p class="promessa" style="color:var(--gold)">7 mil, 16 mil, hasta 18 mil pesos antes del próximo fin de semana.</p>
       <p class="promessa" id="oferta-intro"></p>
       <ul>
         <li><i>🕯️</i><span><strong>Tu Oración de los 3 Arcanos</strong>Hecha con tu nombre, tus tres cartas y tu número de destino. Lista para rezar esta misma noche.</span></li>
@@ -424,9 +432,13 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
         <li><i>🛡️</i><span><strong>Protección contra la envidia y el mal de ojo</strong>Oraciones y técnicas para cuidar lo que llega.</span></li>
         <li><i>💎</i><span><strong>Guía de cristales para la abundancia</strong>Cuáles usar según tu momento y cómo activarlos.</span></li>
       </ul>
-      <p style="text-align:center;margin:14px 0 0">Una consulta con una tarotista profesional en México cuesta de <strong>500 a 1,300 pesos</strong>. Tu Oración personal y todo el Código cuestan menos que una sola consulta:</p>
+      <p style="text-align:center;margin:14px 0 0">En persona, en su consultorio, la sensitiva cobra <strong>500 dólares</strong> por armar el Código de la Prosperidad. Y una consulta con cualquier tarotista en México cuesta de <strong>500 a 1,300 pesos</strong>. Tu Oración personal y todo el Código cuestan menos que una sola consulta:</p>
       <div class="preco"><strong>US$ 14</strong><small>Pago único · Sin suscripción · Acceso inmediato en tu correo</small></div>
-      <div class="reserva" id="reserva">Tu lectura y este precio quedan reservados por <b id="relogio">15:00</b></div>
+      <div class="escassez">
+        <div class="tela esc-v"><video playsinline controls preload="metadata" poster="/es/lectura/v/escassez.jpg" src="/es/lectura/v/escassez.mp4"></video></div>
+        <p>“Esta ventana cósmica no va a quedar abierta para siempre. <strong>Esta página, este precio, esta condición solo existen ahora.</strong> Si sales de esta página, la única opción va a ser en persona, pagando 500 dólares. Si hay lugar.”</p>
+      </div>
+      <div class="reserva" id="reserva">Tu ventana cósmica y este precio se cierran en <b id="relogio">15:00</b></div>
       <button class="gold" type="button" id="btn-oferta">Desbloquear mi Oración de los 3 Arcanos <span>↗</span></button>
       <div class="selos2">
         <div><b>🔒</b><strong>Pago 100% seguro</strong> con Hotmart</div>
@@ -438,6 +450,8 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     </div>
   </div>
 </section>
+
+<div class="barra-esc" id="barra-esc" hidden><span>⏳ Tu ventana se cierra en <b id="relogio2">15:00</b></span><button type="button" id="barra-btn">Activar ahora</button></div>
 
 <!-- E-MAIL -->
 <section class="view t-paso" id="v-email">
@@ -504,6 +518,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     document.getElementById(id).classList.add('ativa');
     window.scrollTo(0,0);
     if(EV[id]) ev(EV[id]);
+    var be=document.getElementById('barra-esc'); if(be&&id!=='v-leitura') be.hidden=true; else if(be&&relOn) be.hidden=false;
     if(id!=='v-mesa'&&id!=='v-leitura') narraTela();
     if(id==='v-vela'){ velaOk=false; velaEl.classList.remove('acesa'); anel.style.strokeDashoffset='540'; document.getElementById('vela-status').textContent='Mantén presionado…'; }
     if(id==='v-espelho') document.getElementById('espelho-txt').textContent=ESPELHO[R.bloqueio]||ESPELHO.alcanza;
@@ -711,15 +726,15 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   var seq=[], atual=0, fimFeito=false, LUG=['pasado','presente','futuro'], FRASE=['Tu pasado…','Tu presente…','Y tu futuro.'];
   function virar(i){ var d=document.querySelectorAll('#reveal-cartas .rc')[i]; if(!d||d.classList.contains('virada')) return; d.classList.add('virada'); sfx('ding',0.45); brilho(d); d.querySelector('b').textContent=CARTAS[seq[i]].nome; document.getElementById('legenda').textContent=FRASE[i]; }
   function tocar(i){
-    atual=i; var c=seq[i];
+    atual=i; var nomeV=i<0?'abertura':CLIPE[seq[i]];
     document.querySelectorAll('#reveal-cartas .rc').forEach(function(d,k){d.classList.toggle('tocando',k===i)});
-    document.getElementById('sens-tit').textContent='La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
-    vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg'; vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4';
+    document.getElementById('sens-tit').textContent=i<0?'La sensitiva vio tu tirada…':'La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
+    vid.poster='/es/lectura/v/'+nomeV+'.jpg'; vid.src='/es/lectura/v/'+nomeV+'.mp4';
     /* com o som ligado, o vídeo já toca com áudio e a música abaixa; se o navegador barrar, cai pro mudo */
     pararVoz(); var comSom=A.on||A.video; vid.muted=!comSom; vid.controls=!!A.video; som.hidden=comSom; if(A.musica) A.musica.volume=0.04;
     var p=vid.play(); if(p&&p.catch) p.catch(function(){
-      if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ som.hidden=false; if(!fimFeito) semVideo(i); }); }
-      else { som.hidden=false; if(!fimFeito) semVideo(i); }
+      if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ som.hidden=false; if(!fimFeito) semVideo(Math.max(0,i)); }); }
+      else { som.hidden=false; if(!fimFeito) semVideo(Math.max(0,i)); }
     });
   }
   function passo(i){ virar(i); tocar(i); }
@@ -743,14 +758,14 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   vid.addEventListener('ended',function(){
     if(A.musica) A.musica.volume=0.22;
     if(A.fimFala&&fimFeito){ var ff=A.fimFala; A.fimFala=null; setTimeout(function(){ narra(ff,null,300); },0); return; }
-    if(!fimFeito&&atual<2) passo(atual+1);
+    if(!fimFeito&&atual<2) passo(atual+1);  /* da abertura (-1) vai pra carta do passado (0) */
     else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
   });
   function ouvirVideo(){ ev('video_som'); A.video=true; pararVoz(); vid.muted=false; vid.controls=true; som.hidden=true; if(A.musica) A.musica.volume=0.04; if(vid.readyState>=1&&!vid.paused){ try{ vid.currentTime=0; }catch(e){} } var p=vid.play(); if(p&&p.catch) p.catch(function(){ vid.muted=true; var q=vid.play(); if(q&&q.catch) q.catch(function(){}); som.hidden=false; }); }
   som.addEventListener('click',function(e){ e.stopPropagation(); ouvirVideo(); });
   vid.parentNode.addEventListener('click',function(){ if(vid.muted||vid.paused) ouvirVideo(); });
   /* depoimentos (Teresa, Marlene, Claudia): um toca por vez, calam a narração e o vídeo da leitura */
-  var depos=[].slice.call(document.querySelectorAll('#depo video'));
+  var depos=[].slice.call(document.querySelectorAll('#depo video, .escassez video'));
   depos.forEach(function(v){
     v.addEventListener('play',function(){ ev('depoimento'); pararVoz(); if(A.musica) A.musica.volume=0.04; vid.pause(); depos.forEach(function(o){ if(o!==v&&!o.paused) o.pause(); }); });
     ['pause','ended'].forEach(function(t){ v.addEventListener(t,function(){ if(A.musica&&depos.every(function(o){return o.paused})) A.musica.volume=0.22; }); });
@@ -772,7 +787,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     preencher(t); seq=t; fimFeito=false;
     box.querySelectorAll('.rc').forEach(function(d,i){ d.addEventListener('click',function(){ if(VIDEO&&fimFeito&&d.classList.contains('virada')) tocar(i); }); });
     if(revelado){ fim(); if(VIDEO){ document.getElementById('sens').hidden=false; tocar(0); } return; }
-    if(VIDEO){ vid.poster='/es/lectura/v/'+CLIPE[t[0]]+'.jpg'; som.hidden=false; document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; narra('revelacion',function(){ setTimeout(function(){passo(0)},300); }); }
+    if(VIDEO){ vid.poster='/es/lectura/v/abertura.jpg'; som.hidden=false; document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; narra('revelacion',function(){ setTimeout(function(){tocar(-1)},300); }); }
     else narra('revelacion',function(){ semVideo(0); });
   }
   function preencher(t){
@@ -802,9 +817,11 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     var fim; try{fim=+sessionStorage.getItem('cp_lectura2_fim')}catch(e){}
     if(!fim){fim=Date.now()+15*60e3; try{sessionStorage.setItem('cp_lectura2_fim',fim)}catch(e){}}
     var el=document.getElementById('relogio');
-    (function tic(){var r=Math.max(0,fim-Date.now()),m=Math.floor(r/60e3),s=Math.floor(r%60e3/1e3);el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;if(r>0)setTimeout(tic,1000);else document.getElementById('reserva').textContent='Tu reserva venció, pero todavía puedes activar tu Código.'})();
+    var el2=document.getElementById('relogio2'); document.getElementById('barra-esc').hidden=false;
+    (function tic(){var r=Math.max(0,fim-Date.now()),m=Math.floor(r/60e3),s=Math.floor(r%60e3/1e3);el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;el2.textContent=el.textContent;if(r>0)setTimeout(tic,1000);else document.getElementById('reserva').textContent='Tu reserva venció, pero todavía puedes activar tu Código.'})();
   }
 
+  document.getElementById('barra-btn').addEventListener('click',function(){ ev('barra_escassez'); document.getElementById('btn-oferta').scrollIntoView({behavior:'smooth',block:'center'}); });
   /* oferta → e-mail → Hotmart com nome, e-mail e UTMs */
   document.getElementById('btn-oferta').addEventListener('click',function(){ev('clique_oferta');ir('v-email'); setTimeout(function(){document.getElementById('email').focus()},300)});
   document.getElementById('btn-checkout').addEventListener('click',function(){
