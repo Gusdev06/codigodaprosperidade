@@ -498,31 +498,36 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   function somDesliga(){ A.on=false; somUI(); if(A.musica) A.musica.pause(); if(A.voz) A.voz.pause(); try{ document.getElementById('vid').muted=true; }catch(e){} }
   bs.addEventListener('click',function(){ A.on?somDesliga():(somLiga(), narraTela()); });
   function duck(b){ if(A.musica) A.musica.volume=b?0.07:0.22; }
-  /* narra uma ou mais falas em sequência; depois() roda no fim (ou na hora, se o som estiver desligado) */
-  function narra(chaves,depois){
-    chaves=[].concat(chaves); var id=++A.fila;
-    if(A.voz){ A.voz.onended=null; A.voz.pause(); }
+  /* canal único de voz: uma fala nova corta a anterior; o atraso evita pedaços de fala quando a pessoa avança rápido */
+  function pararVoz(){ A.fila++; clearTimeout(A.tm); if(A.voz){ A.voz.onended=null; A.voz.onerror=null; A.voz.pause(); A.voz=null; } duck(false); }
+  function videoComSom(){ var v=document.getElementById('vid'); return v&&!v.paused&&!v.muted; }
+  function narra(chaves,depois,atraso){
+    chaves=[].concat(chaves); pararVoz(); var id=A.fila;
     if(!A.on){ if(depois) depois(); return; }
-    (function prox(i){
-      if(id!==A.fila) return;
-      if(i>=chaves.length){ duck(false); if(depois) depois(); return; }
-      var k=chaves[i]; if(!k) return prox(i+1);
-      var alt=null; if(typeof k==='object'){ alt=k.alt; k=k.k; }
-      var au=new Audio('/es/lectura/a/'+k+'.mp3'); A.voz=au; duck(true);
-      au.onended=function(){ prox(i+1); };
-      au.onerror=function(){ if(alt){ chaves[i]=alt; prox(i); } else prox(i+1); };
-      var pr=au.play(); if(pr&&pr.catch) pr.catch(function(){ prox(i+1); });
-    })(0);
+    A.tm=setTimeout(function(){
+      (function prox(i){
+        if(id!==A.fila) return;
+        if(i>=chaves.length){ A.voz=null; duck(false); if(depois) depois(); return; }
+        var k=chaves[i]; if(!k) return prox(i+1);
+        var alt=null; if(typeof k==='object'){ alt=k.alt; k=k.k; }
+        var au=new Audio('/es/lectura/a/'+k+'.mp3'); A.voz=au; duck(true);
+        au.onended=function(){ if(id===A.fila) prox(i+1); };
+        au.onerror=function(){ if(id!==A.fila) return; if(alt){ chaves[i]=alt; prox(i); } else prox(i+1); };
+        var pr=au.play(); if(pr&&pr.catch) pr.catch(function(){ if(id===A.fila) prox(i+1); });
+      })(0);
+    },atraso||0);
   }
-  function sfx(n,vol){ if(!A.on) return; var x=new Audio('/es/lectura/a/'+n+'.mp3'); x.volume=vol||0.5; var p=x.play(); if(p&&p.catch) p.catch(function(){}); }
+  var sfxUlt={};
+  function sfx(n,vol){ if(!A.on) return; var t=Date.now(); if(sfxUlt[n]&&t-sfxUlt[n]<180) return; sfxUlt[n]=t; var x=new Audio('/es/lectura/a/'+n+'.mp3'); x.volume=vol||0.5; var p=x.play(); if(p&&p.catch) p.catch(function(){}); }
   function vibra(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
   function slugNome(n){ return (n||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z]/g,''); }
   var NAR={'v-genero':'paso1','v-idade':'paso2','v-bloqueio':'paso3','v-tentou':'paso5','v-desejo':'paso6','v-manifestar':'paso7','v-dados':'paso8','v-compromisso':'compromiso','v-vela':'vela'};
   function narraTela(){
     var at=document.querySelector('.view.ativa'); if(!at) return; var id=at.id;
-    if(id==='v-home') narra('intro');
-    else if(id==='v-espelho') narra('esp_'+(R.bloqueio||'alcanza'));
-    else if(NAR[id]) narra(NAR[id]);
+    if(id==='v-home') narra('intro',null,300);
+    else if(id==='v-espelho') narra('esp_'+(R.bloqueio||'alcanza'),null,300);
+    else if(NAR[id]) narra(NAR[id],null,300);
+    else pararVoz();
   }
   document.getElementById('ouvir').addEventListener('click',function(){ somLiga(); narra('intro'); });
   document.querySelectorAll('#v-home [data-ir]').forEach(function(b){ b.addEventListener('click',somLiga); });
@@ -607,7 +612,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   /* mesa: 18 cartas viradas, Mezclar, 3 lugares */
   var deck=document.getElementById('deck'),slots=document.querySelectorAll('.slot .lugar'),escolhidas=0;
   function mesa(){
-    narra([{k:'n_'+slugNome(R.nome),alt:'mesa_intro'},'mesa']);
+    narra([{k:'n_'+slugNome(R.nome),alt:'mesa_intro'},'mesa'],null,400);
     document.getElementById('mesa-eyebrow').textContent=R.nome?R.nome+', tus cartas te esperan':'Tus cartas te esperan';
     escolhidas=0; R.escolhidas=[]; document.getElementById('btn-revelar').hidden=true;
     slots.forEach(function(s){s.innerHTML='✦'});
@@ -672,7 +677,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     document.getElementById('sens-tit').textContent='La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
     vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4'; vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg';
     /* com o som ligado, o vídeo já toca com áudio e a música abaixa; se o navegador barrar, cai pro mudo */
-    vid.muted=!A.on; som.hidden=A.on; if(A.on&&A.musica) A.musica.volume=0.04;
+    pararVoz(); vid.muted=!A.on; som.hidden=A.on; if(A.on&&A.musica) A.musica.volume=0.04;
     var p=vid.play(); if(p&&p.catch) p.catch(function(){
       if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ if(!fimFeito) semVideo(i); }); }
       else if(!fimFeito) semVideo(i);
@@ -688,24 +693,27 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     if(VIDEO) document.getElementById('depo').hidden=false;
     relogio(); duck(false);
     if(!fimNarrado){ fimNarrado=true; var sg=document.getElementById('signo-h').textContent.split(': ').pop();
-      setTimeout(function(){ narra(['num'+CP.numero(R),'sig_'+slugNome(sg)]); },600); }
+      A.fimFala=['num'+CP.numero(R),'sig_'+slugNome(sg)];
+      if(!videoComSom()) { narra(A.fimFala,null,600); A.fimFala=null; } }
   }
   var fimNarrado=false;
   /* quando a oferta aparece na tela, a sensitiva chama pro botão (uma vez) */
   (function(){ var of=document.querySelector('.oferta'), dito=false; if(!('IntersectionObserver' in window)||!of) return;
-    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!dito&&fimFeito){ dito=true; narra('oferta'); } }); },{threshold:.35}).observe(of); })();
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!dito&&fimFeito&&!A.voz&&!videoComSom()&&!A.fimFala){ dito=true; narra('oferta',null,500); } }); },{threshold:.35}).observe(of); })();
   function semVideo(de){ for(var k=de;k<3;k++) (function(k){ setTimeout(function(){virar(k)},(k-de)*1500); })(k); setTimeout(fim,(3-de)*1500+300); }
   vid.addEventListener('ended',function(){
     if(A.musica&&A.on) A.musica.volume=0.22;
+    if(A.fimFala&&fimFeito){ var ff=A.fimFala; A.fimFala=null; setTimeout(function(){ narra(ff,null,300); },0); return; }
     if(!fimFeito&&atual<2) passo(atual+1);
     else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
   });
   som.addEventListener('click',function(){ ev('video_som'); somLiga(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; vid.currentTime=0; vid.play(); });
   var vd=document.getElementById('vid-depo'), pd=document.getElementById('play-depo');
-  pd.addEventListener('click',function(){ ev('depoimento'); vid.pause(); pd.hidden=true; vd.controls=true; vd.play(); });
-  vd.addEventListener('play',function(){ vid.pause(); pd.hidden=true; });
+  pd.addEventListener('click',function(){ ev('depoimento'); pararVoz(); if(A.musica) A.musica.volume=0.04; vid.pause(); pd.hidden=true; vd.controls=true; vd.play(); });
+  vd.addEventListener('play',function(){ pararVoz(); if(A.musica&&A.on) A.musica.volume=0.04; vid.pause(); pd.hidden=true; });
+  ['pause','ended'].forEach(function(t){ vd.addEventListener(t,function(){ if(A.musica&&A.on) A.musica.volume=0.22; }); });
   vid.addEventListener('play',function(){ if(!vd.paused) vd.pause(); });
-  document.getElementById('pular').addEventListener('click',function(){ ev('pular_video'); fim(); document.getElementById('corpo').scrollIntoView({behavior:'smooth'}); });
+  document.getElementById('pular').addEventListener('click',function(){ ev('pular_video'); pararVoz(); fim(); document.getElementById('corpo').scrollIntoView({behavior:'smooth'}); });
 
   var revelado=false;
   function revelar(){
@@ -719,7 +727,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
       box.appendChild(d);
     });
     preencher(t); seq=t; fimFeito=false;
-    box.querySelectorAll('.rc').forEach(function(d,i){ d.addEventListener('click',function(){ if(VIDEO&&d.classList.contains('virada')) tocar(i); }); });
+    box.querySelectorAll('.rc').forEach(function(d,i){ d.addEventListener('click',function(){ if(VIDEO&&fimFeito&&d.classList.contains('virada')) tocar(i); }); });
     if(revelado){ fim(); if(VIDEO){ document.getElementById('sens').hidden=false; tocar(0); } return; }
     if(VIDEO){ document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; narra('revelacion',function(){ setTimeout(function(){passo(0)},300); }); }
     else narra('revelacion',function(){ semVideo(0); });
