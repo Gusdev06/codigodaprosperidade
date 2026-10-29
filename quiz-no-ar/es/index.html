@@ -563,7 +563,6 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     else pararVoz();
   }
   document.getElementById('ouvir').addEventListener('click',function(){ somLiga(); narra('intro'); });
-  document.querySelectorAll('#v-home [data-ir]').forEach(function(b){ b.addEventListener('click',somLiga); });
   document.querySelectorAll('.op').forEach(function(b){ b.addEventListener('click',function(){ vibra(12); }); });
   /* faíscas douradas em volta de um elemento */
   function brilho(el){
@@ -578,7 +577,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     var p=Math.min(1,(Date.now()-velaT0)/1600); anel.style.strokeDashoffset=String(540*(1-p));
     if(p>=1){ velaAcende(); return; } velaRaf=requestAnimationFrame(velaTick);
   }
-  function velaDown(e){ if(velaOk) return; e.preventDefault(); somLiga(); velaT0=Date.now(); vibra(10); velaRaf=requestAnimationFrame(velaTick); document.getElementById('vela-status').textContent='Así… respira…'; }
+  function velaDown(e){ if(velaOk) return; e.preventDefault(); velaT0=Date.now(); vibra(10); velaRaf=requestAnimationFrame(velaTick); document.getElementById('vela-status').textContent='Así… respira…'; }
   function velaUp(){ if(velaOk) return; cancelAnimationFrame(velaRaf); anel.style.transition='stroke-dashoffset .4s'; anel.style.strokeDashoffset='540'; setTimeout(function(){anel.style.transition=''},400); document.getElementById('vela-status').textContent='Mantén presionado un poco más…'; }
   function velaAcende(){
     velaOk=true; velaEl.classList.add('acesa'); vibra([30,40,70]); sfx('ding',0.6); brilho(velaEl); ev('vela');
@@ -710,7 +709,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     document.getElementById('sens-tit').textContent='La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
     vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg'; vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4';
     /* com o som ligado, o vídeo já toca com áudio e a música abaixa; se o navegador barrar, cai pro mudo */
-    pararVoz(); vid.muted=!A.on; som.hidden=A.on; if(A.on&&A.musica) A.musica.volume=0.04;
+    pararVoz(); var comSom=A.on||A.video; vid.muted=!comSom; som.hidden=comSom; if(A.on&&A.musica) A.musica.volume=0.04;
     var p=vid.play(); if(p&&p.catch) p.catch(function(){
       if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ som.hidden=false; if(!fimFeito) semVideo(i); }); }
       else { som.hidden=false; if(!fimFeito) semVideo(i); }
@@ -740,7 +739,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     if(!fimFeito&&atual<2) passo(atual+1);
     else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
   });
-  function ouvirVideo(){ ev('video_som'); somLiga(); pararVoz(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; try{ vid.currentTime=0; }catch(e){} var p=vid.play(); if(p&&p.catch) p.catch(function(){ som.hidden=false; }); }
+  function ouvirVideo(){ ev('video_som'); A.video=true; pararVoz(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; try{ vid.currentTime=0; }catch(e){} var p=vid.play(); if(p&&p.catch) p.catch(function(){ som.hidden=false; }); }
   som.addEventListener('click',function(e){ e.stopPropagation(); ouvirVideo(); });
   vid.parentNode.addEventListener('click',function(){ if(vid.muted||vid.paused) ouvirVideo(); });
   /* depoimentos (Teresa, Marlene, Claudia): um toca por vez, calam a narração e o vídeo da leitura */
