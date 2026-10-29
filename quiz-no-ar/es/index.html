@@ -157,6 +157,17 @@
   .faisca{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);pointer-events:none;animation:faisca .9s ease-out forwards}
   @keyframes faisca{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
   .rc{position:relative}
+  .depo-tit{font-family:var(--serif);font-weight:600;font-size:21px;color:var(--gold);text-align:center;margin:22px 0 10px}
+  .carrossel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
+  .carrossel::-webkit-scrollbar{display:none}
+  .dv{flex:0 0 58%;scroll-snap-align:center;text-align:center}
+  .dv .tela{position:relative}
+  .dv b{display:block;font-family:var(--serif);color:var(--ivory);font-size:16px;margin-top:8px}
+  .dv small{color:var(--muted);font-size:12px}
+  .selos2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 0}
+  .selos2 div{border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center;font-size:11px;line-height:1.3;color:var(--muted)}
+  .selos2 b{display:block;font-size:20px;margin-bottom:4px}
+  .selos2 strong{color:var(--ivory)}
   footer{max-width:480px;margin:0 auto;padding:0 18px 30px;font-size:11px;line-height:1.5;color:var(--muted-2);text-align:center}
   [hidden]{display:none !important}
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
@@ -384,11 +395,14 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
       <div class="cadeado">🔒 Se desbloquea al activar tu Código</div>
     </div>
 
-    <div class="cartao" id="depo" hidden>
-      <div class="depo">
-        <div class="tela"><video id="vid-depo" playsinline preload="none" poster="/es/lectura/v/teresa.jpg" src="/es/lectura/v/teresa.mp4"></video><button class="play" type="button" id="play-depo" aria-label="Reproducir">▶</button></div>
-        <div><h3>Doña Teresa</h3><p>58 años. Siguió el Código de la Prosperidad por siete días. Toca para escuchar su historia.</p></div>
+    <div id="depo" hidden>
+      <h3 class="depo-tit">Ellas siguieron el camino de sus cartas</h3>
+      <div class="carrossel">
+        <div class="dv"><div class="tela"><video playsinline preload="none" poster="/es/lectura/v/teresa.jpg" src="/es/lectura/v/teresa.mp4"></video><button class="play" type="button" aria-label="Reproducir">▶</button></div><b>Doña Teresa, 58</b><small>Siete días de Código</small></div>
+        <div class="dv"><div class="tela"><video playsinline preload="none" poster="/es/lectura/v/marlene.jpg" src="/es/lectura/v/marlene.mp4"></video><button class="play" type="button" aria-label="Reproducir">▶</button></div><b>Doña Marlene, 63</b><small>Una semana después</small></div>
+        <div class="dv"><div class="tela"><video playsinline preload="none" poster="/es/lectura/v/claudia.jpg" src="/es/lectura/v/claudia.mp4"></video><button class="play" type="button" aria-label="Reproducir">▶</button></div><b>Claudia, 42</b><small>Diez días después</small></div>
       </div>
+      <p class="micro">Desliza para ver más historias →</p>
     </div>
 
     <div class="oferta">
@@ -409,6 +423,11 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
       <div class="preco"><strong>US$ 14</strong><small>Pago único · Sin suscripción · Acceso inmediato en tu correo</small></div>
       <div class="reserva" id="reserva">Tu lectura y este precio quedan reservados por <b id="relogio">15:00</b></div>
       <button class="gold" type="button" id="btn-oferta">Desbloquear mi Oración de los 3 Arcanos <span>↗</span></button>
+      <div class="selos2">
+        <div><b>🔒</b><strong>Pago 100% seguro</strong> con Hotmart</div>
+        <div><b>🛡️</b><strong>Garantía</strong> de 7 días</div>
+        <div><b>📩</b><strong>Acceso inmediato</strong> en tu correo</div>
+      </div>
       <div class="garantia"><i>🛡️</i><p><strong>Garantía de 7 días.</strong> Si sientes que no es para ti, pides el reembolso dentro de 7 días y te devuelven el 100%.</p></div>
       <p class="pagos">Tarjeta de débito o crédito · Mercado Pago · PayPal<br>En el pago verás el valor en pesos mexicanos, con IVA incluido.</p>
     </div>
@@ -708,11 +727,15 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
   });
   som.addEventListener('click',function(){ ev('video_som'); somLiga(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; vid.currentTime=0; vid.play(); });
-  var vd=document.getElementById('vid-depo'), pd=document.getElementById('play-depo');
-  pd.addEventListener('click',function(){ ev('depoimento'); pararVoz(); if(A.musica) A.musica.volume=0.04; vid.pause(); pd.hidden=true; vd.controls=true; vd.play(); });
-  vd.addEventListener('play',function(){ pararVoz(); if(A.musica&&A.on) A.musica.volume=0.04; vid.pause(); pd.hidden=true; });
-  ['pause','ended'].forEach(function(t){ vd.addEventListener(t,function(){ if(A.musica&&A.on) A.musica.volume=0.22; }); });
-  vid.addEventListener('play',function(){ if(!vd.paused) vd.pause(); });
+  /* depoimentos (Teresa, Marlene, Claudia): um toca por vez, calam a narração e o vídeo da leitura */
+  var depos=[].slice.call(document.querySelectorAll('#depo video'));
+  depos.forEach(function(v){
+    var b=v.parentNode.querySelector('.play');
+    b.addEventListener('click',function(){ ev('depoimento'); b.hidden=true; v.controls=true; v.play(); });
+    v.addEventListener('play',function(){ pararVoz(); if(A.musica&&A.on) A.musica.volume=0.04; vid.pause(); b.hidden=true; depos.forEach(function(o){ if(o!==v&&!o.paused) o.pause(); }); });
+    ['pause','ended'].forEach(function(t){ v.addEventListener(t,function(){ if(A.musica&&A.on&&depos.every(function(o){return o.paused})) A.musica.volume=0.22; }); });
+  });
+  vid.addEventListener('play',function(){ depos.forEach(function(o){ if(!o.paused) o.pause(); }); });
   document.getElementById('pular').addEventListener('click',function(){ ev('pular_video'); pararVoz(); fim(); document.getElementById('corpo').scrollIntoView({behavior:'smooth'}); });
 
   var revelado=false;
