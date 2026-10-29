@@ -161,7 +161,8 @@
   .carrossel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
   .carrossel::-webkit-scrollbar{display:none}
   .dv{flex:0 0 58%;scroll-snap-align:center;text-align:center}
-  .dv .tela{position:relative}
+  .dv .tela{position:relative;cursor:pointer}
+  .dv .play{position:absolute;inset:0;margin:auto;z-index:2;width:58px;height:58px;border-radius:50%;border:0;background:rgba(255,211,77,.94);color:var(--gold-ink);font-size:22px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
   .dv b{display:block;font-family:var(--serif);color:var(--ivory);font-size:16px;margin-top:8px}
   .dv small{color:var(--muted);font-size:12px}
   .selos2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 0}
@@ -731,7 +732,9 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   var depos=[].slice.call(document.querySelectorAll('#depo video'));
   depos.forEach(function(v){
     var b=v.parentNode.querySelector('.play');
-    b.addEventListener('click',function(){ ev('depoimento'); b.hidden=true; v.controls=true; v.play(); });
+    function toca(){ ev('depoimento'); b.hidden=true; v.controls=true; var p=v.play(); if(p&&p.catch) p.catch(function(){ v.muted=true; v.play(); }); }
+    b.addEventListener('click',function(e){ e.stopPropagation(); toca(); });
+    v.parentNode.addEventListener('click',function(){ if(v.paused&&!v.controls) toca(); });
     v.addEventListener('play',function(){ pararVoz(); if(A.musica&&A.on) A.musica.volume=0.04; vid.pause(); b.hidden=true; depos.forEach(function(o){ if(o!==v&&!o.paused) o.pause(); }); });
     ['pause','ended'].forEach(function(t){ v.addEventListener(t,function(){ if(A.musica&&A.on&&depos.every(function(o){return o.paused})) A.musica.volume=0.22; }); });
   });
