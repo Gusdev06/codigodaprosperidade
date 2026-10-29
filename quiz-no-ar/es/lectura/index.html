@@ -137,6 +137,26 @@
   .borrado{filter:blur(6px);user-select:none;pointer-events:none}
   .cadeado{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.04em}
   .promessa{font-family:var(--serif);font-size:20px;line-height:1.35;color:var(--ivory);text-align:center;margin:10px 0}
+  .topo{position:relative}
+  .btn-som{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--plum-2);color:var(--ivory);font-size:18px}
+  .ouvir{display:inline-flex;align-items:center;gap:8px;margin:10px auto 0;border:1px solid var(--gold-soft);background:none;color:var(--gold-soft);border-radius:999px;padding:9px 16px;font-size:14px}
+  .energia{margin:8px 34px 6px;text-align:center}
+  .energia span{display:block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:6px}
+  .energia div{height:8px;border-radius:8px;background:var(--plum-3);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line-soft)}
+  .energia i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--gold-2),var(--gold));box-shadow:0 0 12px rgba(255,211,77,.7);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+  .vela-wrap{display:flex;justify-content:center;margin:26px 0 8px}
+  .vela{position:relative;width:180px;height:180px;border-radius:50%;border:0;background:radial-gradient(circle at 50% 60%,#3a2142,#22132a);touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  .vela svg{position:absolute;inset:0;transform:rotate(-90deg)}
+  .vela .anel{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;stroke-dasharray:540;stroke-dashoffset:540;filter:drop-shadow(0 0 6px rgba(255,211,77,.8))}
+  .cera{position:absolute;left:50%;bottom:38px;width:34px;height:70px;margin-left:-17px;border-radius:6px 6px 4px 4px;background:linear-gradient(90deg,#efe3cf,#fff8ec 45%,#e2d2b8)}
+  .cera::before{content:'';position:absolute;left:50%;top:-9px;width:2px;height:10px;margin-left:-1px;background:#3b2a1e}
+  .chama{position:absolute;left:50%;bottom:112px;width:18px;height:30px;margin-left:-9px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff6c8,#ffd34d 45%,#ff8a1f 80%,transparent 82%);opacity:0;transform:scale(.3);transform-origin:50% 100%;transition:opacity .4s,transform .5s}
+  .vela.acesa .chama{opacity:1;transform:scale(1);animation:tremula 1.2s ease-in-out infinite alternate}
+  .vela.acesa{box-shadow:0 0 70px 10px rgba(255,190,70,.35)}
+  @keyframes tremula{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.08,1.15) rotate(2deg)}}
+  .faisca{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);pointer-events:none;animation:faisca .9s ease-out forwards}
+  @keyframes faisca{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+  .rc{position:relative}
   footer{max-width:480px;margin:0 auto;padding:0 18px 30px;font-size:11px;line-height:1.5;color:var(--muted-2);text-align:center}
   [hidden]{display:none !important}
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
@@ -153,7 +173,7 @@
 fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');</script>
 </head>
 <body>
-<div class="topo"><b>✦</b> Código de la Prosperidad</div>
+<div class="topo"><b>✦</b> Código de la Prosperidad<button class="btn-som" type="button" id="btn-som" aria-label="Activar sonido">🔇</button></div>
 <main>
 
 <!-- HOME -->
@@ -165,6 +185,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   <h1>Elige tus 3 cartas y descubre <em>el bloqueo que no deja llegar tu dinero.</em></h1>
   <button class="gold" type="button" data-ir="v-genero">Empezar mi lectura gratis <span>↗</span></button>
   <p class="micro">1 minuto · Con tu nombre y tu fecha de nacimiento</p>
+  <div style="text-align:center"><button class="ouvir" type="button" id="ouvir">🔊 Escuchar a la sensitiva</button></div>
   <div class="lista">
     <h2>Lo que tus cartas <em>te van a mostrar</em></h2>
     <div class="item"><b>✦</b><p><strong>Qué está frenando tu dinero</strong> y por qué el mismo problema se repite.</p></div>
@@ -182,7 +203,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 <!-- PASSOS -->
 <section class="view t-paso" id="v-genero">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 1 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:10%"></i></div></div>
   <h1>Para que tu lectura hable contigo, <em>tú eres…</em></h1>
   <div class="opcoes" data-campo="genero">
     <button class="op" type="button" data-v="m"><i>👩</i>Mujer</button>
@@ -192,7 +213,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-idade">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 2 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:20%"></i></div></div>
   <h1>¿Cuál es <em>tu edad?</em></h1>
   <div class="opcoes" data-campo="idade">
     <button class="op" type="button" data-v="18-29"><i>🌱</i>18 a 29 años</button>
@@ -204,7 +225,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-bloqueio">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 3 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:30%"></i></div></div>
   <h1>Cuando el dinero entra, <em>¿qué pasa casi siempre?</em></h1>
   <div class="opcoes" data-campo="bloqueio">
     <button class="op" type="button" data-v="fuga"><i>💸</i>Se va tan rápido como llegó.</button>
@@ -216,7 +237,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-espelho">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 4 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:40%"></i></div></div>
   <div class="espelho"><p id="espelho-txt"></p></div>
   <h1>¿Te has preguntado por qué otros <em>trabajan menos y tienen más?</em></h1>
   <div class="opcoes" data-campo="espelho">
@@ -227,7 +248,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-tentou">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 5 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:50%"></i></div></div>
   <h1>¿Ya intentaste algo para <em>cambiar tu suerte?</em></h1>
   <div class="opcoes" data-campo="tentou">
     <button class="op" type="button" data-v="oracao"><i>🙏</i>Oraciones y velas, pero nada cambió.</button>
@@ -239,7 +260,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-desejo">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 6 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:60%"></i></div></div>
   <h1>Si el dinero dejara de ser un problema, <em>¿qué harías primero?</em></h1>
   <div class="opcoes" data-campo="desejo">
     <button class="op" type="button" data-v="deudas"><i>🧾</i>Pagar todas mis deudas.</button>
@@ -251,7 +272,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-manifestar">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 7 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:70%"></i></div></div>
   <h1>¿Qué quieres que llegue <em>en los próximos 30 días?</em></h1>
   <p class="sub">Puedes marcar varias.</p>
   <div class="opcoes" id="multi">
@@ -266,7 +287,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-dados">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">PASO 8 DE 8</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:80%"></i></div></div>
   <h1>¿Cómo te llamas y <em>cuándo naciste?</em></h1>
   <p class="sub">Con tu fecha calculo tu número de destino y tu signo.</p>
   <label class="campo" for="nome">Tu primer nombre</label>
@@ -284,13 +305,21 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 
 <section class="view t-paso" id="v-compromisso">
   <button class="volver" type="button" data-volver aria-label="Volver">←</button>
-  <div class="paso">ANTES DE ELEGIR TUS CARTAS</div>
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:90%"></i></div></div>
   <h1 id="compromisso-h"></h1>
   <p class="sub">Lo que tus cartas revelen funciona para quien lo pone en práctica con fe.</p>
   <div class="opcoes" data-campo="compromisso">
     <button class="op" type="button" data-v="si"><i>🙏</i>Sí, me comprometo.</button>
     <button class="op" type="button" data-v="miedo"><i>🤍</i>Sí, aunque tengo miedo de decepcionarme otra vez.</button>
   </div>
+</section>
+
+<section class="view" id="v-vela">
+  <div class="energia"><span>Energía de tu lectura</span><div><i style="width:100%"></i></div></div>
+  <h1 style="text-align:center">Enciende <em>tu vela</em></h1>
+  <p class="sub">Mantén tu dedo sobre la vela hasta que se encienda.</p>
+  <div class="vela-wrap"><button class="vela" type="button" id="vela" aria-label="Mantén presionado para encender la vela"><svg viewBox="0 0 180 180"><circle class="anel" id="anel" cx="90" cy="90" r="86"/></svg><span class="cera"></span><span class="chama"></span></button></div>
+  <p class="status" id="vela-status">Mantén presionado…</p>
 </section>
 
 <!-- MESA -->
@@ -442,6 +471,8 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     document.getElementById(id).classList.add('ativa');
     window.scrollTo(0,0);
     if(EV[id]) ev(EV[id]);
+    if(id!=='v-mesa'&&id!=='v-leitura') narraTela();
+    if(id==='v-vela'){ velaOk=false; velaEl.classList.remove('acesa'); anel.style.strokeDashoffset='540'; document.getElementById('vela-status').textContent='Mantén presionado…'; }
     if(id==='v-espelho') document.getElementById('espelho-txt').textContent=ESPELHO[R.bloqueio]||ESPELHO.alcanza;
     if(id==='v-compromisso') document.getElementById('compromisso-h').innerHTML=R.nome+', ¿te comprometes a seguir <em>lo que digan tus cartas?</em>';
     if(id==='v-analise') analise();
@@ -452,7 +483,75 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   document.querySelectorAll('[data-volver]').forEach(function(b){b.addEventListener('click',function(){var p=historico.pop(); if(p) ir(p,true);})});
   function a(t){return R.genero==='h'?t.replace(/@/g,'o'):t.replace(/@/g,'a')}
 
-  var SEQ={'genero':'v-idade','idade':'v-bloqueio','bloqueio':'v-espelho','espelho':'v-tentou','tentou':'v-desejo','desejo':'v-manifestar','compromisso':'v-analise'};
+  /* ===== SOM: narração da sensitiva (ElevenLabs "Matilda"), música ambiente e efeitos.
+     Só liga depois de um toque (política de autoplay). Botão 🔊/🔇 fixo no topo. Arquivos em /es/lectura/a/. ===== */
+  var A={on:false,musica:null,voz:null,fila:0};
+  var bs=document.getElementById('btn-som');
+  function somUI(){ bs.textContent=A.on?'🔊':'🔇'; bs.setAttribute('aria-label',A.on?'Silenciar':'Activar sonido'); }
+  function somLiga(){
+    if(A.on) return; A.on=true; somUI();
+    if(!A.musica){ A.musica=new Audio('/es/lectura/a/musica.mp3'); A.musica.loop=true; }
+    A.musica.volume=0.22; var p=A.musica.play(); if(p&&p.catch) p.catch(function(){});
+    try{ var vv=document.getElementById('vid'); if(vv&&!vv.paused){ vv.muted=false; document.getElementById('som').hidden=true; } }catch(e){}
+    ev('som_on');
+  }
+  function somDesliga(){ A.on=false; somUI(); if(A.musica) A.musica.pause(); if(A.voz) A.voz.pause(); try{ document.getElementById('vid').muted=true; }catch(e){} }
+  bs.addEventListener('click',function(){ A.on?somDesliga():(somLiga(), narraTela()); });
+  function duck(b){ if(A.musica) A.musica.volume=b?0.07:0.22; }
+  /* narra uma ou mais falas em sequência; depois() roda no fim (ou na hora, se o som estiver desligado) */
+  function narra(chaves,depois){
+    chaves=[].concat(chaves); var id=++A.fila;
+    if(A.voz){ A.voz.onended=null; A.voz.pause(); }
+    if(!A.on){ if(depois) depois(); return; }
+    (function prox(i){
+      if(id!==A.fila) return;
+      if(i>=chaves.length){ duck(false); if(depois) depois(); return; }
+      var k=chaves[i]; if(!k) return prox(i+1);
+      var alt=null; if(typeof k==='object'){ alt=k.alt; k=k.k; }
+      var au=new Audio('/es/lectura/a/'+k+'.mp3'); A.voz=au; duck(true);
+      au.onended=function(){ prox(i+1); };
+      au.onerror=function(){ if(alt){ chaves[i]=alt; prox(i); } else prox(i+1); };
+      var pr=au.play(); if(pr&&pr.catch) pr.catch(function(){ prox(i+1); });
+    })(0);
+  }
+  function sfx(n,vol){ if(!A.on) return; var x=new Audio('/es/lectura/a/'+n+'.mp3'); x.volume=vol||0.5; var p=x.play(); if(p&&p.catch) p.catch(function(){}); }
+  function vibra(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
+  function slugNome(n){ return (n||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z]/g,''); }
+  var NAR={'v-genero':'paso1','v-idade':'paso2','v-bloqueio':'paso3','v-tentou':'paso5','v-desejo':'paso6','v-manifestar':'paso7','v-dados':'paso8','v-compromisso':'compromiso','v-vela':'vela'};
+  function narraTela(){
+    var at=document.querySelector('.view.ativa'); if(!at) return; var id=at.id;
+    if(id==='v-home') narra('intro');
+    else if(id==='v-espelho') narra('esp_'+(R.bloqueio||'alcanza'));
+    else if(NAR[id]) narra(NAR[id]);
+  }
+  document.getElementById('ouvir').addEventListener('click',function(){ somLiga(); narra('intro'); });
+  document.querySelectorAll('#v-home [data-ir]').forEach(function(b){ b.addEventListener('click',somLiga); });
+  document.querySelectorAll('.op').forEach(function(b){ b.addEventListener('click',function(){ vibra(12); }); });
+  /* faíscas douradas em volta de um elemento */
+  function brilho(el){
+    for(var i=0;i<14;i++){ var f=document.createElement('i'); f.className='faisca'; var ang=Math.random()*Math.PI*2, r=40+Math.random()*50;
+      f.style.left='50%'; f.style.top='45%'; f.style.setProperty('--x',Math.cos(ang)*r+'px'); f.style.setProperty('--y',Math.sin(ang)*r+'px');
+      el.appendChild(f); setTimeout((function(x){return function(){x.remove()}})(f),950); }
+  }
+
+  /* ===== VELA: segurar ~1,6 s acende ===== */
+  var velaEl=document.getElementById('vela'), anel=document.getElementById('anel'), velaT0=0, velaRaf=0, velaOk=false;
+  function velaTick(){
+    var p=Math.min(1,(Date.now()-velaT0)/1600); anel.style.strokeDashoffset=String(540*(1-p));
+    if(p>=1){ velaAcende(); return; } velaRaf=requestAnimationFrame(velaTick);
+  }
+  function velaDown(e){ if(velaOk) return; e.preventDefault(); somLiga(); velaT0=Date.now(); vibra(10); velaRaf=requestAnimationFrame(velaTick); document.getElementById('vela-status').textContent='Así… respira…'; }
+  function velaUp(){ if(velaOk) return; cancelAnimationFrame(velaRaf); anel.style.transition='stroke-dashoffset .4s'; anel.style.strokeDashoffset='540'; setTimeout(function(){anel.style.transition=''},400); document.getElementById('vela-status').textContent='Mantén presionado un poco más…'; }
+  function velaAcende(){
+    velaOk=true; velaEl.classList.add('acesa'); vibra([30,40,70]); sfx('ding',0.6); brilho(velaEl); ev('vela');
+    document.getElementById('vela-status').innerHTML='<strong>Tu vela está encendida.</strong>';
+    setTimeout(function(){ ir('v-analise'); },1400);
+  }
+  velaEl.addEventListener('pointerdown',velaDown);
+  ['pointerup','pointerleave','pointercancel'].forEach(function(t){ velaEl.addEventListener(t,velaUp); });
+  velaEl.addEventListener('contextmenu',function(e){e.preventDefault()});
+
+  var SEQ={'genero':'v-idade','idade':'v-bloqueio','bloqueio':'v-espelho','espelho':'v-tentou','tentou':'v-desejo','desejo':'v-manifestar','compromisso':'v-vela'};
   document.querySelectorAll('.opcoes[data-campo]').forEach(function(g){
     var campo=g.getAttribute('data-campo');
     g.querySelectorAll('.op').forEach(function(b){
@@ -508,6 +607,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   /* mesa: 18 cartas viradas, Mezclar, 3 lugares */
   var deck=document.getElementById('deck'),slots=document.querySelectorAll('.slot .lugar'),escolhidas=0;
   function mesa(){
+    narra([{k:'n_'+slugNome(R.nome),alt:'mesa_intro'},'mesa']);
     document.getElementById('mesa-eyebrow').textContent=R.nome?R.nome+', tus cartas te esperan':'Tus cartas te esperan';
     escolhidas=0; R.escolhidas=[]; document.getElementById('btn-revelar').hidden=true;
     slots.forEach(function(s){s.innerHTML='✦'});
@@ -527,7 +627,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     var b=e.currentTarget; if(escolhidas>=3||b.classList.contains('usada')) return;
     var verso=b.querySelector('img').getAttribute('src');
     b.classList.add('usada');
-    slots[escolhidas].innerHTML='<img src="'+verso+'" alt="">';
+    slots[escolhidas].innerHTML='<img src="'+verso+'" alt="">'; sfx('whoosh',0.35); vibra(15);
     R.escolhidas.push(verso); escolhidas++; salva(); status();
     if(escolhidas===3){ setTimeout(function(){document.getElementById('btn-revelar').hidden=false; document.getElementById('btn-revelar').scrollIntoView({behavior:'smooth',block:'center'})},500); }
   }
@@ -535,6 +635,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     if(escolhidas>=3) return;
     var bs=[].slice.call(deck.children);
     bs.forEach(function(b){b.style.setProperty('--dx',(Math.random()*60-30)+'px');b.style.setProperty('--rot',(Math.random()*30-15)+'deg')});
+    sfx('whoosh',0.45); vibra(15);
     deck.classList.remove('mezclando'); void deck.offsetWidth; deck.classList.add('mezclando');
     setTimeout(function(){bs.sort(function(){return Math.random()-.5}).forEach(function(b){deck.appendChild(b)})},250);
   });
@@ -564,13 +665,18 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   /* revelação sincronizada: vira a carta i e toca o trecho dela; no fim do trecho vira a próxima.
      Sem som de início (autoplay); "Toca para escuchar" liga o áudio e recomeça a carta atual. "Ver toda mi lectura" pula. */
   var seq=[], atual=0, fimFeito=false, LUG=['pasado','presente','futuro'], FRASE=['Tu pasado…','Tu presente…','Y tu futuro.'];
-  function virar(i){ var d=document.querySelectorAll('#reveal-cartas .rc')[i]; if(!d) return; d.classList.add('virada'); d.querySelector('b').textContent=CARTAS[seq[i]].nome; document.getElementById('legenda').textContent=FRASE[i]; }
+  function virar(i){ var d=document.querySelectorAll('#reveal-cartas .rc')[i]; if(!d||d.classList.contains('virada')) return; d.classList.add('virada'); sfx('ding',0.45); brilho(d); d.querySelector('b').textContent=CARTAS[seq[i]].nome; document.getElementById('legenda').textContent=FRASE[i]; }
   function tocar(i){
     atual=i; var c=seq[i];
     document.querySelectorAll('#reveal-cartas .rc').forEach(function(d,k){d.classList.toggle('tocando',k===i)});
     document.getElementById('sens-tit').textContent='La sensitiva te explica tu carta del '+LUG[i]+' ('+(i+1)+' de 3)';
     vid.src='/es/lectura/v/'+CLIPE[c]+'.mp4'; vid.poster='/es/lectura/v/'+CLIPE[c]+'.jpg';
-    var p=vid.play(); if(p&&p.catch) p.catch(function(){ if(!fimFeito) semVideo(i); });
+    /* com o som ligado, o vídeo já toca com áudio e a música abaixa; se o navegador barrar, cai pro mudo */
+    vid.muted=!A.on; som.hidden=A.on; if(A.on&&A.musica) A.musica.volume=0.04;
+    var p=vid.play(); if(p&&p.catch) p.catch(function(){
+      if(!vid.muted){ vid.muted=true; som.hidden=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){ if(!fimFeito) semVideo(i); }); }
+      else if(!fimFeito) semVideo(i);
+    });
   }
   function passo(i){ virar(i); tocar(i); }
   function fim(){
@@ -580,14 +686,21 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     document.getElementById('pular').hidden=true;
     document.getElementById('corpo').hidden=false; ev('oferta');
     if(VIDEO) document.getElementById('depo').hidden=false;
-    relogio();
+    relogio(); duck(false);
+    if(!fimNarrado){ fimNarrado=true; var sg=document.getElementById('signo-h').textContent.split(': ').pop();
+      setTimeout(function(){ narra(['num'+CP.numero(R),'sig_'+slugNome(sg)]); },600); }
   }
+  var fimNarrado=false;
+  /* quando a oferta aparece na tela, a sensitiva chama pro botão (uma vez) */
+  (function(){ var of=document.querySelector('.oferta'), dito=false; if(!('IntersectionObserver' in window)||!of) return;
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!dito&&fimFeito){ dito=true; narra('oferta'); } }); },{threshold:.35}).observe(of); })();
   function semVideo(de){ for(var k=de;k<3;k++) (function(k){ setTimeout(function(){virar(k)},(k-de)*1500); })(k); setTimeout(fim,(3-de)*1500+300); }
   vid.addEventListener('ended',function(){
+    if(A.musica&&A.on) A.musica.volume=0.22;
     if(!fimFeito&&atual<2) passo(atual+1);
     else { fim(); document.getElementById('sens-tit').textContent='Toca una carta si quieres escucharla otra vez'; }
   });
-  som.addEventListener('click',function(){ ev('video_som'); vid.muted=false; som.hidden=true; vid.currentTime=0; vid.play(); });
+  som.addEventListener('click',function(){ ev('video_som'); somLiga(); vid.muted=false; som.hidden=true; if(A.musica) A.musica.volume=0.04; vid.currentTime=0; vid.play(); });
   var vd=document.getElementById('vid-depo'), pd=document.getElementById('play-depo');
   pd.addEventListener('click',function(){ ev('depoimento'); vid.pause(); pd.hidden=true; vd.controls=true; vd.play(); });
   vd.addEventListener('play',function(){ vid.pause(); pd.hidden=true; });
@@ -608,8 +721,8 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     preencher(t); seq=t; fimFeito=false;
     box.querySelectorAll('.rc').forEach(function(d,i){ d.addEventListener('click',function(){ if(VIDEO&&d.classList.contains('virada')) tocar(i); }); });
     if(revelado){ fim(); if(VIDEO){ document.getElementById('sens').hidden=false; tocar(0); } return; }
-    if(VIDEO){ document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; setTimeout(function(){passo(0)},600); }
-    else semVideo(0);
+    if(VIDEO){ document.getElementById('sens').hidden=false; document.getElementById('pular').hidden=false; narra('revelacion',function(){ setTimeout(function(){passo(0)},300); }); }
+    else narra('revelacion',function(){ semVideo(0); });
   }
   function preencher(t){
     var n=reduz(String(R.dia)+String(R.mes)+String(R.ano)), s=signo(R.dia,R.mes);

@@ -42,6 +42,13 @@
   .data{display:grid;grid-template-columns:1fr 1.5fr 1.2fr;gap:8px}
   .erro{color:#ffb3c9;font-size:14px;min-height:18px;margin:8px 0 0}
   .ok{color:var(--gold-soft);font-size:13px;text-align:center;min-height:16px;margin:6px 0 0}
+  .noites{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:12px 0 4px}
+  .noite{aspect-ratio:1/1.6;border-radius:12px;border:1px solid var(--line);background:var(--plum-3);color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:6px 0;cursor:pointer;font-family:var(--sans)}
+  .noite span{font-size:22px;filter:grayscale(1) opacity(.45);margin-bottom:4px}
+  .noite.on{border-color:var(--gold);background:#3b2440;color:var(--gold)}
+  .noite.on span{filter:none;animation:luz 1.4s ease-in-out infinite alternate}
+  @keyframes luz{to{transform:scale(1.12)}}
+  .hoje{border:1px dashed var(--gold-soft);border-radius:12px;padding:10px;text-align:center;color:var(--gold-soft);font-size:14px;margin:12px 0 0}
   [hidden]{display:none !important}
 </style>
 </head>
@@ -102,6 +109,13 @@
     <ol id="ritual"></ol>
   </div>
 
+  <div class="bloco">
+    <h2>Tus 7 noches</h2>
+    <p>Cada noche que reces tu oración, toca tu vela para encenderla.</p>
+    <div class="noites" id="noites"></div>
+    <p class="hoje" id="hoje" hidden></p>
+  </div>
+
   <a class="gold" href="/es/acceso/7MwoFzqQPGec/">Ver todo mi material ↗</a>
   <a class="outline" href="#" id="refazer">¿No son tus datos? Formar de nuevo</a>
 </section>
@@ -124,6 +138,15 @@
     document.getElementById('oracao').innerHTML=CP.oracion(r).map(function(l){return '<p>'+l+'</p>'}).join('');
     document.getElementById('dias-intro').textContent='Tu número de destino es el '+CP.numero(r)+'. En estos días tu energía de dinero está más abierta: reza tu oración siete veces.';
     document.getElementById('dias').innerHTML=CP.dias(r).map(function(x){return '<div><b>'+x.dia+'</b>'+x.txt.replace(/^\d+ /,'')+'</div>'}).join('');
+    /* 7 noites: marca no aparelho (localStorage cp_noches) */
+    var on=[]; try{ on=JSON.parse(localStorage.getItem('cp_noches')||'[]'); }catch(e){}
+    var box=document.getElementById('noites'); box.innerHTML='';
+    for(var k=1;k<=7;k++){ (function(k){ var b=document.createElement('button'); b.type='button'; b.className='noite'+(on.indexOf(k)>=0?' on':''); b.innerHTML='<span>🕯️</span>'+k;
+      b.addEventListener('click',function(){ var i=on.indexOf(k); if(i>=0) on.splice(i,1); else { on.push(k); try{ if(navigator.vibrate) navigator.vibrate(20); }catch(e){} }
+        b.classList.toggle('on'); try{ localStorage.setItem('cp_noches',JSON.stringify(on)); }catch(e){} });
+      box.appendChild(b); })(k); }
+    var h=new Date(), ab=CP.dias(r,h).filter(function(x){return x.dia===h.getDate()&&x.mes===h.getMonth()});
+    var hj=document.getElementById('hoje'); hj.hidden=!ab.length; if(ab.length) hj.innerHTML='✨ <strong>Hoy es uno de tus días de apertura.</strong> Reza tu oración siete veces esta noche.';
     document.getElementById('ritual').innerHTML=CP.ritual(r).map(function(l){return '<li>'+l+'</li>'}).join('');
   }
   document.getElementById('copiar').addEventListener('click',function(){
