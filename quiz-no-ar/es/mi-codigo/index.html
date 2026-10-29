@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tu Oración de los 3 Arcanos</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1D1022">
+<!-- Entrega personalizada do funil B (29/10/2026): lê os dados que /es/lectura/ salvou no aparelho (localStorage cp_codigo);
+     em outro aparelho, pede nome, data e duas respostas e monta igual. Gerador em /es/lectura/codigo.js. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--plum:#1D1022;--plum-2:#2C1932;--plum-3:#3A2142;--line:#57365C;--line-soft:#43294A;--ivory:#F8F1F5;--muted:#C7ABC1;--muted-2:#AE93A9;--gold:#FFD34D;--gold-2:#FFE07A;--gold-soft:#F2D58C;--gold-ink:#2A1607;--serif:Fraunces,Georgia,serif;--sans:'Space Grotesk','Segoe UI',system-ui,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(120% 60% at 50% 0%,#2a1630 0%,var(--plum) 60%);background-color:var(--plum);color:var(--ivory);font-family:var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh}
+  .topo{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 16px;border-bottom:1px solid var(--line-soft);font-family:var(--serif);font-size:20px}
+  .topo b{color:var(--gold)}
+  main{max-width:480px;margin:0 auto;padding:18px 18px 48px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,8vw,36px);line-height:1.12;margin:8px 0 12px;text-align:center}
+  h1 em,h2 em{font-style:normal;color:var(--gold)}
+  h2{font-family:var(--serif);font-weight:600;font-size:24px;margin:0 0 10px;color:var(--gold)}
+  p,li{font-size:16px;line-height:1.6;color:var(--muted)}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);text-align:center}
+  .cartas{display:flex;justify-content:center;gap:12px;margin:16px 0}
+  .cartas div{width:30%;max-width:110px;text-align:center}
+  .cartas img{width:100%;border-radius:9px;box-shadow:0 0 18px rgba(255,211,77,.35)}
+  .cartas small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+  .cartas b{display:block;font-family:var(--serif);font-size:13px;color:var(--gold)}
+  .bloco{background:var(--plum-2);border:1px solid var(--line);border-radius:18px;padding:20px 18px;margin:16px 0}
+  .oracao p{font-family:var(--serif);font-size:19px;line-height:1.55;color:var(--ivory);margin:0 0 12px}
+  .dias{display:grid;gap:10px;margin:10px 0 0}
+  .dias div{display:flex;align-items:center;gap:12px;background:var(--plum-3);border-radius:14px;padding:12px 14px;color:var(--ivory);font-size:17px}
+  .dias b{font-family:var(--serif);font-size:30px;color:var(--gold);min-width:42px;text-align:center}
+  ol{padding-left:20px;margin:8px 0 0}
+  ol li{margin:8px 0;color:var(--ivory)}
+  .gold{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:54px;margin-top:16px;border:0;border-radius:999px;background:linear-gradient(90deg,var(--gold-2),var(--gold) 55%,#F2B93B);color:var(--gold-ink);font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+  .outline{display:block;text-align:center;margin:12px 0 0;padding:14px;border:1px solid var(--line);border-radius:999px;color:var(--ivory);text-decoration:none;font-size:14px}
+  label{display:block;font-size:14px;color:var(--muted);margin:14px 0 6px}
+  input,select{width:100%;font-family:var(--sans);font-size:17px;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:var(--plum-2);color:var(--ivory)}
+  .data{display:grid;grid-template-columns:1fr 1.5fr 1.2fr;gap:8px}
+  .erro{color:#ffb3c9;font-size:14px;min-height:18px;margin:8px 0 0}
+  .ok{color:var(--gold-soft);font-size:13px;text-align:center;min-height:16px;margin:6px 0 0}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="topo"><b>✦</b> Código de la Prosperidad</div>
+<main>
+
+<section id="form" hidden>
+  <div class="eyebrow">Tu Código personal</div>
+  <h1>Vamos a formar <em>tu Oración de los 3 Arcanos</em></h1>
+  <p style="text-align:center">Escribe los mismos datos que usaste en tu lectura.</p>
+  <label for="f-nome">Tu primer nombre</label>
+  <input id="f-nome" autocomplete="given-name" maxlength="30" placeholder="Por ejemplo: Guadalupe">
+  <label>Tu fecha de nacimiento</label>
+  <div class="data">
+    <select id="f-dia" aria-label="Día"><option value="">Día</option></select>
+    <select id="f-mes" aria-label="Mes"><option value="">Mes</option></select>
+    <select id="f-ano" aria-label="Año"><option value="">Año</option></select>
+  </div>
+  <label for="f-bloq">Cuando el dinero entra, ¿qué pasa casi siempre?</label>
+  <select id="f-bloq">
+    <option value="fuga">Se va tan rápido como llegó.</option>
+    <option value="imprevisto">Siempre aparece un gasto o una emergencia.</option>
+    <option value="alcanza" selected>Trabajo muchísimo y nunca alcanza.</option>
+    <option value="estancado">Ni siquiera llega. Siento que no avanzo.</option>
+  </select>
+  <label for="f-des">Si el dinero dejara de ser un problema, ¿qué harías primero?</label>
+  <select id="f-des">
+    <option value="deudas">Pagar todas mis deudas.</option>
+    <option value="casa">Tener mi casa propia.</option>
+    <option value="familia">Darle tranquilidad a mi familia.</option>
+    <option value="libertad">Dejar de vivir con angustia a fin de mes.</option>
+  </select>
+  <p class="erro" id="f-erro"></p>
+  <button class="gold" type="button" id="f-ok">Formar mi oración</button>
+</section>
+
+<section id="codigo" hidden>
+  <div class="eyebrow">Tu Código de la Prosperidad personal</div>
+  <h1 id="titulo"></h1>
+  <div class="cartas" id="cartas"></div>
+
+  <div class="bloco oracao">
+    <h2>Tu Oración de los 3 Arcanos</h2>
+    <div id="oracao"></div>
+    <button class="gold" type="button" id="copiar">Copiar mi oración</button>
+    <p class="ok" id="copiado"></p>
+  </div>
+
+  <div class="bloco">
+    <h2>Tus 3 días de apertura</h2>
+    <p id="dias-intro"></p>
+    <div class="dias" id="dias"></div>
+  </div>
+
+  <div class="bloco">
+    <h2>El ritual de las 7 noches</h2>
+    <ol id="ritual"></ol>
+  </div>
+
+  <a class="gold" href="/es/acceso/7MwoFzqQPGec/">Ver todo mi material ↗</a>
+  <a class="outline" href="#" id="refazer">¿No son tus datos? Formar de nuevo</a>
+</section>
+
+</main>
+<script src="/es/lectura/codigo.js"></script>
+<script>
+(function(){
+  var IMG={torre:'torre',louco:'louco',roda:'roda'}, LUG=['Pasado','Presente','Futuro'];
+  var sd=document.getElementById('f-dia'),sm=document.getElementById('f-mes'),sa=document.getElementById('f-ano');
+  for(var d=1;d<=31;d++) sd.add(new Option(d,d));
+  CP.MESES.forEach(function(m,i){sm.add(new Option(m.charAt(0).toUpperCase()+m.slice(1),i+1))});
+  var ya=new Date().getFullYear(); for(var y=ya-18;y>=ya-95;y--) sa.add(new Option(y,y));
+
+  function mostra(r){
+    document.getElementById('form').hidden=true; document.getElementById('codigo').hidden=false; window.scrollTo(0,0);
+    document.getElementById('titulo').innerHTML=r.nome+', <em>esta es tu oración</em>';
+    var t=CP.tiragem(r);
+    document.getElementById('cartas').innerHTML=t.map(function(c,i){return '<div><img src="/es/cartas/'+IMG[c]+'.png" alt="'+CP.CARTAS[c]+'"><small>'+LUG[i]+'</small><b>'+CP.CARTAS[c]+'</b></div>'}).join('');
+    document.getElementById('oracao').innerHTML=CP.oracion(r).map(function(l){return '<p>'+l+'</p>'}).join('');
+    document.getElementById('dias-intro').textContent='Tu número de destino es el '+CP.numero(r)+'. En estos días tu energía de dinero está más abierta: reza tu oración siete veces.';
+    document.getElementById('dias').innerHTML=CP.dias(r).map(function(x){return '<div><b>'+x.dia+'</b>'+x.txt.replace(/^\d+ /,'')+'</div>'}).join('');
+    document.getElementById('ritual').innerHTML=CP.ritual(r).map(function(l){return '<li>'+l+'</li>'}).join('');
+  }
+  document.getElementById('copiar').addEventListener('click',function(){
+    var txt=[].map.call(document.querySelectorAll('#oracao p'),function(p){return p.textContent}).join('\n');
+    var ok=document.getElementById('copiado');
+    if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ok.textContent='Copiada. Guárdala en tus notas o mándatela por WhatsApp.'},function(){ok.textContent='Mantén presionado el texto para copiarlo.'});
+    else ok.textContent='Mantén presionado el texto para copiarlo.';
+  });
+  document.getElementById('refazer').addEventListener('click',function(e){e.preventDefault(); document.getElementById('codigo').hidden=true; document.getElementById('form').hidden=false;});
+  document.getElementById('f-ok').addEventListener('click',function(){
+    var nome=(document.getElementById('f-nome').value.trim().split(/\s+/)[0]||''),dd=+sd.value,mm=+sm.value,yy=+sa.value,er=document.getElementById('f-erro');
+    if(nome.length<2){er.textContent='Escribe tu primer nombre.';return}
+    if(!dd||!mm||!yy||new Date(yy,mm-1,dd).getDate()!==dd){er.textContent='Revisa tu fecha de nacimiento.';return}
+    var r={nome:nome.charAt(0).toUpperCase()+nome.slice(1).toLowerCase(),dia:dd,mes:mm,ano:yy,bloqueio:document.getElementById('f-bloq').value,desejo:document.getElementById('f-des').value};
+    try{localStorage.setItem('cp_codigo',JSON.stringify(r))}catch(e){}
+    er.textContent=''; mostra(r);
+  });
+  var salvo=null; try{salvo=JSON.parse(localStorage.getItem('cp_codigo')||'null')}catch(e){}
+  if(salvo&&salvo.nome&&salvo.dia) mostra(salvo); else document.getElementById('form').hidden=false;
+})();
+</script>
+</body>
+</html>

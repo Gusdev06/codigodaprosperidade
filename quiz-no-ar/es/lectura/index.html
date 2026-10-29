@@ -131,6 +131,12 @@
   .depo{display:flex;gap:14px;align-items:center}
   .depo .tela{width:42%;flex:none;aspect-ratio:9/16}
   .depo .play{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,211,77,.92);color:var(--gold-ink);font-size:20px}
+  .tranca{position:relative;background:var(--plum-2);border:1px solid var(--gold-soft);border-radius:18px;padding:18px;margin:14px 0;overflow:hidden}
+  .tranca h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 8px;color:var(--gold)}
+  .tranca p{color:var(--ivory);margin:6px 0}
+  .borrado{filter:blur(6px);user-select:none;pointer-events:none}
+  .cadeado{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.04em}
+  .promessa{font-family:var(--serif);font-size:20px;line-height:1.35;color:var(--ivory);text-align:center;margin:10px 0}
   footer{max-width:480px;margin:0 auto;padding:0 18px 30px;font-size:11px;line-height:1.5;color:var(--muted-2);text-align:center}
   [hidden]{display:none !important}
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
@@ -156,7 +162,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     <img src="/es/cartas/torre.png" alt=""><img src="/es/cartas/roda.png" alt=""><img src="/es/cartas/louco.png" alt="">
   </div>
   <div class="eyebrow">Lectura de prosperidad · Gratis</div>
-  <h1>Tus cartas te muestran <em>qué frena tu dinero y cómo abrirle camino.</em></h1>
+  <h1>Elige tus 3 cartas y descubre <em>el bloqueo que no deja llegar tu dinero.</em></h1>
   <button class="gold" type="button" data-ir="v-genero">Empezar mi lectura gratis <span>↗</span></button>
   <p class="micro">1 minuto · Con tu nombre y tu fecha de nacimiento</p>
   <div class="lista">
@@ -329,7 +335,25 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     </div>
     <div class="cartao"><h3 id="signo-h"></h3><p id="signo-txt"></p></div>
     <div class="cartao"><h3>Lo que tus respuestas revelan</h3><p id="cruzamento"></p><p id="desejo-txt"></p></div>
-    <div class="cartao"><h3>El camino que indican tus cartas</h3><p>Tu bloqueo no se rompe con más trabajo ni con fuerza de voluntad. Se rompe limpiando la energía de escasez que se pegó a ti y a tu casa, y abriendo de nuevo los caminos del dinero. Eso es el <strong>Código de la Prosperidad</strong>: oraciones y rituales cortos, de unos minutos al día, guiados paso a paso, para hacer en tu casa.</p></div>
+    <div class="cartao">
+      <h3>La Oración de los 3 Arcanos</h3>
+      <p>Hay una oración que las gitanas de mi linaje rezan solo con las tres cartas de cada persona. Mi abuela la guardó durante décadas y solo la entregaba en consulta, cuando en la tirada salían los arcanos del giro, como los tuyos.</p>
+      <p>No se escribe igual para dos personas: se forma con <strong>tu nombre</strong>, <strong>tus tres arcanos</strong> y <strong>tu número de destino</strong>. Se reza siete noches seguidas, frente a una vela, y en tus días de apertura se reza siete veces.</p>
+      <p>Cuando el camino se abre, el dinero que estaba detenido empieza a moverse: un depósito que no esperabas, una deuda que por fin te pagan, un cliente nuevo, un premio, un beneficio que ni sabías que tenías. Puedes empezar a sentir el cambio antes de terminar las siete noches.</p>
+    </div>
+
+    <div class="tranca">
+      <h3>🔒 Tu Oración de los 3 Arcanos</h3>
+      <p id="ora-1"></p>
+      <div class="borrado" id="ora-resto" aria-hidden="true"></div>
+      <div class="cadeado">🔒 Se desbloquea al activar tu Código</div>
+    </div>
+    <div class="tranca">
+      <h3>🔒 Tus 3 días de apertura</h3>
+      <p>Según tu número <strong id="dias-num"></strong>, estos son los días del mes en que tu energía de dinero está más abierta:</p>
+      <p class="borrado" id="dias-lista" aria-hidden="true">00 de mes · 00 de mes · 00 de mes</p>
+      <div class="cadeado">🔒 Se desbloquea al activar tu Código</div>
+    </div>
 
     <div class="cartao" id="depo" hidden>
       <div class="depo">
@@ -339,20 +363,23 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     </div>
 
     <div class="oferta">
-      <div class="eyebrow" style="text-align:center">Para poner tu lectura en práctica</div>
-      <h2>Tu <em>Código de la Prosperidad</em></h2>
-      <p id="oferta-intro" style="text-align:center"></p>
+      <div class="eyebrow" style="text-align:center">Tu Código de la Prosperidad personal</div>
+      <h2>7 noches para <em>abrir el camino de tu dinero</em></h2>
+      <p class="promessa" id="oferta-intro"></p>
       <ul>
+        <li><i>🕯️</i><span><strong>Tu Oración de los 3 Arcanos</strong>Hecha con tu nombre, tus tres cartas y tu número de destino. Lista para rezar esta misma noche.</span></li>
+        <li><i>📅</i><span><strong>Tus 3 días de apertura del mes</strong>Calculados con tu fecha de nacimiento: los días en que tu oración tiene más fuerza.</span></li>
+        <li><i>🌙</i><span><strong>El ritual de las 7 noches</strong>Paso a paso: la vela, el agua, el papel con tu deseo y qué hacer la séptima noche.</span></li>
         <li><i>🎧</i><span><strong>Ritual de elevación de tu vibración</strong>Un audio guiado para empezar hoy mismo, antes de dormir.</span></li>
-        <li><i>🌙</i><span><strong>Guía de las fases de la luna</strong>Qué pedir y qué hacer en cada luna para atraer dinero.</span></li>
+        <li><i>🌗</i><span><strong>Guía de las fases de la luna</strong>Qué pedir y qué hacer en cada luna para atraer dinero.</span></li>
         <li><i>🏠</i><span><strong>Tu casa como imán de prosperidad</strong>Qué quitar y qué cambiar para que el dinero entre y se quede.</span></li>
         <li><i>🛡️</i><span><strong>Protección contra la envidia y el mal de ojo</strong>Oraciones y técnicas para cuidar lo que llega.</span></li>
         <li><i>💎</i><span><strong>Guía de cristales para la abundancia</strong>Cuáles usar según tu momento y cómo activarlos.</span></li>
       </ul>
-      <p style="text-align:center;margin:14px 0 0">Una consulta con una tarotista profesional en México cuesta de <strong>500 a 1,300 pesos</strong>. Tu Código, con todo esto, cuesta menos que una sola consulta:</p>
+      <p style="text-align:center;margin:14px 0 0">Una consulta con una tarotista profesional en México cuesta de <strong>500 a 1,300 pesos</strong>. Tu Oración personal y todo el Código cuestan menos que una sola consulta:</p>
       <div class="preco"><strong>US$ 14</strong><small>Pago único · Sin suscripción · Acceso inmediato en tu correo</small></div>
       <div class="reserva" id="reserva">Tu lectura y este precio quedan reservados por <b id="relogio">15:00</b></div>
-      <button class="gold" type="button" id="btn-oferta">Quiero activar mi Código <span>↗</span></button>
+      <button class="gold" type="button" id="btn-oferta">Desbloquear mi Oración de los 3 Arcanos <span>↗</span></button>
       <div class="garantia"><i>🛡️</i><p><strong>Garantía de 7 días.</strong> Si sientes que no es para ti, pides el reembolso dentro de 7 días y te devuelven el 100%.</p></div>
       <p class="pagos">Tarjeta de débito o crédito · Mercado Pago · PayPal<br>En el pago verás el valor en pesos mexicanos, con IVA incluido.</p>
     </div>
@@ -383,6 +410,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
 </main>
 <footer>Contenido de carácter espiritual y de crecimiento personal. Los resultados dependen de cada persona y no sustituyen asesoría financiera, médica ni legal.</footer>
 
+<script src="/es/lectura/codigo.js"></script>
 <script>
 (function(){
   /* Mesmo checkout do /es/, com os order bumps Numerología e Llave (decisão do Gusta, 29/10). */
@@ -595,7 +623,12 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     document.getElementById('cruzamento').textContent='Tus cartas, tu número '+n+' y tu signo apuntan a lo mismo. '+(TENT[R.tentou]||'');
     var mani=R.manifestar.map(function(k){return MANI[k]}).filter(Boolean);
     document.getElementById('desejo-txt').innerHTML=(DESEJO[R.desejo]||'')+(mani.length?' Y para los próximos 30 días pediste '+lista(mani)+'. Eso es exactamente lo que el Código de la Prosperidad trabaja.':'');
-    document.getElementById('oferta-intro').textContent=R.nome+', esto es lo que vas a recibir para empezar hoy:';
+    document.getElementById('oferta-intro').textContent=R.nome+', tu oración ya está formada con tus cartas. Solo falta que la reces.';
+    var ora=CP.oracion(R); document.getElementById('ora-1').textContent=ora[0]+' '+ora[1];
+    document.getElementById('ora-resto').innerHTML='<p>'+ora.slice(2).join('</p><p>')+'</p>';
+    document.getElementById('dias-num').textContent=CP.numero(R);
+    /* entrega personalizada: /es/mi-codigo/ lê isso no mesmo aparelho (sem servidor) */
+    try{ localStorage.setItem('cp_codigo',JSON.stringify({nome:R.nome,dia:R.dia,mes:R.mes,ano:R.ano,bloqueio:R.bloqueio,desejo:R.desejo,genero:R.genero})); }catch(e){}
   }
 
   /* reserva de 15 min (desta sessão) */
