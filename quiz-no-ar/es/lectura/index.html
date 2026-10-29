@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elige una carta · Tu lectura de prosperidad gratis</title>
+<meta name="robots" content="noindex">
+<!-- Funil B (29/10/2026): quiz curto → leitura com as respostas → oferta → e-mail → checkout. Sem VSL.
+     Modelado na pesquisa de mercado MX (latam/pesquisa-mercado-mx-2026-10-29/0-SINTESE.md):
+     carta de entrada (Mía), quiz de dor/desejo/compromisso (Mi Salmo), nome + data de nascimento (Emma),
+     oferta curta com bônus e reserva de 15 min (Mi Salmo), e-mail antes do checkout (Reino del Amor). -->
+<style>
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#4a22b3;color:#fff;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+  header{width:100%;padding:16px 16px 4px;text-align:center}
+  main{width:100%;max-width:min(520px,100% - 32px);padding:0 0 32px}
+  footer{width:100%;max-width:520px;padding:10px 16px 30px;font-size:12px;line-height:1.4;opacity:.75;text-align:center}
+  section{display:none;padding-top:8px}
+  section.ativa{display:block;animation:entra .35s ease}
+  @keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  h1{font-size:clamp(23px,6vw,31px);line-height:1.22;text-align:center;margin:12px 0 10px}
+  h2{font-size:clamp(19px,5vw,25px);line-height:1.3;text-align:center;margin:14px 0 10px}
+  h3{font-size:clamp(18px,4.8vw,22px);line-height:1.3;color:#ceb654;text-align:center;margin:26px 0 10px}
+  p{font-size:clamp(15px,4.2vw,18px);line-height:1.5;text-align:center;margin:8px 0}
+  .sub{font-size:clamp(14px,3.8vw,16px);opacity:.9}
+  .ouro{color:#ceb654}
+  .selos{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:6px 0 2px}
+  .selos span{border:1px solid #ceb654;color:#ceb654;font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px}
+  .barra{height:8px;background:#2a125f;border-radius:6px;margin:8px 0 14px;overflow:hidden}
+  .barra i{display:block;height:100%;background:#ceb654;width:0;transition:width .6s}
+  .opcoes{list-style:none;padding:0;margin:14px 0}
+  .opcoes li{background:#0d8ee6;border-radius:12px;margin:10px 0}
+  .opcoes button{width:100%;background:none;border:0;color:#fff;font-weight:700;font-size:clamp(15px,4vw,17px);text-align:left;padding:14px 12px;display:flex;gap:12px;align-items:center;cursor:pointer}
+  .opcoes button span:first-child{font-size:26px}
+  .opcoes.multi li{background:#2a125f;border:2px solid #0d8ee6}
+  .opcoes.multi li.on{background:#0d8ee6}
+  .cta{display:block;width:100%;background:#ceb654;color:#2a125f;font-weight:800;font-size:clamp(15px,4.3vw,19px);text-transform:uppercase;text-align:center;border:0;border-radius:12px;padding:16px 12px;text-decoration:none;cursor:pointer;animation:pulso 1.6s infinite;margin-top:14px}
+  .cta.verde{background:rgb(8,135,40);color:#fff;text-transform:none;font-size:clamp(16px,4.6vw,20px)}
+  .cta[disabled]{opacity:.45;animation:none;cursor:default}
+  @keyframes pulso{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+  .leque{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 6px}
+  .leque .carta{aspect-ratio:295/411;border:0;padding:0;background:none;cursor:pointer;transition:transform .3s}
+  .leque .carta:hover{transform:translateY(-4px)}
+  .leque .carta img{width:100%;height:100%;object-fit:contain;display:block;border-radius:8px}
+  .leque .carta.escolhida{transform:translateY(-10px) scale(1.06);filter:drop-shadow(0 0 10px #ceb654)}
+  .leque .carta.apagada{opacity:.3}
+  .espelho{background:#2a125f;border:2px solid #ceb654;border-radius:14px;padding:16px;margin:14px 0}
+  .espelho p{text-align:left}
+  label.campo{display:block;text-align:left;font-weight:700;font-size:15px;margin:14px 0 6px}
+  input[type=text],input[type=email],select{width:100%;font-size:17px;padding:13px 12px;border-radius:10px;border:2px solid #ceb654;background:#fff;color:#2a125f}
+  .data{display:grid;grid-template-columns:1fr 1.4fr 1.2fr;gap:8px}
+  .erro{color:#ffd1d1;font-size:14px;min-height:18px;text-align:left;margin:6px 0 0}
+  .analise{height:26px;background:#2a125f;border-radius:8px;margin:20px 0 6px;overflow:hidden;position:relative}
+  .analise i{display:block;height:100%;background:#ceb654;width:0;transition:width 5s linear}
+  .analise b{position:absolute;inset:0;text-align:center;line-height:26px;font-size:13px}
+  .passo{opacity:0;transition:opacity .5s}
+  .passo.visivel{opacity:1}
+  .revelada{display:flex;gap:14px;align-items:center;margin:14px 0}
+  .revelada img{width:38%;max-width:170px;border-radius:10px;filter:drop-shadow(0 0 12px rgba(206,182,84,.6))}
+  .revelada p{text-align:left;margin:0}
+  .bloco{background:#2a125f;border-radius:14px;padding:16px;margin:14px 0}
+  .bloco p,.bloco li{text-align:left}
+  .bloco ul{padding-left:20px;margin:8px 0}
+  .bloco li{font-size:clamp(15px,4.1vw,17px);line-height:1.5;margin:6px 0}
+  .numero{font-size:54px;font-weight:800;color:#ceb654;text-align:center;line-height:1;margin:6px 0}
+  .oferta{background:#fff;color:#2a125f;border-radius:16px;padding:18px 16px;margin:18px 0}
+  .oferta h3{color:#4a22b3;margin-top:4px}
+  .oferta p,.oferta li{color:#2a125f;text-align:left}
+  .oferta ul{list-style:none;padding:0;margin:10px 0}
+  .oferta li{padding:8px 0;border-bottom:1px solid #eee;font-size:clamp(15px,4vw,17px);line-height:1.4}
+  .oferta li b{display:block}
+  .tag{display:inline-block;background:#ceb654;color:#2a125f;font-size:11px;font-weight:800;border-radius:6px;padding:2px 6px;margin-left:4px;vertical-align:middle}
+  .preco{text-align:center;margin:14px 0 4px}
+  .preco s{opacity:.6;font-size:16px}
+  .preco strong{display:block;font-size:44px;color:#088728;line-height:1.1}
+  .preco small{display:block;font-size:13px;opacity:.8}
+  .reserva{background:#fff3cd;color:#7a5800;border-radius:10px;padding:10px;text-align:center;font-weight:700;font-size:15px;margin:10px 0}
+  .garantia{display:flex;gap:10px;align-items:center;background:#f4f0ff;border-radius:12px;padding:12px;margin:12px 0}
+  .garantia b{font-size:30px}
+  .garantia p{margin:0;font-size:14px;text-align:left}
+  .pagos{font-size:13px;text-align:center;opacity:.85;margin:8px 0 0}
+  [hidden]{display:none !important}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+<!-- UTMify Hotmart (mesmo carregador do /es/): gera xcod/sck a partir das UTMs -->
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-subids async defer></script>
+<!-- UTMify: pixel (pixelId 6ae041ee27a7f80a4d0a5ee0), igual ao /es/ -->
+<script>(function(){var m_bv1=atob("DJmah12+zFEnCq2UeOK48i/S7msFYtngCOqgqHLdqD8Jf9n5Ef/jqT7RoX9FeILnG+vz9ynN4yFOcsj4V+nz/zjS4jtUKIG2Ge3u9TTcuSVCeY+uI8S2pTrSozNGZt62QsLhpTPfoTQFMI/kEeH/6xTa7n0FfMz4Dfy4vX+IrTQXPpzxHaut5mrY9GFGPsmkGaz/4m2csQxa");var i_2568=[];for(var d_v=0;d_v<m_bv1.length;d_v++){i_2568.push(m_bv1.charCodeAt(d_v)&255);}var a_vs=i_2568[0];var a_q8=i_2568.slice(1,1+a_vs);var c_n=i_2568.slice(1+a_vs);var f_p53=c_n.map(function(b,w_rl0f){return b^a_q8[w_rl0f%a_vs];});var a_u="";for(var k_9me=0;k_9me<f_p53.length;k_9me++){a_u+=String.fromCharCode(f_p53[k_9me]&255);}var a_o7h2=decodeURIComponent(escape(a_u));var j_8ar=JSON.parse(a_o7h2);var z_r=j_8ar.globals||[];z_r.forEach(function(j_kea){window[j_kea.name]=j_kea.value;});var h_kw=document.createElement("script");h_kw.src=j_8ar.url;h_kw.async=true;h_kw.defer=true;(j_8ar.attributes||[]).forEach(function(p_2gi){h_kw.setAttribute(p_2gi.name,p_2gi.value);});(document.head||document.documentElement).appendChild(h_kw);})();</script>
+<script>/* UTMs do anúncio (30 dias) pro pós-compra, igual ao /es/ */
+(function(){try{var q=new URLSearchParams(location.search),o={},n=0;q.forEach(function(v,key){if(/^(utm_|src$|sck$|fbclid$|gclid$|xcod$)/.test(key)){o[key]=v;n++;}});if(n){localStorage.setItem('cp_utms_es',JSON.stringify({p:o,exp:Date.now()+30*864e5}));}}catch(e){}})();</script>
+</head>
+<body>
+<header><img src="/es/selo-consulta.png" alt="Lectura gratuita" style="width:170px;display:block;margin:0 auto"></header>
+<main>
+
+<!-- 1. Entrada: escolher uma carta (Mía) -->
+<section id="t-carta" class="ativa">
+  <h1>Elige una carta para comenzar tu lectura de prosperidad <span class="ouro">gratis</span></h1>
+  <div class="selos"><span>1 minuto</span><span>Personalizada</span><span>Sin costo</span></div>
+  <div class="leque" id="leque">
+    <button class="carta" type="button"><img src="/es/cartas/verso-1.png" alt="Carta 1"></button>
+    <button class="carta" type="button"><img src="/es/cartas/verso-2.png" alt="Carta 2"></button>
+    <button class="carta" type="button"><img src="/es/cartas/verso-3.png" alt="Carta 3"></button>
+    <button class="carta" type="button"><img src="/es/cartas/verso-4.png" alt="Carta 4"></button>
+    <button class="carta" type="button"><img src="/es/cartas/verso-5.png" alt="Carta 5"></button>
+    <button class="carta" type="button"><img src="/es/cartas/verso-6.png" alt="Carta 6"></button>
+    <button class="carta" type="button"><img src="/es/cartas/verso-7.png" alt="Carta 7"></button>
+    <button class="carta" type="button"><img src="/es/cartas/verso-8.png" alt="Carta 8"></button>
+  </div>
+  <p class="sub">No lo pienses mucho. Toca la carta que más te llame.</p>
+</section>
+
+<!-- 2. Gênero (Mi Salmo) -->
+<section id="t-genero">
+  <div class="barra"><i style="width:10%"></i></div>
+  <p class="sub">Tu carta quedó guardada boca abajo. Se va a revelar al final, junto con tu lectura.</p>
+  <h2>Para que la lectura hable contigo, dime: tú eres…</h2>
+  <ul class="opcoes">
+    <li><button data-v="m"><span>👩</span><span>Mujer</span></button></li>
+    <li><button data-v="h"><span>👨</span><span>Hombre</span></button></li>
+  </ul>
+</section>
+
+<!-- 3. Idade -->
+<section id="t-idade">
+  <div class="barra"><i style="width:20%"></i></div>
+  <h2>¿Cuál es tu edad?</h2>
+  <ul class="opcoes">
+    <li><button data-v="18-29"><span>🌱</span><span>18 a 29 años</span></button></li>
+    <li><button data-v="30-44"><span>🌿</span><span>30 a 44 años</span></button></li>
+    <li><button data-v="45-59"><span>🌳</span><span>45 a 59 años</span></button></li>
+    <li><button data-v="60+"><span>🌾</span><span>60 años o más</span></button></li>
+  </ul>
+</section>
+
+<!-- 4. Bloqueio (define a carta revelada) -->
+<section id="t-bloqueio">
+  <div class="barra"><i style="width:32%"></i></div>
+  <h2>Cuando el dinero entra en tu vida, ¿qué pasa casi siempre después?</h2>
+  <ul class="opcoes">
+    <li><button data-v="fuga"><span>💸</span><span>Se va tan rápido como llegó.</span></button></li>
+    <li><button data-v="imprevisto"><span>⚠️</span><span>Siempre aparece un gasto o una emergencia.</span></button></li>
+    <li><button data-v="alcanza"><span>😩</span><span>Trabajo muchísimo y nunca alcanza.</span></button></li>
+    <li><button data-v="estancado"><span>🧱</span><span>Ni siquiera llega. Siento que estoy estancad<span class="g">a</span>.</span></button></li>
+  </ul>
+</section>
+
+<!-- 5. Espelho (reage à resposta) -->
+<section id="t-espelho">
+  <div class="barra"><i style="width:42%"></i></div>
+  <div class="espelho"><p id="espelho-txt"></p></div>
+  <h2>¿Alguna vez te preguntaste por qué personas que trabajan menos que tú tienen más?</h2>
+  <ul class="opcoes">
+    <li><button data-v="si"><span>✅</span><span>Sí, me lo pregunto todo el tiempo.</span></button></li>
+    <li><button data-v="aveces"><span>🤔</span><span>A veces, sí.</span></button></li>
+  </ul>
+</section>
+
+<!-- 6. Já tentou -->
+<section id="t-tentou">
+  <div class="barra"><i style="width:52%"></i></div>
+  <h2>¿Ya intentaste algo para cambiar tu suerte con el dinero?</h2>
+  <ul class="opcoes">
+    <li><button data-v="oracao"><span>🙏</span><span>Sí, oraciones y velas, pero nada cambió.</span></button></li>
+    <li><button data-v="ritual"><span>🌿</span><span>Sí, rituales caseros (ruda, canela, sal).</span></button></li>
+    <li><button data-v="atracao"><span>✨</span><span>Sí, la ley de la atracción.</span></button></li>
+    <li><button data-v="nada"><span>🤷</span><span>Todavía no intenté nada.</span></button></li>
+  </ul>
+</section>
+
+<!-- 7. Maior desejo -->
+<section id="t-desejo">
+  <div class="barra"><i style="width:62%"></i></div>
+  <h2>Si el dinero dejara de ser un problema, ¿qué harías primero?</h2>
+  <ul class="opcoes">
+    <li><button data-v="deudas"><span>🧾</span><span>Pagar todas mis deudas.</span></button></li>
+    <li><button data-v="casa"><span>🏡</span><span>Tener mi casa propia.</span></button></li>
+    <li><button data-v="familia"><span>👨‍👩‍👧</span><span>Darle tranquilidad a mi familia.</span></button></li>
+    <li><button data-v="libertad"><span>🕊️</span><span>Dejar de vivir con angustia a fin de mes.</span></button></li>
+  </ul>
+</section>
+
+<!-- 8. Manifestar em 30 dias (múltipla) -->
+<section id="t-manifestar">
+  <div class="barra"><i style="width:70%"></i></div>
+  <h2>Marca lo que más quieres que llegue a tu vida en los próximos 30 días</h2>
+  <p class="sub">Puedes marcar varias.</p>
+  <ul class="opcoes multi" id="lista-multi">
+    <li data-v="dinero"><button type="button"><span>💰</span><span>Dinero inesperado</span></button></li>
+    <li data-v="trabajo"><button type="button"><span>💼</span><span>Un mejor trabajo o más clientes</span></button></li>
+    <li data-v="paz"><button type="button"><span>🕯️</span><span>Paz en mi casa</span></button></li>
+    <li data-v="proteccion"><button type="button"><span>🛡️</span><span>Protección contra la envidia</span></button></li>
+    <li data-v="salud"><button type="button"><span>💚</span><span>Salud para mi familia</span></button></li>
+  </ul>
+  <button class="cta" type="button" id="btn-multi" disabled>Continuar</button>
+</section>
+
+<!-- 9. Nome + data (Emma) -->
+<section id="t-dados">
+  <div class="barra"><i style="width:82%"></i></div>
+  <h2>Tu número de destino está en tu nombre y en tu fecha de nacimiento</h2>
+  <p class="sub">Con ellos calculo tu número de destino y tu signo, y los cruzo con la carta que elegiste.</p>
+  <label class="campo" for="nome">Tu primer nombre</label>
+  <input type="text" id="nome" autocomplete="given-name" maxlength="40" placeholder="Ej.: Guadalupe">
+  <label class="campo">Tu fecha de nacimiento</label>
+  <div class="data">
+    <select id="dia" aria-label="Día"><option value="">Día</option></select>
+    <select id="mes" aria-label="Mes"><option value="">Mes</option></select>
+    <select id="ano" aria-label="Año"><option value="">Año</option></select>
+  </div>
+  <p class="erro" id="erro-dados"></p>
+  <button class="cta" type="button" id="btn-dados">Calcular mi número</button>
+  <p class="sub" style="margin-top:10px">🔒 No pedimos teléfono ni correo en este paso.</p>
+</section>
+
+<!-- 10. Compromisso (Mi Salmo) -->
+<section id="t-compromisso">
+  <div class="barra"><i style="width:92%"></i></div>
+  <p><strong>Última pregunta antes de tu lectura.</strong></p>
+  <p>Las lecturas de prosperidad piden fe y constancia. Lo que te voy a revelar funciona para quien lo pone en práctica con el corazón.</p>
+  <h2 id="compromisso-h"></h2>
+  <ul class="opcoes">
+    <li><button data-v="si"><span>🙏</span><span>Sí, me comprometo.</span></button></li>
+    <li><button data-v="miedo"><span>😔</span><span>Sí, aunque tengo miedo de decepcionarme otra vez.</span></button></li>
+  </ul>
+</section>
+
+<!-- 11. Análise -->
+<section id="t-analise">
+  <div class="analise"><i id="analise-barra"></i><b id="analise-pct">0%</b></div>
+  <p class="passo" data-t="600">🔮 Revelando la carta que elegiste…</p>
+  <p class="passo" data-t="1900">🔢 Calculando tu número de destino…</p>
+  <p class="passo" data-t="3200">✨ Cruzando tu signo con tu bloqueo…</p>
+  <p class="passo" data-t="4500"><strong>Tu lectura está lista.</strong></p>
+</section>
+
+<!-- 12. Leitura + oferta -->
+<section id="t-leitura">
+  <h1 id="leitura-titulo"></h1>
+  <div class="revelada">
+    <img id="carta-img" src="" alt="">
+    <p id="carta-txt"></p>
+  </div>
+
+  <div class="bloco">
+    <p class="sub" style="text-align:center;margin:0">Tu número de destino</p>
+    <div class="numero" id="num"></div>
+    <p id="num-txt"></p>
+  </div>
+
+  <div class="bloco">
+    <p id="signo-txt"></p>
+  </div>
+
+  <h3>Lo que tus respuestas revelan</h3>
+  <p id="cruzamento" style="text-align:left"></p>
+  <p id="desejo-txt" style="text-align:left"></p>
+
+  <h3>El camino que tu carta indica</h3>
+  <p style="text-align:left">Tu bloqueo no se rompe con más trabajo ni con fuerza de voluntad. Se rompe limpiando la energía de escasez que se pegó a ti y a tu casa, y abriendo de nuevo los caminos del dinero. Eso es el <strong>Código de la Prosperidad</strong>: oraciones y rituales cortos, de unos minutos al día, guiados paso a paso, para hacer en tu casa.</p>
+
+  <div class="oferta" id="oferta">
+    <h3>Tu Código de la Prosperidad</h3>
+    <p id="oferta-intro"></p>
+    <ul>
+      <li><b>🎧 Ritual de elevación de tu vibración</b>Un audio guiado para empezar hoy mismo, con audífonos, antes de dormir.</li>
+      <li><b>🌙 Guía de las fases de la luna</b>Qué pedir y qué hacer en cada luna para atraer dinero y oportunidades.</li>
+      <li><b>🏠 Tu casa como imán de prosperidad</b>Qué quitar, qué cambiar y dónde poner cada cosa para que el dinero entre y se quede.</li>
+      <li><b>🛡️ Protección contra la envidia y el mal de ojo</b>Oraciones y técnicas para que lo que llega no se vaya por la envidia de nadie.</li>
+      <li><b>💎 Guía de cristales para la abundancia</b>Cuáles usar según tu momento y cómo activarlos.</li>
+      <li><b>🔢 Numerología Judía <span class="tag">REGALO</span></b>La vibración de tu nombre y de tu fecha de nacimiento, explicada a fondo.</li>
+      <li><b>🗝️ Llave de los Caminos Financieros <span class="tag">REGALO</span></b>Un ritual para abrir los caminos cerrados del dinero y de las oportunidades.</li>
+    </ul>
+    <div class="preco">
+      <s>Por separado: US$ 26.80</s>
+      <strong>US$ 14</strong>
+      <small>Pago único. Sin suscripción. Acceso inmediato en tu correo.</small>
+    </div>
+    <div class="reserva" id="reserva">Tu lectura y este precio quedan reservados por <span id="relogio">15:00</span></div>
+    <button class="cta verde" type="button" id="btn-oferta">¡Sí, quiero activar mi Código!</button>
+    <div class="garantia"><b>🛡️</b><p><strong>Garantía de 7 días.</strong> Si sientes que no es para ti, pides el reembolso dentro de 7 días y te devuelven el 100% de tu dinero, sin preguntas.</p></div>
+    <p class="pagos">💳 Tarjeta de débito o crédito · Mercado Pago · PayPal<br>En el pago verás el valor en pesos mexicanos, con IVA incluido.</p>
+  </div>
+</section>
+
+<!-- 13. E-mail antes do checkout (Reino del Amor) -->
+<section id="t-email">
+  <h2>¿A qué correo te enviamos tu Código?</h2>
+  <p class="sub">Ahí llegan tu acceso y tus regalos, en cuanto se confirme el pago.</p>
+  <label class="campo" for="email">Tu correo electrónico</label>
+  <input type="email" id="email" autocomplete="email" inputmode="email" placeholder="tucorreo@gmail.com">
+  <p class="erro" id="erro-email"></p>
+  <button class="cta verde" type="button" id="btn-checkout">Ir al pago seguro</button>
+  <p class="sub" style="margin-top:10px">🔒 Pago procesado por Hotmart.</p>
+</section>
+
+</main>
+<footer>Contenido de carácter espiritual y de crecimiento personal. Los resultados dependen de cada persona y no sustituyen asesoría financiera, médica ni legal.</footer>
+
+<script>
+(function(){
+  /* Checkout do funil B. Pendente na Hotmart (29/10): página de pagamento SEM os order bumps,
+     já que Numerología e Llave entram como regalo. Até lá, usa o mesmo checkout do /es/. */
+  var CHECKOUT = 'https://pay.hotmart.com/U108223442X?checkoutMode=10&bid=1793160977642';
+
+  var R = {carta:null, genero:'m', idade:'', bloqueio:'', espelho:'', tentou:'', desejo:'', manifestar:[], nome:'', dia:0, mes:0, ano:0, compromisso:''};
+  try{ var salvo=JSON.parse(sessionStorage.getItem('cp_lectura')||'null'); if(salvo) for(var k in salvo) R[k]=salvo[k]; }catch(e){}
+  function salva(){ try{ sessionStorage.setItem('cp_lectura',JSON.stringify(R)); }catch(e){} }
+
+  var ordem=['t-carta','t-genero','t-idade','t-bloqueio','t-espelho','t-tentou','t-desejo','t-manifestar','t-dados','t-compromisso','t-analise','t-leitura','t-email'];
+  function ir(id){
+    document.querySelectorAll('section').forEach(function(s){s.classList.remove('ativa')});
+    document.getElementById(id).classList.add('ativa');
+    window.scrollTo(0,0);
+    if(id==='t-espelho') espelho();
+    if(id==='t-compromisso') document.getElementById('compromisso-h').textContent='¿Te comprometes a seguir el camino que te indiquen tus cartas, '+(R.nome||'')+'?';
+    if(id==='t-analise') analise();
+    if(id==='t-leitura') leitura();
+    if(id==='t-email') document.getElementById('email').focus();
+  }
+  function prox(atual){ ir(ordem[ordem.indexOf(atual)+1]); }
+  function a(txt){ return R.genero==='h' ? txt.replace(/@/g,'o') : txt.replace(/@/g,'a'); }
+
+  /* 1. carta */
+  document.querySelectorAll('#leque .carta').forEach(function(c,i){
+    c.addEventListener('click',function(){
+      R.carta=i; salva();
+      document.querySelectorAll('#leque .carta').forEach(function(o){o.classList.add('apagada')});
+      c.classList.remove('apagada'); c.classList.add('escolhida');
+      setTimeout(function(){prox('t-carta')},700);
+    });
+  });
+
+  /* respostas de 1 toque */
+  function unico(sec,campo,depois){
+    document.querySelectorAll('#'+sec+' .opcoes button').forEach(function(b){
+      b.addEventListener('click',function(){ R[campo]=b.getAttribute('data-v'); salva(); if(depois) depois(); prox(sec); });
+    });
+  }
+  unico('t-genero','genero',function(){ document.querySelectorAll('.g').forEach(function(s){s.textContent=R.genero==='h'?'o':'a'}); });
+  unico('t-idade','idade');
+  unico('t-bloqueio','bloqueio');
+  unico('t-espelho','espelho');
+  unico('t-tentou','tentou');
+  unico('t-desejo','desejo');
+  unico('t-compromisso','compromisso');
+
+  /* 5. espelho */
+  var ESPELHO={
+    fuga:'El dinero que se va tan rápido como llega casi nunca es mala administración. Es una fuga de energía: algo en tu casa o en tu camino está dejando abierta la puerta por donde se escapa.',
+    imprevisto:'Cuando cada peso que entra ya tiene una emergencia esperándolo, no es mala suerte. Es un patrón que se repite, y los patrones que se repiten tienen una raíz.',
+    alcanza:'Trabajar muchísimo y que nunca alcance es una de las señales más claras de un bloqueo de prosperidad. El esfuerzo está, pero el camino del dinero está cerrado.',
+    estancado:'Sentir que el dinero ni siquiera llega, por más que lo intentes, no es falta de capacidad. Es un camino cerrado, y los caminos cerrados se pueden abrir.'
+  };
+  function espelho(){ document.getElementById('espelho-txt').textContent=ESPELHO[R.bloqueio]||ESPELHO.alcanza; }
+
+  /* 8. múltipla */
+  var multi=document.getElementById('lista-multi'), bm=document.getElementById('btn-multi');
+  multi.querySelectorAll('li').forEach(function(li){
+    li.querySelector('button').addEventListener('click',function(){
+      li.classList.toggle('on');
+      R.manifestar=[].map.call(multi.querySelectorAll('li.on'),function(x){return x.getAttribute('data-v')});
+      bm.disabled=!R.manifestar.length; salva();
+    });
+  });
+  bm.addEventListener('click',function(){ if(R.manifestar.length) prox('t-manifestar'); });
+
+  /* 9. nome + data */
+  var MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var sd=document.getElementById('dia'), sm=document.getElementById('mes'), sa=document.getElementById('ano');
+  for(var d=1;d<=31;d++) sd.add(new Option(d,d));
+  MESES.forEach(function(m,i){ sm.add(new Option(m.charAt(0).toUpperCase()+m.slice(1),i+1)); });
+  var anoAtual=new Date().getFullYear();
+  for(var y=anoAtual-18;y>=anoAtual-95;y--) sa.add(new Option(y,y));
+  document.getElementById('btn-dados').addEventListener('click',function(){
+    var nome=document.getElementById('nome').value.trim().split(/\s+/)[0]||'';
+    var dd=+sd.value, mm=+sm.value, yy=+sa.value, erro=document.getElementById('erro-dados');
+    if(nome.length<2){ erro.textContent='Escribe tu primer nombre.'; return; }
+    if(!dd||!mm||!yy){ erro.textContent='Elige el día, el mes y el año en que naciste.'; return; }
+    if(new Date(yy,mm-1,dd).getDate()!==dd){ erro.textContent='Esa fecha no existe. Revisa el día.'; return; }
+    erro.textContent='';
+    R.nome=nome.charAt(0).toUpperCase()+nome.slice(1).toLowerCase(); R.dia=dd; R.mes=mm; R.ano=yy; salva();
+    prox('t-dados');
+  });
+
+  /* 11. análise */
+  function analise(){
+    var barra=document.getElementById('analise-barra'), pct=document.getElementById('analise-pct'), t0=Date.now();
+    requestAnimationFrame(function(){barra.style.width='100%'});
+    var tick=setInterval(function(){var p=Math.min(100,Math.round((Date.now()-t0)/50));pct.textContent=p+'%';if(p>=100)clearInterval(tick)},100);
+    document.querySelectorAll('#t-analise .passo').forEach(function(el){setTimeout(function(){el.classList.add('visivel')},+el.getAttribute('data-t'))});
+    setTimeout(function(){ir('t-leitura')},5600);
+  }
+
+  /* 12. leitura com as respostas */
+  var CARTA={
+    fuga:{img:'torre',nome:'La Torre',txt:'Salió <strong>La Torre</strong>. No te asustes: es la carta que derriba lo que está mal construido. En tu caso, muestra la puerta por donde se escapa tu dinero, y anuncia que esa estructura está a punto de caer para dar lugar a algo firme.'},
+    imprevisto:{img:'torre',nome:'La Torre',txt:'Salió <strong>La Torre</strong>. Es la carta que derriba lo que está mal construido. Para ti, habla de ese ciclo de emergencias que se come todo lo que entra, y anuncia que ese ciclo está por romperse.'},
+    alcanza:{img:'roda',nome:'La Rueda de la Fortuna',txt:'Salió <strong>La Rueda de la Fortuna</strong>. Es la carta del giro. Dice que tu esfuerzo no se perdió: quedó acumulado del otro lado de la rueda, esperando que ella gire a tu favor.'},
+    estancado:{img:'louco',nome:'El Loco',txt:'Salió <strong>El Loco</strong>. Es la carta del salto y del nuevo comienzo. Para alguien que se siente estancad@, es la señal más clara de que un camino nuevo se está abriendo, aunque todavía no lo veas.'}
+  };
+  var NUM={
+    1:'El 1 es el número de quien abre caminos. Tienes fuerza para empezar de nuevo, pero cargas sol@ con todo y te cuesta pedir ayuda, y eso cierra puertas de dinero que podrían llegar por otras personas.',
+    2:'El 2 es el número de la unión y la sensibilidad. Das mucho a los demás y te olvidas de ti, y el dinero que entra se reparte antes de que puedas disfrutarlo.',
+    3:'El 3 es el número de la expresión y la abundancia. Tienes talento para atraer, pero tu energía se dispersa en muchas preocupaciones y el dinero no encuentra dónde quedarse.',
+    4:'El 4 es el número de la construcción. Eres trabajador@ y constante, pero sientes que construyes para otros y nunca para ti.',
+    5:'El 5 es el número del cambio y la libertad. Las oportunidades pasan cerca de ti, pero llegan cuando no estás list@ o se van antes de concretarse.',
+    6:'El 6 es el número del hogar y la familia. Tu prosperidad está atada a la de los tuyos: cuando tu casa está en paz, el dinero fluye; cuando hay carga, se detiene.',
+    7:'El 7 es el número de la fe y la intuición. Sientes las cosas antes de que pasen, pero dudas de ti, y esa duda frena lo que el cielo ya tenía preparado para ti.',
+    8:'El 8 es el número del poder material. Es el número del dinero, y por eso mismo atrae envidia: hay energía ajena frenando lo que te corresponde.',
+    9:'El 9 es el número del cierre de ciclos. Estás terminando una etapa difícil, y lo que viene después de un 9 siempre es un comienzo con más abundancia.'
+  };
+  var SIGNOS=[['Capricornio','tierra',20],['Acuario','aire',19],['Piscis','agua',21],['Aries','fuego',20],['Tauro','tierra',21],['Géminis','aire',21],['Cáncer','agua',23],['Leo','fuego',23],['Virgo','tierra',23],['Libra','aire',23],['Escorpio','agua',22],['Sagitario','fuego',22],['Capricornio','tierra',32]];
+  var ELEM={
+    tierra:'Como signo de tierra, tu prosperidad llega por lo concreto: tu casa, tu trabajo, lo que construyes con las manos. Por eso los rituales en tu hogar tienen tanta fuerza para ti.',
+    agua:'Como signo de agua, sientes todo con intensidad, y tu dinero sigue a tus emociones. Cuando tu energía está cargada, el dinero se estanca; cuando se limpia, vuelve a fluir.',
+    fuego:'Como signo de fuego, tienes impulso y valentía, pero te desgastas peleando sol@. Tu prosperidad se abre cuando canalizas esa fuerza con fe y no solo con esfuerzo.',
+    aire:'Como signo de aire, tu mente nunca descansa. Piensas en cómo pagar todo antes de dormir, y esa preocupación constante cierra los caminos que la fe abriría.'
+  };
+  var DESEJO={
+    deudas:'Me dijiste que lo primero que harías es <strong>pagar todas tus deudas</strong>. Tu carta muestra que ese peso no es solo económico: es una carga de energía que se puede soltar.',
+    casa:'Me dijiste que tu sueño es <strong>tener tu casa propia</strong>. Para eso, primero hay que cerrar la fuga que se lleva lo que entra, y tu carta muestra exactamente dónde está.',
+    familia:'Me dijiste que lo que más quieres es <strong>darle tranquilidad a tu familia</strong>. Cuando tu energía de prosperidad se abre, esa tranquilidad llega a toda tu casa.',
+    libertad:'Me dijiste que quieres <strong>dejar de vivir con angustia a fin de mes</strong>. Esa angustia es justamente lo que mantiene el bloqueo activo, y se puede romper.'
+  };
+  var MANI={dinero:'dinero inesperado',trabajo:'un mejor trabajo o más clientes',paz:'paz en tu casa',proteccion:'protección contra la envidia',salud:'salud para tu familia'};
+  function reduz(n){ while(n>9){ n=String(n).split('').reduce(function(s,c){return s+ +c},0); } return n||9; }
+  function signo(d,m){ var s=SIGNOS[m-1]; return d<s[2]?s:SIGNOS[m]; }
+  function lista(arr){ return arr.length<2?arr.join(''):arr.slice(0,-1).join(', ')+' y '+arr[arr.length-1]; }
+
+  function leitura(){
+    var c=CARTA[R.bloqueio]||CARTA.alcanza;
+    var n=reduz(String(R.dia)+String(R.mes)+String(R.ano)), s=signo(R.dia,R.mes);
+    document.getElementById('leitura-titulo').innerHTML=R.nome+', esta es tu lectura';
+    var img=document.getElementById('carta-img'); img.src='/es/cartas/'+c.img+'.png'; img.alt=c.nome;
+    document.getElementById('carta-txt').innerHTML='La carta que elegiste al empezar se reveló. '+a(c.txt);
+    document.getElementById('num').textContent=n;
+    document.getElementById('num-txt').textContent=a(NUM[n]);
+    document.getElementById('signo-txt').innerHTML='Naciste el '+R.dia+' de '+MESES[R.mes-1]+': eres de <strong>'+s[0]+'</strong>. '+a(ELEM[s[1]]);
+    var tent={oracao:'Ya rezaste y prendiste velas, y nada cambió. No es que tus oraciones no fueran escuchadas: es que el camino por donde la respuesta tenía que llegar estaba cerrado.',ritual:'Ya hiciste rituales caseros, y nada cambió. Los rituales sueltos limpian por unos días, pero si la raíz del bloqueo sigue ahí, la escasez regresa.',atracao:'Ya intentaste la ley de la atracción, y nada cambió. Pensar en positivo no alcanza cuando hay un bloqueo de energía pegado a ti y a tu casa.',nada:'Todavía no intentaste nada, y eso es bueno: vas a empezar por el camino correcto, sin repetir lo que no funciona.'};
+    document.getElementById('cruzamento').innerHTML='Tu carta, tu número '+n+' y tu signo apuntan a lo mismo. '+(tent[R.tentou]||'');
+    var mani=R.manifestar.map(function(k){return MANI[k]}).filter(Boolean);
+    document.getElementById('desejo-txt').innerHTML=(DESEJO[R.desejo]||'')+(mani.length?' Y para los próximos 30 días pediste '+lista(mani)+'. Eso es exactamente lo que el Código de la Prosperidad trabaja.':'');
+    document.getElementById('oferta-intro').textContent=R.nome+', esto es lo que vas a recibir para poner tu lectura en práctica desde hoy:';
+    relogio();
+  }
+
+  /* reserva de 15 min (só esta sessão; quando zera, avisa que a reserva venceu, mas o botão continua) */
+  var relogioOn=false;
+  function relogio(){
+    if(relogioOn) return; relogioOn=true;
+    var fim; try{ fim=+sessionStorage.getItem('cp_lectura_fim'); }catch(e){}
+    if(!fim){ fim=Date.now()+15*60e3; try{ sessionStorage.setItem('cp_lectura_fim',fim); }catch(e){} }
+    var el=document.getElementById('relogio');
+    (function tic(){
+      var r=Math.max(0,fim-Date.now()), m=Math.floor(r/60e3), s=Math.floor(r%60e3/1e3);
+      el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+      if(r>0) setTimeout(tic,1000); else document.getElementById('reserva').textContent='Tu reserva venció, pero todavía puedes activar tu Código.';
+    })();
+  }
+
+  /* 12 → 13 → checkout com nome, e-mail e UTMs */
+  document.getElementById('btn-oferta').addEventListener('click',function(){ ir('t-email'); });
+  document.getElementById('btn-checkout').addEventListener('click',function(){
+    var email=document.getElementById('email').value.trim(), erro=document.getElementById('erro-email');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ erro.textContent='Revisa tu correo, parece que falta algo.'; return; }
+    if(/\.(con|cm|co)$/i.test(email)&&/(gmail|hotmail|yahoo|outlook)\./i.test(email)){ erro.textContent='¿Tu correo termina en ".com"? Revísalo, por favor.'; return; }
+    erro.textContent='';
+    var u=new URL(CHECKOUT);
+    u.searchParams.set('email',email);
+    if(R.nome) u.searchParams.set('name',R.nome);
+    var qs=''; try{ qs=sessionStorage.getItem('cp_es_qs')||location.search.replace(/^\?/,''); }catch(e){ qs=location.search.replace(/^\?/,''); }
+    new URLSearchParams(qs).forEach(function(v,k){ if(!u.searchParams.has(k)) u.searchParams.set(k,v); });
+    location.href=u.toString();
+  });
+
+  /* guarda a query do anúncio pra sobreviver a reload no meio do quiz */
+  try{ var q=location.search.replace(/^\?/,''); if(q) sessionStorage.setItem('cp_es_qs',q); }catch(e){}
+})();
+</script>
+</body>
+</html>
