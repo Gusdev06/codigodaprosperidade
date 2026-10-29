@@ -179,6 +179,14 @@
   .barra-esc{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#2a1630;border-top:1px solid var(--gold-soft);box-shadow:0 -10px 30px rgba(0,0,0,.5);font-size:14px;color:var(--ivory)}
   .barra-esc b{color:var(--gold);font-variant-numeric:tabular-nums}
   .barra-esc button{border:0;border-radius:999px;background:linear-gradient(90deg,var(--gold-2),var(--gold));color:var(--gold-ink);font-weight:700;font-size:13px;padding:10px 16px;white-space:nowrap}
+  .esc-frase{text-align:center;font-family:var(--serif);font-size:17px;color:var(--ivory);margin:12px 0 0}
+  .sheet-fundo{position:fixed;inset:0;z-index:60;background:rgba(10,5,12,.72);display:flex;align-items:flex-end;justify-content:center;animation:fundo .25s ease}
+  @keyframes fundo{from{opacity:0}to{opacity:1}}
+  .sheet{position:relative;width:100%;max-width:480px;max-height:94vh;overflow:auto;background:linear-gradient(180deg,#2f1a36,#1d1022);border:1px solid var(--gold-soft);border-bottom:0;border-radius:24px 24px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));animation:sobe .35s cubic-bezier(.2,.8,.2,1)}
+  @keyframes sobe{from{transform:translateY(100%)}to{transform:none}}
+  .sheet h2{margin:0 0 10px}
+  .sheet-v{width:62%;margin:0 auto}
+  .sheet-x{position:absolute;right:10px;top:8px;width:40px;height:40px;border:0;background:none;color:var(--muted);font-size:28px}
   footer{max-width:480px;margin:0 auto;padding:0 18px 30px;font-size:11px;line-height:1.5;color:var(--muted-2);text-align:center}
   [hidden]{display:none !important}
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
@@ -434,10 +442,7 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
       </ul>
       <p style="text-align:center;margin:14px 0 0">En persona, en su consultorio, la sensitiva cobra <strong>500 dólares</strong> por armar el Código de la Prosperidad. Y una consulta con cualquier tarotista en México cuesta de <strong>500 a 1,300 pesos</strong>. Tu Oración personal y todo el Código cuestan menos que una sola consulta:</p>
       <div class="preco"><strong>US$ 14</strong><small>Pago único · Sin suscripción · Acceso inmediato en tu correo</small></div>
-      <div class="escassez">
-        <div class="tela esc-v"><video playsinline controls preload="metadata" poster="/es/lectura/v/escassez.jpg" src="/es/lectura/v/escassez.mp4"></video></div>
-        <p>“Esta ventana cósmica no va a quedar abierta para siempre. <strong>Esta página, este precio, esta condición solo existen ahora.</strong> Si sales de esta página, la única opción va a ser en persona, pagando 500 dólares. Si hay lugar.”</p>
-      </div>
+      <p class="esc-frase">“Esta página, este precio, esta condición <strong>solo existen ahora.</strong>”</p>
       <div class="reserva" id="reserva">Tu ventana cósmica y este precio se cierran en <b id="relogio">15:00</b></div>
       <button class="gold" type="button" id="btn-oferta">Desbloquear mi Oración de los 3 Arcanos <span>↗</span></button>
       <div class="selos2">
@@ -450,6 +455,17 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     </div>
   </div>
 </section>
+
+<div class="sheet-fundo" id="sheet" hidden>
+  <div class="sheet">
+    <button class="sheet-x" type="button" id="sheet-x" aria-label="Cerrar">×</button>
+    <p class="eyebrow" style="text-align:center;margin:0 0 6px">Antes de que te vayas</p>
+    <h2 id="sheet-tit">Escucha esto, por favor</h2>
+    <div class="tela sheet-v"><video id="vid-esc" playsinline preload="metadata" poster="/es/lectura/v/escassez.jpg" src="/es/lectura/v/escassez.mp4"></video><button class="som" type="button" id="som-esc"><span class="som-ico">🔊</span><span class="som-txt">Toca para escuchar</span></button></div>
+    <button class="gold" type="button" id="sheet-btn">Activar mi Oración ahora <span>↗</span></button>
+    <button class="text-button" type="button" id="sheet-fechar">Seguir viendo mi lectura</button>
+  </div>
+</div>
 
 <div class="barra-esc" id="barra-esc" hidden><span>⏳ Tu ventana se cierra en <b id="relogio2">15:00</b></span><button type="button" id="barra-btn">Activar ahora</button></div>
 
@@ -821,6 +837,34 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
     (function tic(){var r=Math.max(0,fim-Date.now()),m=Math.floor(r/60e3),s=Math.floor(r%60e3/1e3);el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;el2.textContent=el.textContent;if(r>0)setTimeout(tic,1000);else document.getElementById('reserva').textContent='Tu reserva venció, pero todavía puedes activar tu Código.'})();
   }
 
+  /* janela de hesitação: 35 s vendo a oferta sem clicar, ou rolou de volta pra cima depois do preço (1 vez por visita) */
+  (function(){
+    var sh=document.getElementById('sheet'), ve=document.getElementById('vid-esc'), se=document.getElementById('som-esc'), of=document.querySelector('.oferta');
+    var feito=false, vista=0, tm=0, clicou=false;
+    try{ feito=!!sessionStorage.getItem('cp_sheet'); }catch(e){}
+    function abre(){
+      if(feito||clicou||!document.getElementById('v-leitura').classList.contains('ativa')) return; feito=true;
+      try{ sessionStorage.setItem('cp_sheet','1'); }catch(e){}
+      ev('escassez_popup'); pararVoz(); vid.pause(); depos.forEach(function(o){ if(!o.paused) o.pause(); });
+      if(R.nome) document.getElementById('sheet-tit').textContent=R.nome+', escucha esto antes de irte';
+      sh.hidden=false; var comSom=A.on||A.video; ve.muted=!comSom; se.hidden=comSom; if(A.musica) A.musica.volume=0.04;
+      var p=ve.play(); if(p&&p.catch) p.catch(function(){ ve.muted=true; se.hidden=false; var q=ve.play(); if(q&&q.catch) q.catch(function(){}); });
+    }
+    function fecha(){ sh.hidden=true; ve.pause(); if(A.musica) A.musica.volume=0.22; }
+    function ouvir(){ ve.muted=false; se.hidden=true; try{ if(ve.readyState>=1) ve.currentTime=0; }catch(e){} ve.play(); }
+    se.addEventListener('click',function(e){ e.stopPropagation(); ouvir(); });
+    ve.parentNode.addEventListener('click',function(){ if(ve.muted||ve.paused) ouvir(); });
+    document.getElementById('sheet-x').addEventListener('click',fecha);
+    document.getElementById('sheet-fechar').addEventListener('click',fecha);
+    sh.addEventListener('click',function(e){ if(e.target===sh) fecha(); });
+    document.getElementById('sheet-btn').addEventListener('click',function(){ ev('escassez_clique'); fecha(); document.getElementById('btn-oferta').click(); });
+    document.getElementById('btn-oferta').addEventListener('click',function(){ clicou=true; clearTimeout(tm); },true);
+    if(!of||!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting){ if(!vista) vista=Date.now(); clearTimeout(tm); tm=setTimeout(abre,35000); }
+      else { clearTimeout(tm); if(vista&&e.boundingClientRect.top>0) abre(); }
+    }); },{threshold:.25}).observe(of);
+  })();
   document.getElementById('barra-btn').addEventListener('click',function(){ ev('barra_escassez'); document.getElementById('btn-oferta').scrollIntoView({behavior:'smooth',block:'center'}); });
   /* oferta → e-mail → Hotmart com nome, e-mail e UTMs */
   document.getElementById('btn-oferta').addEventListener('click',function(){ev('clique_oferta');ir('v-email'); setTimeout(function(){document.getElementById('email').focus()},300)});
