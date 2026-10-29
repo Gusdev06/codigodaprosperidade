@@ -483,8 +483,17 @@ fbq('set','autoConfig',false,'1084035341125746');fbq('init','1084035341125746');
   var EV={'v-home':'home','v-genero':'paso1','v-idade':'paso2','v-bloqueio':'paso3','v-espelho':'paso4','v-tentou':'paso5','v-desejo':'paso6','v-manifestar':'paso7','v-dados':'paso8','v-compromisso':'compromiso','v-mesa':'mesa','v-leitura':'revelacion','v-email':'email'};
   function ev(nome){
     try{ var k='cp_ev_'+nome; if(sessionStorage.getItem(k)) return; sessionStorage.setItem(k,'1'); }catch(e){}
-    try{ if(window.fbq) fbq('trackSingleCustom','1084035341125746','CDP_B_'+nome,{video:/[?&]video=0(&|$)/.test(location.search)?0:1}); }catch(e){}
+    var video=/[?&]video=0(&|$)/.test(location.search)?0:1;
+    try{ if(window.fbq) fbq('trackSingleCustom','1084035341125746','CDP_B_'+nome,{video:video}); }catch(e){}
+    /* painel próprio (/es/admin/): sessão aleatória + passo + UTMs do anúncio, sem dado pessoal */
+    try{
+      var sid=sessionStorage.getItem('cp_sid'); if(!sid){ sid=Math.random().toString(36).slice(2)+Date.now().toString(36); sessionStorage.setItem('cp_sid',sid); }
+      var q=new URLSearchParams(sessionStorage.getItem('cp_es_qs')||location.search.replace(/^\?/,''));
+      var corpo=JSON.stringify({sid:sid,ev:nome,video:video,ad:q.get('utm_content')||'',campaign:q.get('utm_campaign')||'',adset:q.get('utm_medium')||''});
+      if(navigator.sendBeacon) navigator.sendBeacon('/api/ev/',corpo); else fetch('/api/ev/',{method:'POST',body:corpo,keepalive:true});
+    }catch(e){}
   }
+  try{ var q00=location.search.replace(/^\?/,''); if(q00) sessionStorage.setItem('cp_es_qs',q00); }catch(e){}
   ev('home');
 
   var historico=[];

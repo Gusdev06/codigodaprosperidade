@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Site estático do funil + funções /api (eventos do funil e painel /es/admin/)",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0"
+  }
+}

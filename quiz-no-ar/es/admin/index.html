@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Painel · Código de la Prosperidad</title>
+<!-- Painel do funil /es/ (29/10/2026). Lê /api/stats/ com a chave ADMIN_KEY (variável do projeto na Vercel). -->
+<style>
+  :root{--bg:#140b18;--card:#221428;--line:#3a2442;--txt:#f5eef3;--mut:#b9a3b4;--gold:#ffd34d;--ok:#5fd18b;--bad:#ff8a8a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+  main{max-width:860px;margin:0 auto;padding:18px 16px 40px}
+  h1{font-size:20px;margin:6px 0 4px}
+  .sub{color:var(--mut);font-size:13px;margin:0 0 14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+  .tabs button{border:1px solid var(--line);background:var(--card);color:var(--txt);border-radius:999px;padding:8px 14px;font-size:14px;cursor:pointer}
+  .tabs button.on{background:var(--gold);color:#2a1607;border-color:var(--gold);font-weight:700}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 16px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+  .kpi b{display:block;font-size:26px}
+  .kpi span{color:var(--mut);font-size:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 16px;overflow-x:auto}
+  .card h2{font-size:15px;margin:0 0 10px}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+  th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{color:var(--mut);font-weight:600}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+  .barra{height:10px;border-radius:6px;background:#3a2442;min-width:80px}
+  .barra i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#ffe07a,#ffd34d)}
+  .queda{color:var(--bad)}
+  .bom{color:var(--ok)}
+  .login{max-width:360px;margin:80px auto;text-align:center}
+  .login input{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-size:16px;margin:12px 0}
+  .login button{width:100%;padding:12px;border:0;border-radius:12px;background:var(--gold);font-weight:700;font-size:15px;cursor:pointer}
+  .erro{color:var(--bad);font-size:14px;min-height:18px}
+  @media (max-width:600px){.kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="login" id="login" hidden>
+  <h1>Painel do funil</h1>
+  <input id="chave" type="password" placeholder="Chave de acesso" autocomplete="current-password">
+  <button type="button" id="entrar">Entrar</button>
+  <p class="erro" id="erro"></p>
+</div>
+
+<main id="painel" hidden>
+  <h1>Código de la Prosperidad · funil /es/</h1>
+  <p class="sub" id="atualizado"></p>
+  <div class="tabs" id="tabs">
+    <button data-p="hoje" class="on">Hoje (Brasília)</button>
+    <button data-p="24h">Últimas 24 h</button>
+    <button data-p="7d">7 dias</button>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><span>Visitas (home)</span><b id="k-home">–</b></div>
+    <div class="kpi"><span>Viram a leitura</span><b id="k-rev">–</b></div>
+    <div class="kpi"><span>Foram pro checkout</span><b id="k-chk">–</b></div>
+    <div class="kpi"><span>Home → checkout</span><b id="k-conv">–</b></div>
+  </div>
+  <div class="card"><h2>Funil passo a passo (pessoas únicas)</h2><table id="t-funil"></table></div>
+  <div class="card"><h2>Com vídeo × sem vídeo (<code>?video=0</code>)</h2><table id="t-video"></table></div>
+  <div class="card"><h2>Por anúncio (utm_content)</h2><table id="t-ads"></table></div>
+  <div class="card"><h2>Por hora</h2><table id="t-horas"></table></div>
+  <p class="sub">Vendas aprovadas e fichas OXXO ficam na Hotmart/UTMify. Atualiza sozinho a cada 60 s.</p>
+</main>
+
+<script>
+(function(){
+  var PASSOS=[['home','Chegou na página'],['som_on','Ligou o som'],['paso1','Passo 1 · gênero'],['paso2','Passo 2 · idade'],['paso3','Passo 3 · bloqueio'],['paso4','Passo 4 · espelho'],['paso5','Passo 5 · já tentou'],['paso6','Passo 6 · desejo'],['paso7','Passo 7 · 30 dias'],['paso8','Passo 8 · nome e data'],['compromiso','Compromisso'],['vela','Acendeu a vela'],['mesa','Mesa de cartas'],['revelacion','Revelação'],['video_som','Ouviu o vídeo da carta'],['pular_video','Pulou o vídeo'],['oferta','Viu a oferta'],['depoimento','Tocou um depoimento'],['clique_oferta','Clicou na oferta'],['email','Tela do e-mail'],['checkout','Foi pro checkout']];
+  var EXTRA={som_on:1,video_som:1,pular_video:1,depoimento:1};
+  var chave='', periodo='hoje', timer=0;
+  try{ chave=localStorage.getItem('cdp_admin_k')||''; }catch(e){}
+  function $(id){return document.getElementById(id)}
+  function pct(a,b){ return b?Math.round(a/b*1000)/10+'%':'–'; }
+  function carrega(){
+    fetch('/api/stats/?k='+encodeURIComponent(chave)+'&p='+periodo,{cache:'no-store'}).then(function(r){
+      if(r.status===401){ sair('Chave inválida.'); return null; } return r.json();
+    }).then(function(d){ if(d) desenha(d); }).catch(function(){ $('atualizado').textContent='Erro ao carregar. Tentando de novo em 60 s.'; });
+  }
+  function sair(msg){ try{localStorage.removeItem('cdp_admin_k')}catch(e){} $('painel').hidden=true; $('login').hidden=false; $('erro').textContent=msg||''; }
+  function desenha(d){
+    $('login').hidden=true; $('painel').hidden=false;
+    $('atualizado').textContent='Atualizado às '+new Date(d.gerado).toLocaleTimeString('pt-BR');
+    var tot={}, por={0:{},1:{}};
+    d.funil.forEach(function(r){ tot[r.ev]=(tot[r.ev]||0)+r.n; por[r.video][r.ev]=(por[r.video][r.ev]||0)+r.n; });
+    var home=tot.home||0;
+    $('k-home').textContent=home; $('k-rev').textContent=tot.revelacion||0; $('k-chk').textContent=tot.checkout||0; $('k-conv').textContent=pct(tot.checkout||0,home);
+    var h='<tr><th>Passo</th><th class="n">Pessoas</th><th class="n">% da home</th><th class="n">vs passo anterior</th><th></th></tr>', ant=null;
+    PASSOS.forEach(function(p){
+      var n=tot[p[0]]||0, extra=EXTRA[p[0]];
+      var vsAnt=(!extra&&ant!==null)?(ant?Math.round((n-ant)/ant*100):0):null;
+      h+='<tr><td>'+p[1]+(extra?' <small style="color:#b9a3b4">(ação)</small>':'')+'</td><td class="n">'+n+'</td><td class="n">'+pct(n,home)+'</td><td class="n '+(vsAnt!==null&&vsAnt<-25?'queda':'')+'">'+(vsAnt===null?'':(vsAnt>0?'+':'')+vsAnt+'%')+'</td><td><div class="barra"><i style="width:'+(home?Math.min(100,n/home*100):0)+'%"></i></div></td></tr>';
+      if(!extra) ant=n;
+    });
+    $('t-funil').innerHTML=h;
+    var v='<tr><th>Passo</th><th class="n">Com vídeo</th><th class="n">%</th><th class="n">Sem vídeo</th><th class="n">%</th></tr>';
+    [['home','Chegou'],['revelacion','Revelação'],['oferta','Viu a oferta'],['clique_oferta','Clicou na oferta'],['checkout','Checkout']].forEach(function(p){
+      var a=por[1][p[0]]||0, b=por[0][p[0]]||0;
+      v+='<tr><td>'+p[1]+'</td><td class="n">'+a+'</td><td class="n">'+pct(a,por[1].home||0)+'</td><td class="n">'+b+'</td><td class="n">'+pct(b,por[0].home||0)+'</td></tr>';
+    });
+    $('t-video').innerHTML=v;
+    var ads={}; d.anuncios.forEach(function(r){ (ads[r.ad]=ads[r.ad]||{})[r.ev]=r.n; });
+    var lista=Object.keys(ads).sort(function(x,y){return (ads[y].home||0)-(ads[x].home||0)});
+    var t='<tr><th>Anúncio</th><th class="n">Home</th><th class="n">Passo 1</th><th class="n">Mesa</th><th class="n">Leitura</th><th class="n">Oferta</th><th class="n">Checkout</th><th class="n">Home→checkout</th></tr>';
+    lista.forEach(function(k){ var a=ads[k];
+      t+='<tr><td>'+k.replace(/</g,'&lt;')+'</td><td class="n">'+(a.home||0)+'</td><td class="n">'+(a.paso1||0)+'</td><td class="n">'+(a.mesa||0)+'</td><td class="n">'+(a.revelacion||0)+'</td><td class="n">'+(a.oferta||0)+'</td><td class="n">'+(a.checkout||0)+'</td><td class="n '+((a.checkout||0)>0?'bom':'')+'">'+pct(a.checkout||0,a.home||0)+'</td></tr>'; });
+    $('t-ads').innerHTML=lista.length?t:'<tr><td>Sem dados ainda.</td></tr>';
+    var hr='<tr><th>Hora (Brasília)</th><th class="n">Chegaram</th><th class="n">Checkout</th></tr>';
+    d.horas.forEach(function(r){ hr+='<tr><td>'+r.h+'</td><td class="n">'+r.home+'</td><td class="n">'+r.checkout+'</td></tr>'; });
+    $('t-horas').innerHTML=d.horas.length?hr:'<tr><td>Sem dados ainda.</td></tr>';
+  }
+  $('tabs').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; periodo=b.getAttribute('data-p'); [].forEach.call($('tabs').children,function(x){x.classList.toggle('on',x===b)}); carrega(); });
+  $('entrar').addEventListener('click',function(){ chave=$('chave').value.trim(); if(!chave) return; try{localStorage.setItem('cdp_admin_k',chave)}catch(e){} carrega(); });
+  $('chave').addEventListener('keydown',function(e){ if(e.key==='Enter') $('entrar').click(); });
+  var q=new URLSearchParams(location.search).get('k'); if(q){ chave=q; try{localStorage.setItem('cdp_admin_k',q)}catch(e){} history.replaceState(null,'',location.pathname); }
+  if(chave){ carrega(); } else $('login').hidden=false;
+  timer=setInterval(function(){ if(chave&&!$('painel').hidden) carrega(); },60000);
+})();
+</script>
+</body>
+</html>
